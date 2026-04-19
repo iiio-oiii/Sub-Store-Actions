@@ -1,4 +1,4 @@
-name: Ultimate Multi-Source Merger
+name: Stable Multi-Source Raw Mirror
 
 on:
   workflow_dispatch:
@@ -17,39 +17,30 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Comprehensive Reconstruction
+      - name: Pixel-Perfect Multi-Merge
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
 
+          // 只挑选格式最规范、最稳定的标准 Clash 订阅源
           const urls = [
             'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
             'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
             'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
             'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
-            'https://542fd54b.996391.xyz/sub/vAfdhHotgHHhuHkhdFCEPCkiyjDII1Vr5XSW.yaml',
-            'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg',
             'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
             'https://raw.githubusercontent.com/wenxig/dongtai-sub/refs/heads/main/data/sub.yaml',
             'https://raw.githubusercontent.com/PuddinCat/BestClash/main/proxies.yaml',
             'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
             'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
             'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml',
-            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml',
-            'https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub',
-            'https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Vless.txt',
-            'https://raw.githubusercontent.com/pachangcheng/mianfeijiedian/refs/heads/main/should.txt',
-            'https://raw.githubusercontent.com/Leon406/SubCrawler/refs/heads/main/sub/share/vless',
-            'https://raw.githubusercontent.com/bin1site1/V2rayFree/refs/heads/main/config.txt',
-            'https://raw.githubusercontent.com/niq0n0pin/v2rayfree-nice-tracker/main/backup/nodes.txt',
-            'https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/simple.txt',
-            'https://raw.githubusercontent.com/ishalumi/proxy-node-collector/main/output/nodes.txt'
+            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml'
           ];
 
           async function fetchUrl(url) {
             return new Promise((resolve) => {
-              https.get(url, { timeout: 30000 }, (res) => {
+              https.get(url, { timeout: 20000 }, (res) => {
                 let data = '';
                 res.on('data', (chunk) => data += chunk);
                 res.on('end', () => resolve(data));
@@ -62,47 +53,37 @@ jobs:
             let proxyNames = [];
 
             for (const url of urls) {
-              console.log(`📡 Fetching: ${url}`);
-              let content = await fetchUrl(url);
-              if (!content) continue;
-
-              // 自动解码 Base64 (很多源是加密的)
-              if (!content.includes('server:') && !content.includes('name:')) {
-                try { content = Buffer.from(content, 'base64').toString(); } catch(e) {}
-              }
+              console.log(`📡 Processing: ${url}`);
+              const content = await fetchUrl(url);
+              if (!content || !content.includes('proxies:')) continue; // 必须包含规范关键字才处理
 
               const lines = content.split('\n');
-              let isProxyArea = false;
-              let currentBlock = [];
+              let start = false;
 
               for (let line of lines) {
                 const trimmed = line.trim();
-
-                // 核心逻辑：如果看到 "proxies:" 或者是符合节点特征的行
+                
+                // 1. 寻找 proxies: 发令枪
                 if (trimmed === 'proxies:') {
-                  isProxyArea = true;
+                  start = true;
                   continue;
                 }
-
-                // 如果没看到 "proxies:" 但看到了以 "- name:" 开头，也强制开启抓取
-                if (trimmed.startsWith('- name:') || trimmed.startsWith('- {name:')) {
-                  isProxyArea = true;
-                }
-
-                if (isProxyArea) {
-                  // 遇到下一个顶级配置（无缩进且不是节点）则停止该文件的抓取
+                
+                // 2. 物理搬运：如果开启了抓取模式
+                if (start) {
+                  // 如果遇到顶级字段（无缩进且不是节点），说明该文件 proxies 结束
                   if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                    isProxyArea = false;
+                    start = false;
                     continue;
                   }
-
-                  // 像素级收集行
+                  
+                  // 直接推入原始行
                   allProxyLines.push(line);
-
-                  // 提取名字用于 Group，确保加引号防止表情符号导致报错
-                  const nameMatch = line.match(/name:\s*(.*)/);
+                  
+                  // 3. 提取名字用于组
+                  const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                   if (nameMatch) {
-                    let n = nameMatch[1].trim().replace(/^["']|["']$/g, '').split(',')[0].replace(/[{} ]/g, '');
+                    let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
                     if (n) proxyNames.push(`      - "${n}"`);
                   }
                 }
@@ -138,18 +119,18 @@ jobs:
             ].join('\n');
 
             fs.writeFileSync('merged_nodes.yaml', output);
-            console.log("✅ 全部 21 个订阅源已处理完毕！");
           }
           main();
           EOF
+          
           node generator.js
 
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          # 核心修复：移除 \r 换行符并强制使用 UTF-8
+          # 核心修正：移除 \r 换行符，这是能够下载的关键
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Merged All 21 Sources $(date +'%Y-%m-%d')" || exit 0
+          git commit -m "Stable Mirror Update $(date +'%Y-%m-%d')" || exit 0
           git push
