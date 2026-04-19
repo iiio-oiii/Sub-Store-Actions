@@ -4413,7 +4413,7 @@ proxies:
       - 🇺🇸 美国|@ripaojiedian
       - 🇺🇸 美国2|@ripaojiedian
       - 🇺🇸 美国3|@ripaojiedian
-  - name: 📲 电报信息
+  - name: ���� 电报信息
     type: select
       - 🚀 节点选择
       - 🎯 全球直连
@@ -4451,7 +4451,7 @@ proxies:
       - 🇺🇸 美国3|@ripaojiedian
   - name: 🍎 苹果服务
     type: select
-      - 🚀 节点选择
+      - 🚀 节点选���
       - 🎯 全球直连
       - tg频道:@ripaojiedian
       - 🇭🇰 香港|@ripaojiedian
@@ -4518,6 +4518,271 @@ proxies:
       - 🇺🇸 美国|@ripaojiedian
       - 🇺🇸 美国2|@ripaojiedian
       - 🇺🇸 美国3|@ripaojiedian
+  - name: 官网https://kelayun.notepin.co
+    type: vless
+    server: 129.153.71.226
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: xtls-rprx-vision
+    client-fingerprint: ios
+    servername: iosapps.itunes.apple.com
+    reality-opts:
+      public-key: qkP2pqQ3NHNBkyzqsC2W9wChp3OfeXdVjOhUv8vQW0o
+      short-id: aac4df9d05a5ba8f
+    alterId: 0
+    cipher: ""
+    sni: iosapps.itunes.apple.com
+  - name: 机场https://kelayun.notepin.co
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: chrome
+    servername: d2-us1.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/us1
+      headers:
+        Host: d2-us1.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-us1.djwstlsweb.top
+  - name: 购买地址https://kelayun.notepin.co
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: ios
+    servername: d2-us3.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/us3
+      headers:
+        Host: d2-us3.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-us3.djwstlsweb.top
+  - name: 梯子https://kelayun.notepin.co
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: ios
+    servername: d2-us4.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/us4
+      headers:
+        Host: d2-us4.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-us4.djwstlsweb.top
+  - name: 最低月付2块钱1000G
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: safari
+    servername: d2-jp1.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/jp1
+      headers:
+        Host: d2-jp1.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-jp1.djwstlsweb.top
+  - name: 最高200元终身无限流量
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: safari
+    servername: d2-jp2.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/jp2
+      headers:
+        Host: d2-jp2.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-jp2.djwstlsweb.top
+  - name: 不限速不限设备不限地区
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: ios
+    servername: d2-jp2.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/jp2
+      headers:
+        Host: d2-jp2.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-jp2.djwstlsweb.top
+  - name: 新疆西藏福建可用
+    type: vless
+    server: 63.141.128.188
+    port: 443
+    uuid: 8e8f0173-6426-4fed-94f6-580847c744f1
+    udp: true
+    tls: true
+    skip-cert-verify: null
+    flow: ''
+    client-fingerprint: safari
+    servername: d2-jp2.djwstlsweb.top
+    network: ws
+    ws-opts:
+      path: /djjc/jp2
+      headers:
+        Host: d2-jp2.djwstlsweb.top
+    alterId: 0
+    cipher: ""
+    sni: d2-jp2.djwstlsweb.top
+      - ♻️ 自动选择
+      - DIRECT
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: ♻️ 自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: 🌍 国外媒体
+    type: select
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🎯 全球直连
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: 📢 谷歌FCM
+    type: select
+      - 🚀 节点选择
+      - 🎯 全球直连
+      - ♻️ 自动选择
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: �� 电报信息
+    type: select
+      - 🚀 节点选择
+      - 🎯 全球直连
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: Ⓜ️ 微软服务
+    type: select
+      - 🎯 全球直连
+      - 🚀 节点选择
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: 🍎 苹果服务
+    type: select
+      - 🚀 节点选择
+      - 🎯 全球直连
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
+  - name: 🎯 全球直连
+    type: select
+      - DIRECT
+      - 🚀 节点选择
+      - ���️ 自动选择
+  - name: 🛑 全球拦截
+    type: select
+      - REJECT
+      - DIRECT
+  - name: 🍃 应用净化
+    type: select
+      - REJECT
+      - DIRECT
+  - name: 🆎 AdBlock
+    type: select
+      - REJECT
+      - DIRECT
+  - name: 🐟 漏网之鱼
+    type: select
+      - 🚀 节点选择
+      - 🎯 全球直连
+      - ♻️ 自动选择
+      - 官网https://kelayun.notepin.co
+      - 机场https://kelayun.notepin.co
+      - 购买地址https://kelayun.notepin.co
+      - 梯子https://kelayun.notepin.co
+      - 最低月付2块钱1000G
+      - 最高200元终身无限流量
+      - 不限速不限设备不限地区
+      - 新疆西藏福建可用
 - name: A
   server: hk2.mutoujs.top
   port: 20000
@@ -4632,338 +4897,6 @@ proxies:
   - I
   - J
   - K
-- cipher: chacha20-ietf-poly1305
-  name: xx|e806|puddincat07@Telegram
-  password: hbGrpfvNrJsUmKmPbR3iY2
-  port: 443
-  server: tinkered-pennies-puppies.freesocks.work
-  type: ss
-- name: xx|32c6|puddincat07@Telegram
-  password: e136d465-0558-43b9-b50c-b1f45d4cb2c2
-  port: 24534
-  server: jp2-8sb.6121999.dpdns.org
-  skip-cert-verify: true
-  sni: jp2-8sb.6121999.dpdns.org
-  type: trojan
-- cipher: none
-  name: us|7e15|puddincat07@Telegram
-  password: 14b02e2a-8930-4afb-8412-ea4a4954ca5b
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: ylnhh.us.ci
-    mode: websocket
-    mux: false
-    path: /14b02e2a-8930-4afb-8412-ea4a4954ca5b/?ed=2560
-    tls: true
-  port: 443
-  server: 198.12.144.16
-  type: ss
-  udp: true
-- cipher: none
-  name: xx|0f6a|puddincat07@Telegram
-  password: 3e96ef7d-8637-42c2-ac73-75182196e755
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: mfvpn.fuchen.indevs.in
-    mode: websocket
-    mux: false
-    path: /3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560
-    tls: true
-  port: 443
-  server: store.ubi.com
-  type: ss
-  udp: true
-- cipher: none
-  name: hk|01c9|puddincat07@Telegram
-  password: 3e96ef7d-8637-42c2-ac73-75182196e755
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: mfvpn.fuchen.indevs.in
-    mode: websocket
-    mux: false
-    path: 3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560
-    tls: true
-  port: 443
-  server: 47.57.182.141
-  type: ss
-  udp: true
-- cipher: none
-  name: cf|3645|puddincat07@Telegram
-  password: 3e96ef7d-8637-42c2-ac73-75182196e755
-  plugin: v2ray-plugin
-  plugin-opts:
-    host: mfvpn.fuchen.indevs.in
-    mode: websocket
-    mux: false
-    path: 3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560
-    tls: true
-  port: 443
-  server: 199.181.197.38
-  type: ss
-  udp: true
-- cipher: aes-256-cfb
-  name: in|52f1|puddincat07@Telegram
-  password: f8f7aCzcPKbsF8p3
-  port: 989
-  server: 134.209.147.198
-  type: ss
-- name: at|68da|puddincat07@Telegram
-  network: ws
-  password: trojan
-  port: 8444
-  server: 152.53.200.167
-  skip-cert-verify: false
-  sni: jflsjlaf.pages.dev
-  type: trojan
-  udp: true
-  ws-opts:
-    headers:
-      Host: jflsjlaf.pages.dev
-    path: /
-- cipher: chacha20-ietf-poly1305
-  name: xx|1052|puddincat07@Telegram
-  password: e777513e-9df5-4dc3-bc84-74e564345a81
-  port: 13012
-  server: usgpt.slianrk.com
-  type: ss
-- alterId: 32
-  cipher: auto
-  client-fingerprint: chrome
-  name: xx|1aac|puddincat07@Telegram
-  network: ws
-  port: 443
-  server: vc.fly.dev
-  skip-cert-verify: true
-  tls: true
-  type: vmess
-  uuid: 35379219-6535-4f2e-a4fe-3e44f61e0eee
-  ws-opts:
-    headers:
-      host: vc.fly.dev
-    path: /vc
-- cipher: chacha20-ietf-poly1305
-  name: xx|ac99|puddincat07@Telegram
-  password: 9tqhMdIrTkgQ46PvhyAtMH
-  port: 443
-  server: switcher-nick-croquet.freesocks.work
-  type: ss
-- cipher: aes-128-gcm
-  name: us|f5e4|puddincat07@Telegram
-  password: shadowsocks
-  port: 443
-  server: 156.146.38.169
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: gb|7133|puddincat07@Telegram
-  password: k1dBOmOB4oqi7Ump37a1bQ
-  port: 8080
-  server: 82.38.31.194
-  type: ss
-- cipher: aes-256-cfb
-  name: xx|c4c6|puddincat07@Telegram
-  password: qwerREWQ@@
-  port: 4652
-  server: p141.panda001.net
-  type: ss
-- cipher: aes-128-cfb
-  name: nl|da19|puddincat07@Telegram
-  password: shadowsocks
-  port: 443
-  server: 109.201.152.181
-  type: ss
-  udp: true
-- name: us|eeed|puddincat07@Telegram
-  password: 4732adfa16c6450bbef87264e41332db
-  port: 443
-  server: 104.16.192.138
-  skip-cert-verify: true
-  sni: jobscareerforlawyers.com
-  type: trojan
-  udp: true
-  - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
-- interval: 300
-  name: "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: url-test
-  url: https://www.gstatic.com/youtube/img/emojis/emojis-png-7.json
-- name: "\U0001F3A5 NETFLIX"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
-- name: "\u26D4\uFE0F \u5E7F\u544A\u62E6\u622A"
-  - "\U0001F6D1 \u5168\u7403\u62E6\u622A"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  type: select
-- name: "\U0001F6AB \u8FD0\u8425\u52AB\u6301"
-  - "\U0001F6D1 \u5168\u7403\u62E6\u622A"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  type: select
-- name: "\U0001F30D \u56FD\u5916\u5A92\u4F53"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
-- name: "\U0001F30F \u56FD\u5185\u5A92\u4F53"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  type: select
-- name: "\u24C2\uFE0F \u5FAE\u8F6F\u670D\u52A1"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
-- name: "\U0001F4F2 \u7535\u62A5\u4FE1\u606F"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
-- name: "\U0001F34E \u82F9\u679C\u670D\u52A1"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
-- name: "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - DIRECT
-  type: select
-- name: "\U0001F6D1 \u5168\u7403\u62E6\u622A"
-  - REJECT
-  - DIRECT
-  type: select
-- name: "\U0001F41F \u6F0F\u7F51\u4E4B\u9C7C"
-  - "\U0001F530 \u8282\u70B9\u9009\u62E9"
-  - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-  - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-  - xx|e806|puddincat07@Telegram
-  - xx|32c6|puddincat07@Telegram
-  - us|7e15|puddincat07@Telegram
-  - xx|0f6a|puddincat07@Telegram
-  - hk|01c9|puddincat07@Telegram
-  - cf|3645|puddincat07@Telegram
-  - in|52f1|puddincat07@Telegram
-  - at|68da|puddincat07@Telegram
-  - xx|1052|puddincat07@Telegram
-  - xx|1aac|puddincat07@Telegram
-  - xx|ac99|puddincat07@Telegram
-  - us|f5e4|puddincat07@Telegram
-  - gb|7133|puddincat07@Telegram
-  - xx|c4c6|puddincat07@Telegram
-  - nl|da19|puddincat07@Telegram
-  - us|eeed|puddincat07@Telegram
-  type: select
   - name: https://t.me/xyfqzy ⚡_1
     port: 443
     server: 198.41.206.102
@@ -9222,7 +9155,7 @@ proxies:
         - "\U0001F1EC\U0001F1E7 英国节点"
         - "\U0001F1EB\U0001F1F7 法国节点"
         - "\U0001F1E9\U0001F1EA 德国节点"
-        - "\U0001F1E8\U0001F1E6 加拿大节点"
+        - "\U0001F1E8\U0001F1E6 加��大节点"
         - "\U0001F1E6\U0001F1FA 澳大利亚节点"
         - "\U0001F1F3\U0001F1F1 荷兰节点"
         - "\U0001F1F7\U0001F1FA 俄罗斯节点"
@@ -9452,7 +9385,7 @@ proxies:
         - "\U0001F1F8\U0001F1EC 新加坡节点"
         - "\U0001F1FA\U0001F1F8 美国节点"
         - "\U0001F1EC\U0001F1E7 英国节点"
-        - "\U0001F1EB\U0001F1F7 法国节点"
+        - "\U0001F1EB\U0001F1F7 法��节点"
         - "\U0001F1E9\U0001F1EA 德国节点"
         - "\U0001F1E8\U0001F1E6 加拿大节点"
         - "\U0001F1E6\U0001F1FA 澳大利亚节点"
@@ -10965,6 +10898,7 @@ proxies:
  - {"cipher":"none","name":" t.me/PFSub | 🇯🇵 JP 1202 | ⬇️ 298KB/s","password":"79960b0b-7d31-4263-8915-6511b0e137a8","plugin":"v2ray-plugin","plugin-opts":{"host":"woshinidie-et3.pages.dev","mode":"websocket","mux":false,"path":"/79960b0b-7d31-4263-8915-6511b0e137a8/?ed=2560","tls":true},"port":443,"server":"198.41.211.222","type":"ss","udp":true}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇺🇸 US 1203 | ⬇️ 370KB/s","network":"tcp","port":180,"server":"82.198.246.97","skip-cert-verify":false,"tls":false,"type":"vmess","uuid":"d13fc2f5-3e05-4795-81eb-44143a09e552"}
  - {"client-fingerprint":"chrome","name":" t.me/PFSub | 🇩🇪 DE 1204 | ⬇️ 436KB/s","network":"ws","password":"8r\u003c[9'l6hAO#8ZQi","port":8443,"server":"172.66.44.230","skip-cert-verify":false,"sni":"Koma-YT.PAGeS.Dev","type":"trojan","udp":true,"ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{"User-Agent":"Mozilla/5.0 (Linux; Android 6.0.1; SM-G532M Build/MMB29T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.91 Mobile Safari/537.36"},"max-early-data":2560,"path":"/tro8sFW1S91B6sZrM1"}}
+
 proxy-groups:
   - name: 🚀 自动选择
     type: url-test
@@ -11294,7 +11228,24 @@ proxy-groups:
       - "🇺🇸 美国|@ripaojiedian"
       - "🇺🇸 美国2|@ripaojiedian"
       - "🇺🇸 美国3|@ripaojiedian"
+      - "���� 电报信息"
       - "📢 谷歌FCM"
+      - "官网https://kelayun.notepin.co"
+      - "iosapps.itunes.apple.com"
+      - "机场https://kelayun.notepin.co"
+      - "d2-us1.djwstlsweb.top"
+      - "购买地址https://kelayun.notepin.co"
+      - "d2-us3.djwstlsweb.top"
+      - "梯子https://kelayun.notepin.co"
+      - "d2-us4.djwstlsweb.top"
+      - "最低月付2块钱1000G"
+      - "d2-jp1.djwstlsweb.top"
+      - "最高200元终身无限流量"
+      - "d2-jp2.djwstlsweb.top"
+      - "不限速不限设备不限地区"
+      - "新疆西藏福建可用"
+      - "�� 电报信息"
+      - "🆎 AdBlock"
       - "A"
       - "B"
       - "C"
@@ -11307,34 +11258,6 @@ proxy-groups:
       - "J"
       - "K"
       - "yf.xhya.nyc.mn"
-      - "xx|e806|puddincat07@Telegram"
-      - "xx|32c6|puddincat07@Telegram"
-      - "us|7e15|puddincat07@Telegram"
-      - "xx|0f6a|puddincat07@Telegram"
-      - "hk|01c9|puddincat07@Telegram"
-      - "cf|3645|puddincat07@Telegram"
-      - "in|52f1|puddincat07@Telegram"
-      - "at|68da|puddincat07@Telegram"
-      - "xx|1052|puddincat07@Telegram"
-      - "xx|1aac|puddincat07@Telegram"
-      - "xx|ac99|puddincat07@Telegram"
-      - "us|f5e4|puddincat07@Telegram"
-      - "gb|7133|puddincat07@Telegram"
-      - "xx|c4c6|puddincat07@Telegram"
-      - "nl|da19|puddincat07@Telegram"
-      - "us|eeed|puddincat07@Telegram"
-      - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-      - "\U0001F3A5 NETFLIX"
-      - "\u26D4\uFE0F \u5E7F\u544A\u62E6\u622A"
-      - "\U0001F6AB \u8FD0\u8425\u52AB\u6301"
-      - "\U0001F30D \u56FD\u5916\u5A92\u4F53"
-      - "\U0001F30F \u56FD\u5185\u5A92\u4F53"
-      - "\u24C2\uFE0F \u5FAE\u8F6F\u670D\u52A1"
-      - "\U0001F4F2 \u7535\u62A5\u4FE1\u606F"
-      - "\U0001F34E \u82F9\u679C\u670D\u52A1"
-      - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-      - "\U0001F6D1 \u5168\u7403\u62E6\u622A"
-      - "\U0001F41F \u6F0F\u7F51\u4E4B\u9C7C"
       - "https://t.me/xyfqzy ⚡_1"
       - "rayan-10.parastoo.dpdns.org"
       - "https://t.me/xyfqzy ⚡_2"
@@ -11982,7 +11905,24 @@ proxy-groups:
       - "🇺🇸 美国|@ripaojiedian"
       - "🇺🇸 美国2|@ripaojiedian"
       - "🇺🇸 美国3|@ripaojiedian"
+      - "���� 电报信息"
       - "📢 谷歌FCM"
+      - "官网https://kelayun.notepin.co"
+      - "iosapps.itunes.apple.com"
+      - "机场https://kelayun.notepin.co"
+      - "d2-us1.djwstlsweb.top"
+      - "购买地址https://kelayun.notepin.co"
+      - "d2-us3.djwstlsweb.top"
+      - "梯子https://kelayun.notepin.co"
+      - "d2-us4.djwstlsweb.top"
+      - "最低月付2块钱1000G"
+      - "d2-jp1.djwstlsweb.top"
+      - "最高200元终身无限流量"
+      - "d2-jp2.djwstlsweb.top"
+      - "不限速不限设备不限地区"
+      - "新疆西藏福建可用"
+      - "�� 电报信息"
+      - "🆎 AdBlock"
       - "A"
       - "B"
       - "C"
@@ -11995,34 +11935,6 @@ proxy-groups:
       - "J"
       - "K"
       - "yf.xhya.nyc.mn"
-      - "xx|e806|puddincat07@Telegram"
-      - "xx|32c6|puddincat07@Telegram"
-      - "us|7e15|puddincat07@Telegram"
-      - "xx|0f6a|puddincat07@Telegram"
-      - "hk|01c9|puddincat07@Telegram"
-      - "cf|3645|puddincat07@Telegram"
-      - "in|52f1|puddincat07@Telegram"
-      - "at|68da|puddincat07@Telegram"
-      - "xx|1052|puddincat07@Telegram"
-      - "xx|1aac|puddincat07@Telegram"
-      - "xx|ac99|puddincat07@Telegram"
-      - "us|f5e4|puddincat07@Telegram"
-      - "gb|7133|puddincat07@Telegram"
-      - "xx|c4c6|puddincat07@Telegram"
-      - "nl|da19|puddincat07@Telegram"
-      - "us|eeed|puddincat07@Telegram"
-      - "\u267B\uFE0F \u81EA\u52A8\u9009\u62E9"
-      - "\U0001F3A5 NETFLIX"
-      - "\u26D4\uFE0F \u5E7F\u544A\u62E6\u622A"
-      - "\U0001F6AB \u8FD0\u8425\u52AB\u6301"
-      - "\U0001F30D \u56FD\u5916\u5A92\u4F53"
-      - "\U0001F30F \u56FD\u5185\u5A92\u4F53"
-      - "\u24C2\uFE0F \u5FAE\u8F6F\u670D\u52A1"
-      - "\U0001F4F2 \u7535\u62A5\u4FE1\u606F"
-      - "\U0001F34E \u82F9\u679C\u670D\u52A1"
-      - "\U0001F3AF \u5168\u7403\u76F4\u8FDE"
-      - "\U0001F6D1 \u5168\u7403\u62E6\u622A"
-      - "\U0001F41F \u6F0F\u7F51\u4E4B\u9C7C"
       - "https://t.me/xyfqzy ⚡_1"
       - "rayan-10.parastoo.dpdns.org"
       - "https://t.me/xyfqzy ⚡_2"
