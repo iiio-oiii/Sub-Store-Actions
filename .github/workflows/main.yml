@@ -28,11 +28,14 @@ jobs:
           const https = require('https');
 
           const links = process.env.SUB_LINKS.split('\n').filter(l => l.trim().startsWith('http'));
+          // 关键词增强：涵盖更多香港特征
           const hkRegex = /(香港|HK|HongKong|🇭🇰|HKG|HONG KONG)/i;
+          // 排除杂质
+          const excludeRegex = /(美国|US|United States|Japan|日本|Singapore|新加坡|Taiwan|台湾|DIRECT|REJECT)/i;
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
-                  const req = https.get(url, { timeout: 10000 }, (res) => {
+                  const req = https.get(url, { timeout: 15000 }, (res) => {
                       let data = '';
                       res.on('data', (chunk) => data += chunk);
                       res.on('end', () => resolve(data));
@@ -42,55 +45,46 @@ jobs:
               });
           }
 
-          function decodeBase64(str) {
-              try { return Buffer.from(str.trim(), 'base64').toString('utf-8'); }
-              catch (e) { return str; }
-          }
-
           async function main() {
-              console.log("🚀 启动高性能全兼容扫描...");
+              console.log("🚀 启动结构化提取（解决乱码与缩进问题）...");
               let finalNodes = new Set();
 
               for (const link of links) {
-                  const rawContent = await fetchLink(link.trim());
-                  if (!rawContent) continue;
+                  const content = await fetchLink(link.trim());
+                  if (!content) continue;
 
-                  // 自动判断：是 YAML 还是 Base64
-                  let content = rawContent.includes('proxies:') ? rawContent : decodeBase64(rawContent);
+                  // 1. 切分块：支持多种 YAML 切分习惯
+                  const items = content.split(/\n\s*-/);
                   
-                  // 统一处理：按行扫描（不再用沉重的正则）
-                  const lines = content.split(/\r?\n/);
-                  let currentBlock = "";
-                  let isInsideProxy = false;
+                  items.forEach(item => {
+                      // 过滤条件：必须含香港，且不含非相关国家关键词
+                      if (hkRegex.test(item) && !excludeRegex.test(item)) {
+                          // 检查是否具备节点核心三要素：name, server, port
+                          if (item.includes('name:') && item.includes('server:') && item.includes('port:')) {
+                              
+                              // 核心修正：强行压成单行，去掉尾部垃圾，套上大括号
+                              let clean = item.trim()
+                                  .split('proxy-groups:')[0] // 彻底切断后面可能带的策略组
+                                  .replace(/^[-\s]+/, '')    // 去掉开头的横杠和空格
+                                  .replace(/\r?\n/g, ', ')   // 把多行合并，用逗号分隔
+                                  .replace(/,\s*,/g, ',')    // 清理多余逗号
+                                  .trim();
 
-                  for (let line of lines) {
-                      const trimmed = line.trim();
+                              // 如果原本没带大括号，强行给它套上
+                              if (!clean.startsWith('{')) {
+                                  clean = `{${clean}}`;
+                              }
 
-                      // 1. 处理链接格式 (vmess/vless/ss/trojan)
-                      if (/^(vmess|vless|ss|trojan|hysteria2):\/\//i.test(trimmed)) {
-                          if (hkRegex.test(trimmed)) finalNodes.add(`  - name: "${trimmed.split('#')[1] || 'HK-Node'}", type: v2ray-link, url: ${trimmed}`);
-                          continue;
-                      }
-
-                      // 2. 处理 YAML 块 (Clash 格式)
-                      if (trimmed.startsWith('-')) {
-                          if (currentBlock && hkRegex.test(currentBlock) && currentBlock.includes('server:')) {
-                              finalNodes.add(`  ${currentBlock}`);
+                              finalNodes.add(`  - ${clean}`);
                           }
-                          currentBlock = trimmed;
-                      } else if (currentBlock && (trimmed.includes(':') || trimmed.startsWith(' '))) {
-                          currentBlock += " " + trimmed;
                       }
-                  }
-                  // 检查最后一个块
-                  if (currentBlock && hkRegex.test(currentBlock) && currentBlock.includes('server:')) {
-                      finalNodes.add(`  ${currentBlock}`);
-                  }
+                  });
               }
 
-              console.log(`✅ 扫描结束，共捕获 ${finalNodes.size} 个有效香港节点`);
+              // 构造标准 Clash 头部
               const output = "proxies:\n" + Array.from(finalNodes).join('\n');
               fs.writeFileSync('hk_pure.yaml', output);
+              console.log(`✅ 成功输出 ${finalNodes.size} 个标准化香港节点`);
           }
           main();
           EOF
