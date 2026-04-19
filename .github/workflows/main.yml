@@ -23,7 +23,6 @@ jobs:
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          # --- 从这里开始替换 ---
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
@@ -42,77 +41,56 @@ jobs:
               });
           }
 
-          // 核心功能：2500ms 真实性测速
-          async function testLatency() {
-              return new Promise((resolve) => {
-                  const start = Date.now();
-                  // 测速目标：Google 延迟探测
-                  const req = https.get('https://www.gstatic.com/generate_204', { timeout: 2500 }, (res) => {
-                      resolve(Date.now() - start <= 2500);
-                  });
-                  req.on('error', () => resolve(false));
-                  req.on('timeout', () => { req.destroy(); resolve(false); });
-                  req.end();
-              });
-          }
-
           async function main() {
-              console.log(`🚀 开始处理 ${links.length} 个源...`);
-              let rawData = '';
+              console.log(`🚀 开始从 23 个源深度抠取香港节点...`);
+              let allNodes = [];
+              const hkInclude = /(香港|HK|HongKong|🇭🇰|HKG)/i;
+              const globalExclude = /(美国|日本|新加坡|韩国|台湾|US|JP|SG|KR|TW|United States|Japan|Singapore|Korea|Taiwan|DIRECT|REJECT)/i;
+
               for (const link of links) {
                   const content = await fetchLink(link.trim());
-                  if (content && !content.includes('proxies')) {
-                      try { rawData += Buffer.from(content.trim(), 'base64').toString('utf-8') + '\n'; }
-                      catch(e) { rawData += content + '\n'; }
-                  } else {
-                      rawData += content + '\n';
+                  if (!content) continue;
+
+                  // 处理 Base64 格式 (V2Ray/SS 链接)
+                  if (!content.includes('proxies:')) {
+                      try {
+                          const decoded = Buffer.from(content.trim(), 'base64').toString('utf-8');
+                          decoded.split('\n').forEach(line => {
+                              if (hkInclude.test(line) && !globalExclude.test(line) && line.includes('://')) {
+                                  allNodes.push(line.trim());
+                              }
+                          });
+                      } catch(e) {}
                   }
-              }
 
-              const lines = rawData.split(/\r?\n/);
-              const hkInclude = /(香港|HK|HongKong|🇭🇰|Hong Kong|HKG)/i;
-              // 排除无效的分流规则、广告拦截、直连规则
-              const filterExclude = /(DOMAIN|SUFFIX|KEYWORD|拦截|净化|DIRECT|REJECT|选择代理|国外媒体)/i;
-              // 协议识别指纹
-              const protocolInclude = /(vmess:\/\/|vless:\/\/|ss:\/\/|trojan:\/\/|hysteria2:\/\/|{.*server:.*port:.*})/;
-
-              const potentialNodes = [];
-              const uniqueCheck = new Set();
-
-              for (let line of lines) {
-                  line = line.trim();
-                  // 逻辑：是香港节点，是真实协议，不是分流规则
-                  if (hkInclude.test(line) && protocolInclude.test(line) && !filterExclude.test(line)) {
-                      if (!uniqueCheck.has(line)) {
-                          uniqueCheck.add(line);
-                          potentialNodes.push(line);
+                  // 处理 Clash YAML 格式 (提取完整对象)
+                  const lines = content.split('\n');
+                  lines.forEach(line => {
+                      const l = line.trim();
+                      // 必须包含香港关键字，且必须包含 server/type 指纹，且排除分流规则行
+                      if (hkInclude.test(l) && (l.includes('server:') || l.includes('type:')) && !l.includes('DOMAIN')) {
+                          if (!globalExclude.test(l)) {
+                              // 规范化：确保是以 "- " 开头
+                              const formatted = l.startsWith('-') ? l : `- ${l}`;
+                              allNodes.push(formatted);
+                          }
                       }
-                  }
-              }
-
-              console.log(`🔍 识别到 ${potentialNodes.length} 个香港节点。`);
-              console.log(`⌛ 开始执行 2500ms 测速过滤 (Batch size: 15)...`);
-
-              const finalNodes = [];
-              const batchSize = 15;
-              for (let i = 0; i < potentialNodes.length; i += batchSize) {
-                  const batch = potentialNodes.slice(i, i + batchSize);
-                  // 并发测速
-                  const results = await Promise.all(batch.map(() => testLatency()));
-                  batch.forEach((node, idx) => {
-                      if (results[idx]) finalNodes.push(node);
                   });
-                  console.log(`进度: ${Math.min(i + batchSize, potentialNodes.length)}/${potentialNodes.length}`);
               }
 
-              console.log(`✅ 最终导出: ${finalNodes.length} 个低延迟全活香港节点`);
-              fs.writeFileSync('hk_pure.yaml', finalNodes.join('\n'));
+              // 物理去重
+              const uniqueNodes = Array.from(new Set(allNodes));
+              console.log(`✅ 深度提取完成，共获取 ${uniqueNodes.length} 个香港节点。`);
+
+              // 构建 Clash 订阅格式
+              let yamlContent = "proxies:\n" + uniqueNodes.map(n => `  ${n.replace(/^- /, '')}`).join('\n');
+              
+              fs.writeFileSync('hk_pure.yaml', yamlContent);
           }
           main();
           EOF
-          
+
           node generator.js
-          # --- 替换到此结束 ---
 
       - name: Commit and Push
         run: |
