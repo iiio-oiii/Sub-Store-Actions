@@ -5009,7 +5009,7 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+      path: /Telegram��🇳 @WangCai2 /?ed=2560
       headers:
         host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
@@ -6217,7 +6217,7 @@ proxies:
       headers:
         host: yg.bantony199.top
     uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
-  - name: 🇩🇪DE_5 | ⬇️ 1.4MB/s
+  - name: 🇩🇪DE_5 | ⬇��� 1.4MB/s
     port: 2087
     server: 188.114.97.11
     type: vless
@@ -9146,7 +9146,7 @@ proxies:
         - "\U0001F1EC\U0001F1E7 英国节点"
         - "\U0001F1EB\U0001F1F7 法国节点"
         - "\U0001F1E9\U0001F1EA 德国节点"
-        - "\U0001F1E8\U0001F1E6 加拿大节点"
+        - "\U0001F1E8\U0001F1E6 加��大节点"
         - "\U0001F1E6\U0001F1FA 澳大利亚节点"
         - "\U0001F1F3\U0001F1F1 荷兰节点"
         - "\U0001F1F7\U0001F1FA 俄罗斯节点"
@@ -9376,7 +9376,7 @@ proxies:
         - "\U0001F1F8\U0001F1EC 新加坡节点"
         - "\U0001F1FA\U0001F1F8 美国节点"
         - "\U0001F1EC\U0001F1E7 英国节点"
-        - "\U0001F1EB\U0001F1F7 法国节点"
+        - "\U0001F1EB\U0001F1F7 法��节点"
         - "\U0001F1E9\U0001F1EA 德国节点"
         - "\U0001F1E8\U0001F1E6 加拿大节点"
         - "\U0001F1E6\U0001F1FA 澳大利亚节点"
@@ -9505,7 +9505,7 @@ proxies:
       max-failed-times: 3
       strategy: sticky-sessions
       include-all: true
-    - name: "\U0001F1ED\U0001F1F0 香港节点"
+    - name: "\U0001F1ED\U0001F1F0 ���港节点"
       type: url-test
       tolerance: 100
       interval: 60
@@ -9555,7 +9555,7 @@ proxies:
       max-failed-times: 3
       filter: "(?i)SG|新加坡|狮城"
       include-all: true
-    - name: "\U0001F1FA\U0001F1F8 美国节点"
+    - name: "\U0001F1FA\U0001F1F8 美国节��"
       type: url-test
       tolerance: 100
       interval: 60
@@ -9605,7 +9605,7 @@ proxies:
       max-failed-times: 3
       filter: "(?i)CA|加拿大"
       include-all: true
-    - name: "\U0001F1E6\U0001F1FA 澳大利亚节点"
+    - name: "\U0001F1E6\U0001F1FA 澳大利亚��点"
       type: url-test
       tolerance: 100
       interval: 60
@@ -9655,7 +9655,7 @@ proxies:
       max-failed-times: 3
       filter: "(?i)UA|乌克兰"
       include-all: true
-    - name: "\U0001F1F5\U0001F1F1 波兰节点"
+    - name: "\U0001F1F5\U0001F1F1 ���兰节点"
       type: url-test
       tolerance: 100
       interval: 60
@@ -9787,7 +9787,7 @@ proxies:
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 100 | ⬇️ 16KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
  - {"cipher":"none","name":" t.me/PFSub | 🇭🇰 HK 101 | ⬇️ 4MB/s","password":"14b02e2a-8930-4afb-8412-ea4a4954ca5b","plugin":"v2ray-plugin","plugin-opts":{"host":"ylnhh.us.ci","mode":"websocket","mux":false,"path":"/14b02e2a-8930-4afb-8412-ea4a4954ca5b/?ed=2560","tls":true},"port":12126,"server":"116.44.53.251","type":"ss","udp":true}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇭🇰 HK 102 | ⬇️ 14KB/s","network":"ws","port":36703,"server":"47.244.120.197","skip-cert-verify":true,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","max-early-data":2048,"path":"/arki"}}
- - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭�� HK 103 | ⬇️ 20KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
+ - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 103 | ⬇️ 20KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
  - {"cipher":"chacha20-ietf-poly1305","name":" t.me/PFSub | 🇹🇼 TW 104 | ⬇️ 32KB/s","password":"7e731ec3-f8e1-43f6-92cf-3978d14705c4","port":50099,"server":"r3mrcg0011499tl.cybervena.com","type":"ss"}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇭🇰 HK 105 | ⬇️ 26KB/s","network":"ws","port":44867,"server":"47.244.120.197","skip-cert-verify":true,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","max-early-data":2048,"path":"/arki"}}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 106 | ⬇️ 18KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
@@ -10093,7 +10093,7 @@ proxies:
  - {"cipher":"none","name":" t.me/PFSub | 🇯🇵 JP 406 | ⬇️ 64KB/s","password":"3e96ef7d-8637-42c2-ac73-75182196e755","plugin":"v2ray-plugin","plugin-opts":{"host":"mfvpn.fuchen.indevs.in","mode":"websocket","mux":false,"path":"3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560","tls":true},"port":8443,"server":"57.129.137.51","type":"ss","udp":true}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇸🇬 SG 407 | ⬇️ 99KB/s","network":"tcp","port":30812,"server":"v12.hdacd.com","skip-cert-verify":false,"tls":false,"type":"vmess","uuid":"cbb3f877-d1fb-344c-87a9-d153bffd5484"}
  - {"alterId":2,"cipher":"auto","client-fingerprint":"chrome","country":"🏁 ZZ","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇯🇵 JP 408 | ⬇️ 39KB/s","network":"tcp","port":30806,"server":"v6.hdacd.com","skip-cert-verify":true,"type":"vmess","uuid":"cbb3f877-d1fb-344c-87a9-d153bffd5484"}
- - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇬🇧 GB","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇺🇸 US 409 | ⬇️ 563KB/s","network":"tcp","port":180,"server":"82.198.246.46","skip-cert-verify":true,"type":"vmess","uuid":"d13fc2f5-3e05-4795-81eb-44143a09e552"}
+ - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇬🇧 GB","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇺��� US 409 | ⬇️ 563KB/s","network":"tcp","port":180,"server":"82.198.246.46","skip-cert-verify":true,"type":"vmess","uuid":"d13fc2f5-3e05-4795-81eb-44143a09e552"}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇳🇱 NL 410 | ⬇️ 13MB/s","network":"tcp","port":30830,"server":"v30.hdacd.com","skip-cert-verify":true,"type":"vmess","uuid":"cbb3f877-d1fb-344c-87a9-d153bffd5484"}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇺🇸 US 411 | ⬇️ 183KB/s","network":"tcp","port":180,"server":"82.198.246.250","tls":false,"type":"vmess","uuid":"d13fc2f5-3e05-4795-81eb-44143a09e552"}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇺🇸 US 412 | ⬇️ 14MB/s","network":"tcp","port":180,"server":"82.198.246.250","skip-cert-verify":false,"tls":false,"type":"vmess","uuid":"d13fc2f5-3e05-4795-81eb-44143a09e552"}
@@ -10387,7 +10387,7 @@ proxies:
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇸🇬 SG 700 | ⬇️ 7MB/s","network":"tcp","port":30812,"server":"v12.hdacd.com","skip-cert-verify":false,"tls":false,"type":"vmess","uuid":"cbb3f877-d1fb-344c-87a9-d153bffd5484"}
  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 701 | ⬇️ 5MB/s","network":"tcp","port":7754,"server":"efan.dnsefan04881.com","tls":false,"type":"vmess","uuid":"7cd96dbe-ecec-4937-9e05-87ab70af2f30"}
  - {"cipher":"aes-256-cfb","country":"🏁 ZZ","delay":553,"name":" t.me/PFSub | 🇻🇳 VN 702 | ⬇️ 98KB/s","password":"Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV","port":38388,"server":"103.186.154.214","type":"ss"}
- - {"cipher":"none","name":" t.me/PFSub | ���🇵 JP 703 | ⬇️ 4MB/s","password":"79960b0b-7d31-4263-8915-6511b0e137a8","plugin":"v2ray-plugin","plugin-opts":{"host":"woshinidie-et3.pages.dev","mode":"websocket","mux":false,"path":"/79960b0b-7d31-4263-8915-6511b0e137a8/?ed=2560","tls":true},"port":443,"server":"57.128.183.107","type":"ss","udp":true}
+ - {"cipher":"none","name":" t.me/PFSub | 🇯🇵 JP 703 | ⬇️ 4MB/s","password":"79960b0b-7d31-4263-8915-6511b0e137a8","plugin":"v2ray-plugin","plugin-opts":{"host":"woshinidie-et3.pages.dev","mode":"websocket","mux":false,"path":"/79960b0b-7d31-4263-8915-6511b0e137a8/?ed=2560","tls":true},"port":443,"server":"57.128.183.107","type":"ss","udp":true}
  - {"cipher":"aes-256-cfb","name":" t.me/PFSub | 🇻🇳 VN 704 | ⬇️ 290KB/s","password":"Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV","port":38388,"server":"103.186.154.49","skip-cert-verify":false,"type":"ss","udp":false}
  - {"cipher":"chacha20-ietf-poly1305","name":" t.me/PFSub | 🇭🇰 HK 705 | ⬇️ 2MB/s","password":"aed6e687-58a9-4836-ba62-7d8184c94df4","port":32063,"server":"hk2.network-cdn-gw-yd.net","type":"ss","udp":true}
  - {"cipher":"aes-256-cfb","name":" t.me/PFSub | 🇻🇳 VN 706 | ⬇️ 46KB/s","password":"Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV","port":38388,"server":"103.186.154.198","type":"ss","udp":true}
@@ -10900,7 +10900,6 @@ proxy-groups:
       - "11|🇭🇰 香港|@ripaojiedian"
       - "11"
       - "12|香港|@ripaojiedian"
-      - ""
       - "13|AT_speednode_0001"
       - "♻ 自动选择"
       - "🔰 延迟最低"
@@ -11376,7 +11375,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
@@ -11550,22 +11549,22 @@ proxy-groups:
       - "\U0001F4AA 手动选择"
       - "\U0001F64F 自动选择"
       - "\U0001F3A1负载均衡"
-      - "\U0001F1ED\U0001F1F0 香港节点"
+      - "\U0001F1ED\U0001F1F0 ���港节点"
       - "\U0001F1F9\U0001F1FC 台湾节点"
       - "\U0001F1EF\U0001F1F5 日本节点"
       - "\U0001F1F0\U0001F1F7 韩国节点"
       - "\U0001F1F8\U0001F1EC 新加坡节点"
-      - "\U0001F1FA\U0001F1F8 美国节点"
+      - "\U0001F1FA\U0001F1F8 美国节��"
       - "\U0001F1EC\U0001F1E7 英国节点"
       - "\U0001F1EB\U0001F1F7 法国节点"
       - "\U0001F1E9\U0001F1EA 德国节点"
       - "\U0001F1E8\U0001F1E6 加拿大节点"
-      - "\U0001F1E6\U0001F1FA 澳大利亚节点"
+      - "\U0001F1E6\U0001F1FA 澳大利亚��点"
       - "\U0001F1F3\U0001F1F1 荷兰节点"
       - "\U0001F1F7\U0001F1FA 俄罗斯节点"
       - "\U0001F1ED\U0001F1FA 匈牙利节点"
       - "\U0001F1FA\U0001F1E6 乌克兰节点"
-      - "\U0001F1F5\U0001F1F1 波兰节点"
+      - "\U0001F1F5\U0001F1F1 ���兰节点"
       - "\U0001F1EE\U0001F1F9 意大利节点"
       - "\U0001F1EE\U0001F1F7 伊朗节点"
 
@@ -11578,7 +11577,6 @@ proxy-groups:
       - "11|🇭🇰 香港|@ripaojiedian"
       - "11"
       - "12|香港|@ripaojiedian"
-      - ""
       - "13|AT_speednode_0001"
       - "♻ 自动选择"
       - "🔰 延迟最低"
@@ -12054,7 +12052,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
@@ -12228,23 +12226,24 @@ proxy-groups:
       - "\U0001F4AA 手动选择"
       - "\U0001F64F 自动选择"
       - "\U0001F3A1负载均衡"
-      - "\U0001F1ED\U0001F1F0 香港节点"
+      - "\U0001F1ED\U0001F1F0 ���港节点"
       - "\U0001F1F9\U0001F1FC 台湾节点"
       - "\U0001F1EF\U0001F1F5 日本节点"
       - "\U0001F1F0\U0001F1F7 韩国节点"
       - "\U0001F1F8\U0001F1EC 新加坡节点"
-      - "\U0001F1FA\U0001F1F8 美国节点"
+      - "\U0001F1FA\U0001F1F8 美国节��"
       - "\U0001F1EC\U0001F1E7 英国节点"
       - "\U0001F1EB\U0001F1F7 法国节点"
       - "\U0001F1E9\U0001F1EA 德国节点"
       - "\U0001F1E8\U0001F1E6 加拿大节点"
-      - "\U0001F1E6\U0001F1FA 澳大利亚节点"
+      - "\U0001F1E6\U0001F1FA 澳大利亚��点"
       - "\U0001F1F3\U0001F1F1 荷兰节点"
       - "\U0001F1F7\U0001F1FA 俄罗斯节点"
       - "\U0001F1ED\U0001F1FA 匈牙利节点"
       - "\U0001F1FA\U0001F1E6 乌克兰节点"
-      - "\U0001F1F5\U0001F1F1 波兰节点"
+      - "\U0001F1F5\U0001F1F1 ���兰节点"
       - "\U0001F1EE\U0001F1F9 意大利节点"
       - "\U0001F1EE\U0001F1F7 伊朗节点"
 
-rules: [MATCH,🔰 手动切换]
+rules:
+  - MATCH,🔰 手动切换
