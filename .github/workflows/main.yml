@@ -1,4 +1,4 @@
-name: Ultimate_Single_Key_Merger
+name: Ultimate_Structural_Fixer
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Strict Single-Key Extraction
+      - name: Recursive Normalization Extraction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -38,7 +38,7 @@ jobs:
           ];
 
           async function main() {
-            let allNodes = [];
+            let finalNodes = [];
             let proxyNames = [];
 
             for (const url of urls) {
@@ -53,29 +53,33 @@ jobs:
 
                 if (!data) continue;
                 const lines = data.split('\n');
-                let inProxies = false;
+                let inArea = false;
 
                 for (let line of lines) {
                   const trimmed = line.trim();
                   
-                  // 1. 发现源文件中的 proxies: 标记，仅开启抓取开关，绝对不搬运这一行
+                  // 1. 发现 proxies 段开始，开启抓取，但不搬运这一行
                   if (trimmed.toLowerCase().startsWith('proxies:')) {
-                    inProxies = true;
+                    inArea = true;
                     continue;
                   }
 
-                  if (inProxies) {
-                    // 2. 判定结束：遇到新的顶级配置（非空、非空格开头、非横杠开头）
+                  if (inArea) {
+                    // 2. 判定段落结束（遇到非缩进且非杠开头的顶级键）
                     if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                      inProxies = false;
+                      inArea = false;
                       continue;
                     }
 
-                    // 3. 核心过滤：即使在抓取区，如果行内包含 proxies: 字样（防止源文件嵌套），也剔除
+                    // 3. 核心修复：剔除多余的标题行，并强制标准化缩进
                     if (trimmed.length > 0 && !trimmed.toLowerCase().includes('proxies:')) {
-                      allNodes.push(line);
+                      if (trimmed.startsWith('-')) {
+                        finalNodes.push('  ' + trimmed); // 节点开头，强制 2 空格
+                      } else {
+                        finalNodes.push('    ' + trimmed); // 节点属性，强制 4 空格
+                      }
 
-                      // 提取节点名用于生成 proxy-groups
+                      // 提取节点名用于组，确保不带引号干扰
                       const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                       if (nameMatch) {
                         let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
@@ -84,18 +88,17 @@ jobs:
                     }
                   }
                 }
-                console.log(`✅ ${url} 处理完成`);
-              } catch (e) { console.log(`❌ 跳过失败源: ${url}`); }
+              } catch (e) { console.log(`Skipping: ${url}`); }
             }
 
             const uniqueNames = [...new Set(proxyNames)];
-            
-            // 构造最终 YAML，确保 proxies: 全局唯一
-            const finalYaml = [
+            const output = [
               "allow-left-click: true",
               "mode: rule",
-              "proxies:",  // 这是全文件唯一的 proxies 标题
-              ...allNodes,
+              "unified-delay: true",
+              "",
+              "proxies:", // 全局唯一标题
+              ...finalNodes,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -116,7 +119,7 @@ jobs:
               "  - MATCH,🔰 手动切换"
             ].join('\n');
 
-            fs.writeFileSync('merged_nodes.yaml', finalYaml);
+            fs.writeFileSync('merged_nodes.yaml', output);
           }
           main();
           EOF
@@ -128,5 +131,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Fix: Enforce single proxies key" || exit 0
+          git commit -m "Fix: Normalized structure and single-key" || exit 0
           git push origin HEAD
