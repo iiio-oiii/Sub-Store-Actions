@@ -5011,7 +5011,7 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    path: /Telegram��🇳 @WangCai2 /?ed=2560
     headers:
     host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
@@ -6219,7 +6219,7 @@ proxies:
     headers:
     host: yg.bantony199.top
     uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
-  - name: 🇩🇪DE_5 | ⬇️ 1.4MB/s
+  - name: 🇩🇪DE_5 | ⬇��� 1.4MB/s
     port: 2087
     server: 188.114.97.11
     type: vless
@@ -8847,7 +8847,7 @@ proxies:
   - {name: "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_3", server: mm2.shabijichang.com, port: 80, type: vmess, uuid: c458695d-6908-45c3-9512-e0c46418454c, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /, headers: {Host: mm2.shabijichang.com}}, udp: true}
   - {name: "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_4", server: mm3.shabijichang.com, port: 80, type: vmess, uuid: c458695d-6908-45c3-9512-e0c46418454c, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /, headers: {Host: mm3.shabijichang.com}}, udp: true}
   - {name: "[VMess] 🇳🇱 _US_美国->🇳🇱_NL_荷兰", server: 45.199.138.191, port: 30000, type: vmess, uuid: 418048af-a293-4b99-9b0c-98ca3580dd24, alterId: 64, cipher: auto, tls: true, skip-cert-verify: true, network: ws, ws-opts: {path: /path/1696251522438, headers: {Host: www.42077230.xyz}}, udp: true}
-  - {name: "[VMess] 🇸🇦 _US_美国->🇸🇦_SA_沙特阿拉伯", server: jd3.shabijichang.com, port: 80, type: vmess, uuid: c458695d-6908-45c3-9512-e0c46418454c, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /, headers: {Host: jd3.shabijichang.com}}, udp: true}
+  - {name: "[VMess] 🇸🇦 _US_美国->��🇦_SA_沙特阿拉伯", server: jd3.shabijichang.com, port: 80, type: vmess, uuid: c458695d-6908-45c3-9512-e0c46418454c, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /, headers: {Host: jd3.shabijichang.com}}, udp: true}
   - {name: "[VMess] 🇺🇸 _US_美国_1", server: 206.168.190.219, port: 2082, type: vmess, uuid: e31ca750-71f7-11ee-b920-1239d0255272, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /vmws}, udp: true}
   - {name: "[VMess] 🇺🇸 _US_美国_2", server: wnd2.shabijichang.com, port: 80, type: vmess, uuid: c458695d-6908-45c3-9512-e0c46418454c, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: {path: /, headers: {Host: wnd2.shabijichang.com}}, udp: true}
   - {name: "[VMess] 🇺🇸 _US_美国_3", server: 45.199.138.186, port: 30000, type: vmess, uuid: 4ec0ae62-de09-4029-904a-0313d4628ecf, alterId: 64, cipher: auto, tls: true, skip-cert-verify: true, network: ws, ws-opts: {path: /path/1696682720138, headers: {Host: www.19229362.xyz}}, udp: true}
@@ -8876,7 +8876,7 @@ proxies:
   - "[Trojan] 🇬🇧 英国 伦敦Virgin Media"
   - "[Trojan] 🇬🇧 英国 伦敦Virgin Media 2"
   - "[Trojan] 🇬🇧 英国 伦敦Virgin Media 3"
-  - "[VMess] 🇭🇰 香港 电讯盈科有��公司"
+  - "[VMess] 🇭🇰 香港 电讯盈科有限公司"
   - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_1"
   - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_2"
   - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_3"
@@ -8938,7 +8938,7 @@ proxies:
   - "[SS] 🇫🇷 _FR_法国"
   - "[VMess] 🇬🇧 _US_美国->🇬🇧_GB_英国_1"
   - "[VMess] 🇬🇧 _US_美国->🇬🇧_GB_英国_2"
-  - "[VMess] 🇬🇧 ��国 V2CROSS.COM"
+  - "[VMess] 🇬🇧 英国 V2CROSS.COM"
   - "[VMess] 🇬🇧 英国 V2CROSS.COM 2"
   - "[VMess] 🇬🇧 英国 V2CROSS.COM 3"
   - "[Trojan] 🇬🇧 英国 伦敦Virgin Media"
@@ -8969,7 +8969,7 @@ proxies:
   - "[SS] 🇨🇭 _CH_瑞士"
   - "[VMess] 🇨🇳 _TW_台湾->🇺🇸_US_美国"
   - "[VMess] 🇩🇪 _US_美国->🇩🇪_DE_德国"
-  - "[SS] ���🇷 _FR_法国"
+  - "[SS] 🇫🇷 _FR_法国"
   - "[VMess] 🇬🇧 _US_美国->🇬🇧_GB_英国_1"
   - "[VMess] 🇬🇧 _US_美国->🇬🇧_GB_英国_2"
   - "[VMess] 🇬🇧 英国 V2CROSS.COM"
@@ -9029,7 +9029,7 @@ proxies:
     type: select
   - 🚀 全球互联
   - 🇭🇰 香港
-  - 🇯🇵 日本
+  - 🇯🇵 日���
   - 🇺🇲 美国
   - 🇹🇼 台湾
   - 🇸🇬 新加坡
@@ -9148,7 +9148,7 @@ proxies:
   - "\U0001F1EC\U0001F1E7 英国节点"
   - "\U0001F1EB\U0001F1F7 法国节点"
   - "\U0001F1E9\U0001F1EA 德国节点"
-  - "\U0001F1E8\U0001F1E6 加拿大节点"
+  - "\U0001F1E8\U0001F1E6 加��大节点"
   - "\U0001F1E6\U0001F1FA 澳大利亚节点"
   - "\U0001F1F3\U0001F1F1 荷兰节点"
   - "\U0001F1F7\U0001F1FA 俄罗斯节点"
@@ -9378,7 +9378,7 @@ proxies:
   - "\U0001F1F8\U0001F1EC 新加坡节点"
   - "\U0001F1FA\U0001F1F8 美国节点"
   - "\U0001F1EC\U0001F1E7 英国节点"
-  - "\U0001F1EB\U0001F1F7 法国节点"
+  - "\U0001F1EB\U0001F1F7 法��节点"
   - "\U0001F1E9\U0001F1EA 德国节点"
   - "\U0001F1E8\U0001F1E6 加拿大节点"
   - "\U0001F1E6\U0001F1FA 澳大利亚节点"
@@ -10902,6 +10902,7 @@ proxy-groups:
       - "11|🇭🇰 香港|@ripaojiedian"
       - "11"
       - "12|香港|@ripaojiedian"
+      - ""
       - "13|AT_speednode_0001"
       - "♻ 自动选择"
       - "🔰 延迟最低"
@@ -11377,7 +11378,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
@@ -11519,7 +11520,7 @@ proxy-groups:
       - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_3"
       - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_4"
       - "[VMess] 🇳🇱 _US_美国->🇳🇱_NL_荷兰"
-      - "[VMess] 🇸🇦 _US_美国->🇸🇦_SA_沙特阿拉伯"
+      - "[VMess] 🇸🇦 _US_美国->��🇦_SA_沙特阿拉伯"
       - "[VMess] 🇺🇸 _US_美国_1"
       - "[VMess] 🇺🇸 _US_美国_2"
       - "[VMess] 🇺🇸 _US_美国_3"
@@ -11579,6 +11580,7 @@ proxy-groups:
       - "11|🇭🇰 香港|@ripaojiedian"
       - "11"
       - "12|香港|@ripaojiedian"
+      - ""
       - "13|AT_speednode_0001"
       - "♻ 自动选择"
       - "🔰 延迟最低"
@@ -12054,7 +12056,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
@@ -12196,7 +12198,7 @@ proxy-groups:
       - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_3"
       - "[VMess] 🇮🇳 _US_美国->🇮🇳_IN_印度_4"
       - "[VMess] 🇳🇱 _US_美国->🇳🇱_NL_荷兰"
-      - "[VMess] 🇸🇦 _US_美国->🇸🇦_SA_沙特阿拉伯"
+      - "[VMess] 🇸🇦 _US_美国->��🇦_SA_沙特阿拉伯"
       - "[VMess] 🇺🇸 _US_美国_1"
       - "[VMess] 🇺🇸 _US_美国_2"
       - "[VMess] 🇺🇸 _US_美国_3"
