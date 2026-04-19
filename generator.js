@@ -1,0 +1,66 @@
+const fs = require('fs');
+const https = require('https');
+
+const urls = [
+  'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
+  'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
+  'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
+  'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
+  'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg',
+  'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
+  'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
+  'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
+  'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml'
+];
+
+async function main() {
+  let finalNodes = [];
+  let names = new Set();
+
+  for (const url of urls) {
+    try {
+      const data = await new Promise((res, rej) => {
+        https.get(url, { timeout: 15000 }, (r) => {
+          let d = '';
+          r.on('data', (c) => d += c);
+          r.on('end', () => res(d));
+        }).on('error', rej);
+      });
+
+      if (!data || !data.includes('proxies:')) continue;
+      
+      // 重点：只提取含有节点属性的行，并且强制抹平所有行首空格，重新按标准生成
+      const rawLines = data.split('\n');
+      let start = false;
+      for (let line of rawLines) {
+        const t = line.trim();
+        if (t.toLowerCase().startsWith('proxies:')) { start = true; continue; }
+        if (start) {
+          if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) { start = false; continue; }
+          if (t.startsWith('-')) {
+            finalNodes.push("  " + t);
+            const m = t.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+            if (m) names.add(m[1].trim());
+          } else if (t.length > 0) {
+            finalNodes.push("    " + t);
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  const nameList = Array.from(names).map(n => `      - "${n.replace(/"/g, '')}"`).join('\n');
+  const output = [
+    "allow-left-click: true",
+    "mode: rule",
+    "proxies:",
+    ...finalNodes,
+    "proxy-groups:",
+    "  - {name: 🚀 自动选择, type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, proxies: [\n" + nameList + "\n    ]}",
+    "  - {name: 🔰 手动切换, type: select, proxies: [🚀 自动选择, DIRECT, \n" + nameList + "\n    ]}",
+    "rules: [MATCH,🔰 手动切换]"
+  ].join('\n');
+
+  fs.writeFileSync('merged_nodes.yaml', output);
+}
+main();
