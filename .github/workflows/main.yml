@@ -1,4 +1,4 @@
-name: Ultimate_Single_Proxies_Merger
+name: Ultimate_Standard_Merger_Final
 
 on:
   workflow_dispatch:
@@ -19,11 +19,69 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Clean Proxies Extraction
+      - name: Bulletproof Proxies Extraction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
 
           const urls = [
-            '
+            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
+            'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
+            'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
+            'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
+            'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg',
+            'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
+            'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
+            'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
+            'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml'
+          ];
+
+          async function fetchWithRetry(url) {
+            return new Promise((resolve) => {
+              const req = https.get(url, { timeout: 20000 }, (res) => {
+                let data = '';
+                res.on('data', (chunk) => data += chunk);
+                res.on('end', () => resolve(data));
+              });
+              req.on('error', (err) => { console.log(`❌ 网络错误 (${url}): ${err.message}`); resolve(null); });
+              req.on('timeout', () => { console.log(`⏰ 请求超时 (${url})`); req.destroy(); resolve(null); });
+            });
+          }
+
+          async function main() {
+            let allProxyLines = [];
+            let proxyNames = [];
+
+            for (const url of urls) {
+              try {
+                const content = await fetchWithRetry(url);
+                if (!content) continue;
+
+                const lines = content.split('\n');
+                let isProxyArea = false;
+
+                for (let line of lines) {
+                  const trimmed = line.trim();
+                  
+                  // 智能识别 proxies: 开始（不分大小写）
+                  if (trimmed.toLowerCase().startsWith('proxies:')) {
+                    isProxyArea = true;
+                    continue;
+                  }
+
+                  if (isProxyArea) {
+                    // 识别结束：如果遇到不带缩进且不以横杠开头的行，且不是空行
+                    if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                      isProxyArea = false;
+                      continue;
+                    }
+
+                    // 物理搬运：确保不搬运重复的标题
+                    if (trimmed.length > 0 && !trimmed.toLowerCase().startsWith('proxies:')) {
+                      allProxyLines.push(line);
+                      
+                      // 提取名字用于 proxy-groups
+                      const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                      if (nameMatch) {
+                        let n = nameMatch[1].trim().replace(/^["']|["
