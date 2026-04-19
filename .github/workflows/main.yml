@@ -1,4 +1,4 @@
-name: Ultimate_Diagnostics_Merger
+name: Ultimate_Single_Key_Merger
 
 on:
   workflow_dispatch:
@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # 显式声明权限
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Bulletproof Extraction
+      - name: Strict Single-Key Extraction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -38,12 +38,12 @@ jobs:
           ];
 
           async function main() {
-            let allProxyLines = [];
+            let allNodes = [];
             let proxyNames = [];
 
             for (const url of urls) {
               try {
-                const content = await new Promise((res, rej) => {
+                const data = await new Promise((res, rej) => {
                   https.get(url, { timeout: 15000 }, (r) => {
                     let d = '';
                     r.on('data', (c) => d += c);
@@ -51,28 +51,51 @@ jobs:
                   }).on('error', rej);
                 });
 
-                if (!content || !content.includes('proxies:')) continue;
-                const lines = content.split('\n');
-                let isArea = false;
-                for (let l of lines) {
-                  if (l.trim().toLowerCase().startsWith('proxies:')) { isArea = true; continue; }
-                  if (isArea) {
-                    if (l.length > 0 && !l.startsWith(' ') && !l.startsWith('-')) { isArea = false; continue; }
-                    if (l.trim()) {
-                      allProxyLines.push(l);
-                      const m = l.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
-                      if (m) proxyNames.push(`      - "${m[1].trim()}"`);
+                if (!data) continue;
+                const lines = data.split('\n');
+                let inProxies = false;
+
+                for (let line of lines) {
+                  const trimmed = line.trim();
+                  
+                  // 1. 发现源文件中的 proxies: 标记，仅开启抓取开关，绝对不搬运这一行
+                  if (trimmed.toLowerCase().startsWith('proxies:')) {
+                    inProxies = true;
+                    continue;
+                  }
+
+                  if (inProxies) {
+                    // 2. 判定结束：遇到新的顶级配置（非空、非空格开头、非横杠开头）
+                    if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                      inProxies = false;
+                      continue;
+                    }
+
+                    // 3. 核心过滤：即使在抓取区，如果行内包含 proxies: 字样（防止源文件嵌套），也剔除
+                    if (trimmed.length > 0 && !trimmed.toLowerCase().includes('proxies:')) {
+                      allNodes.push(line);
+
+                      // 提取节点名用于生成 proxy-groups
+                      const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                      if (nameMatch) {
+                        let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
+                        if (n) proxyNames.push(`      - "${n}"`);
+                      }
                     }
                   }
                 }
-              } catch (e) { console.log(`Skipping ${url}`); }
+                console.log(`✅ ${url} 处理完成`);
+              } catch (e) { console.log(`❌ 跳过失败源: ${url}`); }
             }
 
-            const output = [
+            const uniqueNames = [...new Set(proxyNames)];
+            
+            // 构造最终 YAML，确保 proxies: 全局唯一
+            const finalYaml = [
               "allow-left-click: true",
               "mode: rule",
-              "proxies:",
-              ...allProxyLines,
+              "proxies:",  // 这是全文件唯一的 proxies 标题
+              ...allNodes,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -80,48 +103,30 @@ jobs:
               "    url: http://www.gstatic.com/generate_204",
               "    interval: 300",
               "    proxies:",
-              ...new Set(proxyNames),
+              ...uniqueNames,
               "",
               "  - name: 🔰 手动切换",
               "    type: select",
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              ...new Set(proxyNames),
+              ...uniqueNames,
               "",
-              "rules: [MATCH,🔰 手动切换]"
+              "rules:",
+              "  - MATCH,🔰 手动切换"
             ].join('\n');
 
-            fs.writeFileSync('merged_nodes.yaml', output);
-            console.log("File write complete.");
+            fs.writeFileSync('merged_nodes.yaml', finalYaml);
           }
           main();
           EOF
           node generator.js
 
-      - name: Debug and Push
+      - name: Commit and Push
         run: |
-          # 1. 检查文件是否真的生成了
-          echo "Checking if file exists..."
-          ls -la merged_nodes.yaml
-          
-          # 2. Git 配置
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # 3. 强制处理并提交
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          
-          # 4. 检查是否有变动，如果有则强制推送
-          if git diff --staged --quiet; then
-            echo "No changes detected, but forcing a commit for diagnostics..."
-            date >> debug.log
-            git add debug.log
-            git commit -m "Diagnostic Update $(date)"
-          else
-            git commit -m "Nodes Update $(date)"
-          fi
-          
-          # 5. 推送到当前分支
+          git commit -m "Fix: Enforce single proxies key" || exit 0
           git push origin HEAD
