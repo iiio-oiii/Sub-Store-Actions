@@ -1,0 +1,34 @@
+name: HK_Pure_Update
+on:
+  schedule:
+    - cron: '0 */4 * * *' # 每4小时运行一次
+  workflow_dispatch:      # 允许手动运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Sub-Store CLI
+        run: npm install -g @sub-store/cli
+
+      - name: Generate Pure Subscription
+        env:
+          SUB_LINKS: ${{ secrets.SUB_LINKS }}
+        run: |
+          # 将 Secret 里的链接保存为临时文件
+          echo "$SUB_LINKS" > links.txt
+          
+          # 运行命令行转换
+          # --script 指向刚才写的过滤逻辑
+          sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml
+
+      - name: Upload to Gist or Commit to Repo
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add hk_pure.yaml
+          git commit -m "Update HK Pure List" || exit 0
+          git push
