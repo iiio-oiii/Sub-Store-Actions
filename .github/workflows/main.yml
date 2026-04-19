@@ -20,10 +20,12 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Install Sub-Store CLI
+      - name: Install Sub-Store
         run: |
-          npm install -g sub-store/cli
-          echo "Sub-Store CLI version: $(sub-store --version)"
+          # 核心修正：包名就是 sub-store，不带任何后缀或前缀
+          npm install -g sub-store
+          # 验证安装是否成功，如果打印出版本号就稳了
+          sub-store --version
 
       - name: Generate Pure Subscription
         env:
