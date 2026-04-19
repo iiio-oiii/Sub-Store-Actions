@@ -1,4 +1,4 @@
-name: Generate All Nodes Subscription
+name: Compare and Merge All Nodes
 
 on:
   workflow_dispatch:
@@ -17,116 +17,110 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Generate Full Subscription
-        env:
-          SUB_LINKS: ${{ secrets.SUB_LINKS }}
+      - name: Merge Nodes
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
 
-          const links = process.env.SUB_LINKS.split('\n').filter(l => l.trim().startsWith('http'));
+          const urls = [
+            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
+            'https://raw.githubusercontent.com/iiio-oiii/Sub-Store-Actions/refs/heads/main/all_nodes.yaml'
+          ];
 
-          async function fetchLink(url) {
-              return new Promise((resolve) => {
-                  const req = https.get(url, { timeout: 20000 }, (res) => {
-                      let data = '';
-                      res.on('data', (chunk) => data += chunk);
-                      res.on('end', () => resolve(data));
-                  });
-                  req.on('error', () => resolve(''));
-                  req.end();
-              });
+          async function fetchUrl(url) {
+            return new Promise((resolve) => {
+              https.get(url, { timeout: 30000 }, (res) => {
+                let data = '';
+                res.on('data', (chunk) => data += chunk);
+                res.on('end', () => resolve(data));
+              }).on('error', () => resolve(''));
+            });
           }
 
           async function main() {
-              console.log("🚀 正在从 23 个源提取所有节点...");
-              let finalNodes = [];
-              let nodeNames = [];
+            let allProxies = [];
+            let proxyNames = [];
 
-              for (const link of links) {
-                  let content = await fetchLink(link.trim());
-                  if (!content) continue;
-                  
-                  if (!content.includes('server:')) {
-                      try { content = Buffer.from(content, 'base64').toString(); } catch(e) {}
+            for (const url of urls) {
+              console.log(`📡 正在抓取: ${url}`);
+              const content = await fetchUrl(url);
+              if (!content) continue;
+
+              // 识别 proxies 列表的开始位置
+              const lines = content.split('\n');
+              let isProxySection = false;
+              let currentProxy = [];
+
+              for (let line of lines) {
+                const trimmed = line.trim();
+                
+                // 寻找 proxies: 标记
+                if (trimmed === 'proxies:') {
+                  isProxySection = true;
+                  continue;
+                }
+                // 如果遇到下一个顶级字段（如 proxy-groups），停止抓取
+                if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                  if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
+                  isProxySection = false;
+                  break;
+                }
+
+                if (isProxySection) {
+                  // 如果是以 - 开头，说明是新节点的开始
+                  if (line.trim().startsWith('-')) {
+                    if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
+                    currentProxy = [line];
+                  } else if (currentProxy.length > 0) {
+                    currentProxy.push(line);
                   }
-
-                  // 提取所有节点块
-                  const blocks = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
-                  
-                  blocks.forEach(block => {
-                      if (block.includes('server:')) {
-                          const fields = ['name', 'server', 'port', 'type', 'uuid', 'password', 'cipher', 'alterId', 'tls', 'sni', 'network', 'ws-opts', 'headers', 'skip-cert-verify', 'path'];
-                          let nodeObj = {};
-
-                          fields.forEach(field => {
-                              const regex = new RegExp(`${field}:\\s*({.*?}|".*?"|'.*?'|[^,\\n\\}]+)`);
-                              const match = block.match(regex);
-                              if (match) {
-                                  nodeObj[field] = match[1].trim().replace(/^["']|["']$/g, '');
-                              }
-                          });
-
-                          if (nodeObj.name && nodeObj.server) {
-                              // 处理重名，防止配置文件冲突
-                              let cleanName = nodeObj.name.replace(/[\[\]"]/g, '').trim();
-                              if (nodeNames.includes(`      - "${cleanName}"`)) {
-                                  cleanName = `${cleanName}_${Math.random().toString(36).substr(2, 4)}`;
-                              }
-
-                              let kv = Object.entries(nodeObj).map(([k, v]) => {
-                                  if (k === 'name') return `${k}: "${cleanName}"`;
-                                  if (k === 'ws-opts' || k === 'headers') return `${k}: {${v.replace(/[\{\}]/g, '')}}`;
-                                  return `${k}: ${v}`;
-                              }).join(', ');
-                              
-                              finalNodes.push(`  - {${kv}}`);
-                              nodeNames.push(`      - "${cleanName}"`);
-                          }
-                      }
-                  });
+                }
               }
+              if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
+            }
 
-              // 移除重复节点
-              const uniqueNodes = [...new Set(finalNodes)];
-              const uniqueNames = [...new Set(nodeNames)];
+            // 提取所有节点名称用于生成代理组
+            allProxies.forEach(proxyBlock => {
+              const nameMatch = proxyBlock.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+              if (nameMatch) {
+                proxyNames.push(`      - "${nameMatch[1].trim()}"`);
+              }
+            });
 
-              // 构造标准 YAML
-              let config = [
-                "port: 7890",
-                "socks-port: 7891",
-                "allow-left-click: true",
-                "mode: rule",
-                "log-level: info",
-                "external-controller: 127.0.0.1:9090",
-                "",
-                "proxies:",
-                ...uniqueNodes,
-                "",
-                "proxy-groups:",
-                "  - name: 🚀 自动选择(延迟最低)",
-                "    type: url-test",
-                "    url: http://www.gstatic.com/generate_204",
-                "    interval: 300",
-                "    proxies:",
-                ...uniqueNames,
-                "",
-                "  - name: 🔰 手动切换节点",
-                "    type: select",
-                "    proxies:",
-                "      - 🚀 自动选择(延迟最低)",
-                "      - DIRECT",
-                ...uniqueNames,
-                "",
-                "rules:",
-                "  - DOMAIN-SUFFIX,interactivebrokers.com,🚀 自动选择(延迟最低)",
-                "  - DOMAIN-SUFFIX,google.com,🔰 手动切换节点",
-                "  - MATCH,🔰 手动切换节点"
-              ].join('\n');
+            const uniqueNames = [...new Set(proxyNames)];
 
-              fs.writeFileSync('all_nodes.yaml', config);
-              console.log(`✅ 处理完成！已提取 ${uniqueNodes.length} 个节点。`);
+            const finalYaml = [
+              "port: 7890",
+              "socks-port: 7891",
+              "allow-left-click: true",
+              "mode: rule",
+              "log-level: info",
+              "",
+              "proxies:",
+              ...allProxies,
+              "",
+              "proxy-groups:",
+              "  - name: 🚀 自动选择",
+              "    type: url-test",
+              "    url: http://www.gstatic.com/generate_204",
+              "    interval: 300",
+              "    proxies:",
+              ...uniqueNames,
+              "",
+              "  - name: 🔰 手动切换",
+              "    type: select",
+              "    proxies:",
+              "      - 🚀 自动选择",
+              "      - DIRECT",
+              ...uniqueNames,
+              "",
+              "rules:",
+              "  - MATCH,🔰 手动切换"
+            ].join('\n');
+
+            fs.writeFileSync('merged_nodes.yaml', finalYaml);
+            console.log(`✅ 合并完成！总计节点数: ${allProxies.length}`);
           }
           main();
           EOF
@@ -136,6 +130,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add all_nodes.yaml
-          git commit -m "Update All Nodes Config" || exit 0
+          git add merged_nodes.yaml
+          git commit -m "Merge all nodes from list.yml and all_nodes.yaml" || exit 0
           git push
