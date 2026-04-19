@@ -1,44 +1,12 @@
-name: HK_Pure_Update
-on:
-  schedule:
-    - cron: '0 */4 * * *' 
-  workflow_dispatch:      
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    # 强制开启 Node.js 24 运行模式
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4 # 依然使用 v4，但通过环境变量强制跑在 Node 24 上
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24' # 显式指定使用 Node.js 24
-
-      - name: Install Sub-Store CLI
-        run: |
-          npm install -g @sub-store/cli
-          # 验证安装版本（可选）
-          sub-store --version
-
-      - name: Generate Pure Subscription
+- name: Generate Pure Subscription
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          echo "$SUB_LINKS" > links.txt
-          # 执行 process.js 脚本逻辑
-          sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml
-
-      - name: Commit and Push
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add hk_pure.yaml
-          # 只有当文件有变化时才提交，避免报错
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure List (Node 24)"
-          git push
+          # 使用 printf 避免 echo 处理特殊字符时的转义问题
+          printf "%s" "$SUB_LINKS" > links.txt
+          
+          # 增加调试信息：看看读取到了多少行链接
+          echo "Total subscription links: $(wc -l < links.txt)"
+          
+          # 运行转换，增加 --verbose 模式以便报错时看到细节
+          sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
