@@ -35,23 +35,21 @@ jobs:
                       let data = '';
                       res.on('data', (chunk) => data += chunk);
                       res.on('end', () => resolve(data));
-                  });
-                  req.on('error', () => resolve(''));
-                  req.end();
+                  }).on('error', () => resolve(''));
               });
           }
 
           async function main() {
-              console.log(`🚀 开始从 23 个源深度抠取香港节点...`);
+              console.log(`🚀 开启智能块模式，解析 23 个源...`);
               let allNodes = [];
               const hkInclude = /(香港|HK|HongKong|🇭🇰|HKG)/i;
-              const globalExclude = /(美国|日本|新加坡|韩国|台湾|US|JP|SG|KR|TW|United States|Japan|Singapore|Korea|Taiwan|DIRECT|REJECT)/i;
+              const globalExclude = /(美国|日本|新加坡|韩国|台湾|US|JP|SG|KR|TW)/i;
 
               for (const link of links) {
                   const content = await fetchLink(link.trim());
                   if (!content) continue;
 
-                  // 处理 Base64 格式 (V2Ray/SS 链接)
+                  // 1. 处理 Base64 (链接形式)
                   if (!content.includes('proxies:')) {
                       try {
                           const decoded = Buffer.from(content.trim(), 'base64').toString('utf-8');
@@ -63,27 +61,28 @@ jobs:
                       } catch(e) {}
                   }
 
-                  // 处理 Clash YAML 格式 (提取完整对象)
-                  const lines = content.split('\n');
-                  lines.forEach(line => {
-                      const l = line.trim();
-                      // 必须包含香港关键字，且必须包含 server/type 指纹，且排除分流规则行
-                      if (hkInclude.test(l) && (l.includes('server:') || l.includes('type:')) && !l.includes('DOMAIN')) {
-                          if (!globalExclude.test(l)) {
-                              // 规范化：确保是以 "- " 开头
-                              const formatted = l.startsWith('-') ? l : `- ${l}`;
-                              allNodes.push(formatted);
+                  // 2. 核心：Clash 块提取逻辑 (抓取完整的 YAML 节点块)
+                  const proxyMatch = content.match(/-[\s\S]*?(?=\n-|\n\n|\n[a-z])/g);
+                  if (proxyMatch) {
+                      proxyMatch.forEach(block => {
+                          if (hkInclude.test(block) && (block.includes('server:') || block.includes('type:'))) {
+                              if (!globalExclude.test(block) && !block.includes('DOMAIN')) {
+                                  allNodes.push(block.trim());
+                              }
                           }
-                      }
-                  });
+                      });
+                  }
               }
 
-              // 物理去重
+              // 去重
               const uniqueNodes = Array.from(new Set(allNodes));
-              console.log(`✅ 深度提取完成，共获取 ${uniqueNodes.length} 个香港节点。`);
+              console.log(`✅ 智能识别完成！找到 ${uniqueNodes.length} 个香港节点。`);
 
-              // 构建 Clash 订阅格式
-              let yamlContent = "proxies:\n" + uniqueNodes.map(n => `  ${n.replace(/^- /, '')}`).join('\n');
+              // 输出为标准 Clash 格式
+              let yamlContent = "proxies:\n" + uniqueNodes.map(n => {
+                  const clean = n.replace(/^- /, '').trim();
+                  return `  - ${clean}`;
+              }).join('\n');
               
               fs.writeFileSync('hk_pure.yaml', yamlContent);
           }
