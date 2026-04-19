@@ -1,7 +1,6 @@
 allow-left-click: true
 mode: rule
 unified-delay: true
-
 proxies:
   - cipher: aes-256-cfb
     name: 11|tg频道:@ripaojiedian
@@ -1649,7 +1648,7 @@ proxies:
     tls: true
     ws-opts:
     path: /
-  - name: 🇫🇷 法国_35
+  - name: ��🇷 法国_35
     type: vless
     server: 146.59.230.8
     port: 8443
@@ -4409,7 +4408,7 @@ proxies:
   - 🇺🇸 美国|@ripaojiedian
   - 🇺🇸 美国2|@ripaojiedian
   - 🇺🇸 美国3|@ripaojiedian
-  - name: ���� 电报信息
+  - name: 📲 电报信息
     type: select
   - 🚀 节点选择
   - 🎯 全球直连
@@ -4447,7 +4446,7 @@ proxies:
   - 🇺🇸 美国3|@ripaojiedian
   - name: 🍎 苹果服务
     type: select
-  - 🚀 节点选���
+  - 🚀 节点选择
   - 🎯 全球直连
   - tg频道:@ripaojiedian
   - 🇭🇰 香港|@ripaojiedian
@@ -4713,7 +4712,7 @@ proxies:
   - 最高200元终身无限流量
   - 不限速不限设备不限地区
   - 新疆西藏福建可用
-  - name: �� 电报信息
+  - name: 📲 电报信息
     type: select
   - 🚀 节点选择
   - 🎯 全球直连
@@ -4753,7 +4752,7 @@ proxies:
     type: select
   - DIRECT
   - 🚀 节点选择
-  - ���️ 自动选择
+  - ♻️ 自动选择
   - name: 🛑 全球拦截
     type: select
   - REJECT
@@ -9148,7 +9147,7 @@ proxies:
   - "\U0001F1EC\U0001F1E7 英国节点"
   - "\U0001F1EB\U0001F1F7 法国节点"
   - "\U0001F1E9\U0001F1EA 德国节点"
-  - "\U0001F1E8\U0001F1E6 加拿大节点"
+  - "\U0001F1E8\U0001F1E6 加��大节点"
   - "\U0001F1E6\U0001F1FA 澳大利亚节点"
   - "\U0001F1F3\U0001F1F1 荷兰节点"
   - "\U0001F1F7\U0001F1FA 俄罗斯节点"
@@ -9378,7 +9377,7 @@ proxies:
   - "\U0001F1F8\U0001F1EC 新加坡节点"
   - "\U0001F1FA\U0001F1F8 美国节点"
   - "\U0001F1EC\U0001F1E7 英国节点"
-  - "\U0001F1EB\U0001F1F7 法国节点"
+  - "\U0001F1EB\U0001F1F7 法��节点"
   - "\U0001F1E9\U0001F1EA 德国节点"
   - "\U0001F1E8\U0001F1E6 加拿大节点"
   - "\U0001F1E6\U0001F1FA 澳大利亚节点"
@@ -11088,7 +11087,7 @@ proxy-groups:
       - "🇺🇸 美国_13"
       - "121"
       - "🇬🇧 英国_5"
-      - "🇫🇷 法国_35"
+      - "��🇷 法国_35"
       - "🇫🇷 法国_36"
       - "125"
       - "fm3.pages.dev"
@@ -11222,7 +11221,6 @@ proxy-groups:
       - "🇺🇸 美国|@ripaojiedian"
       - "🇺🇸 美国2|@ripaojiedian"
       - "🇺🇸 美国3|@ripaojiedian"
-      - "���� 电报信息"
       - "📢 谷歌FCM"
       - "官网https://kelayun.notepin.co"
       - "iosapps.itunes.apple.com"
@@ -11238,7 +11236,6 @@ proxy-groups:
       - "d2-jp2.djwstlsweb.top"
       - "不限速不限设备不限地区"
       - "新疆西藏福建可用"
-      - "�� 电报信息"
       - "🆎 AdBlock"
       - "A"
       - "B"
@@ -11766,7 +11763,7 @@ proxy-groups:
       - "🇺🇸 美国_13"
       - "121"
       - "🇬🇧 英国_5"
-      - "🇫🇷 法国_35"
+      - "��🇷 法国_35"
       - "🇫🇷 法国_36"
       - "125"
       - "fm3.pages.dev"
@@ -11900,7 +11897,6 @@ proxy-groups:
       - "🇺🇸 美国|@ripaojiedian"
       - "🇺🇸 美国2|@ripaojiedian"
       - "🇺🇸 美国3|@ripaojiedian"
-      - "���� 电报信息"
       - "📢 谷歌FCM"
       - "官网https://kelayun.notepin.co"
       - "iosapps.itunes.apple.com"
@@ -11916,7 +11912,6 @@ proxy-groups:
       - "d2-jp2.djwstlsweb.top"
       - "不限速不限设备不限地区"
       - "新疆西藏福建可用"
-      - "�� 电报信息"
       - "🆎 AdBlock"
       - "A"
       - "B"
