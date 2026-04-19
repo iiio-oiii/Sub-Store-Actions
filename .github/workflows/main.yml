@@ -1,4 +1,4 @@
-name: Absolute_Standard_Merger_Final
+name: Simple_Is_Better_Merger
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Atomic Content Reconstruction
+      - name: Reset and Rebuild
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -38,8 +38,8 @@ jobs:
           ];
 
           async function main() {
-            let cleanNodes = [];
-            let nodeNames = new Set();
+            let finalNodes = [];
+            let names = new Set();
 
             for (const url of urls) {
               try {
@@ -51,75 +51,51 @@ jobs:
                   }).on('error', rej);
                 });
 
-                if (!data) continue;
-                const lines = data.split('\n');
-                let inProxies = false;
-
-                for (let line of lines) {
-                  const trimmed = line.trim();
-                  if (trimmed.toLowerCase().startsWith('proxies:')) { inProxies = true; continue; }
-                  
-                  if (inProxies) {
-                    if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) { inProxies = false; continue; }
-                    
-                    if (trimmed.length > 0 && !trimmed.toLowerCase().includes('proxies:')) {
-                      // 1. 物理对齐：确保每一行都有正确的 2/4 缩进
-                      const formatted = trimmed.startsWith('-') ? '  ' + trimmed : '    ' + trimmed;
-                      cleanNodes.push(formatted);
-
-                      // 2. 提取并清理节点名：处理引号，确保纯净
-                      const nameMatch = line.match(/name:\s*(.+)/);
-                      if (nameMatch) {
-                        let n = nameMatch[1].split(',')[0].trim(); // 处理后面带逗号的情况
-                        n = n.replace(/^["']|["']$/g, ''); // 去掉包裹的引号
-                        if (n) nodeNames.add(n);
-                      }
+                if (!data || !data.includes('proxies:')) continue;
+                
+                // 重点：只提取含有节点属性的行，并且强制抹平所有行首空格，重新按标准生成
+                const rawLines = data.split('\n');
+                let start = false;
+                for (let line of rawLines) {
+                  const t = line.trim();
+                  if (t.toLowerCase().startsWith('proxies:')) { start = true; continue; }
+                  if (start) {
+                    if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) { start = false; continue; }
+                    if (t.startsWith('-')) {
+                      finalNodes.push("  " + t);
+                      const m = t.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                      if (m) names.add(m[1].trim());
+                    } else if (t.length > 0) {
+                      finalNodes.push("    " + t);
                     }
                   }
                 }
-              } catch (e) { console.log(`Error: ${url}`); }
+              } catch (e) {}
             }
 
-            // 3. 强制对所有节点名使用单引号包裹，防止特殊字符引发 YAML 解析错误
-            const proxyList = Array.from(nodeNames).map(n => `      - '${n}'`).join('\n');
-            
-            const finalYaml = [
+            const nameList = Array.from(names).map(n => `      - "${n.replace(/"/g, '')}"`).join('\n');
+            const output = [
               "allow-left-click: true",
               "mode: rule",
-              "unified-delay: true",
               "proxies:",
-              ...cleanNodes,
-              "",
+              ...finalNodes,
               "proxy-groups:",
-              "  - name: 🚀 自动选择",
-              "    type: url-test",
-              "    url: http://www.gstatic.com/generate_204",
-              "    interval: 300",
-              "    proxies:",
-              proxyList,
-              "",
-              "  - name: 🔰 手动切换",
-              "    type: select",
-              "    proxies:",
-              "      - 🚀 自动选择",
-              "      - DIRECT",
-              proxyList,
-              "",
-              "rules:",
-              "  - MATCH,🔰 手动切换"
+              "  - {name: 🚀 自动选择, type: url-test, url: http://www.gstatic.com/generate_204, interval: 300, proxies: [\n" + nameList + "\n    ]}",
+              "  - {name: 🔰 手动切换, type: select, proxies: [🚀 自动选择, DIRECT, \n" + nameList + "\n    ]}",
+              "rules: [MATCH,🔰 手动切换]"
             ].join('\n');
 
-            fs.writeFileSync('merged_nodes.yaml', finalYaml);
+            fs.writeFileSync('merged_nodes.yaml', output);
           }
           main();
           EOF
           node generator.js
 
-      - name: Commit and Push
+      - name: Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
-          git add merged_nodes.yaml
-          git commit -m "Auto: Fix naming and escaping" || exit 0
+          git add .
+          git commit -m "Simple Rebuild" || exit 0
           git push origin HEAD
