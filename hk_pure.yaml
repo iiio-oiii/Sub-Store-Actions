@@ -33,7 +33,6 @@ proxies:
   - {name: 🇭🇰 香港-C89FF104, server: 222.167.202.52, port: 7443, type: vless, uuid: 06ef598c-1555-4887-b3f9-08214a2f6792, tls: true, network: ws, ws-opts: {headers:}, headers: {Host: 2026.hhhhh.eu.org}, skip-cert-verify: false, path: /222.167.202.52:7443}
   - {name: 🇭🇰 香港-F97F33C4, server: 222.167.202.64, port: 7443, type: vless, uuid: 06ef598c-1555-4887-b3f9-08214a2f6792, tls: true, network: ws, ws-opts: {path: /222.167.202.64:7443}, headers: {Host: 2026.hhhhh.eu.org}, skip-cert-verify: true, path: /222.167.202.64:7443}
   - {name: 🇭🇰 香港-92F366B8, server: cf.877774.xyz, port: 443, type: ss, password: 79960b0b-7d31-4263-8915-6511b0e137a8, cipher: none, tls: true, skip-cert-verify: false, path: /79960b0b-7d31-4263-8915-6511b0e137a8/?ed=2560}
-  - {name: 🇱🇹 立陶宛-E47A4B73, server: 138.124.65.39.alexanderoff.ru, port: 443, type: vless, uuid: ef413b60-7df5-4503-a2ce-42f0e28d700b, tls: true, network: tcp, skip-cert-verify: false}
   - {name: 🇭🇰 香港-74D2D953, server: 88.99.60.34, port: 2053, type: vless, uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d, tls: true, network: ws, ws-opts: {headers:}, headers: {Host: sni.111000.v6.navy}, skip-cert-verify: false, path: /?ed=2560&telegram🇨🇳@wangcai2}
   - {name: 🇭🇰 香港-D7B24817, server: 222.167.202.42, port: 7443, type: vless, uuid: 06ef598c-1555-4887-b3f9-08214a2f6792, tls: true, network: ws, ws-opts: {path: /222.167.202.42:7443}, headers: {Host: 2026.hhhhh.eu.org}, skip-cert-verify: true, path: /222.167.202.42:7443}
   - {name: 🇭🇰 香港-22EA854D, server: 8.218.58.37, port: 443, type: vless, uuid: 3e7f67de-648e-4871-b51a-a225214d41ee, tls: true, network: tcp}
@@ -50,7 +49,6 @@ proxies:
   - {name: 🇭🇰 香港-CCA6D2A2, server: cf.zhetengsha.eu.org, port: 443, type: ss, password: 79960b0b-7d31-4263-8915-6511b0e137a8, cipher: none, tls: true, skip-cert-verify: false, path: /79960b0b-7d31-4263-8915-6511b0e137a8/?ed=2560}
   - {name: 🇭🇰 香港-6D408B9E, server: 156.224.79.89, port: 28334, type: vless, uuid: 26524cce-d514-4014-a426-365fb266a14d, tls: true, network: ws, ws-opts: {path: /danfeng}, headers: {Host: snippet.fgfw.loc.cc}, skip-cert-verify: false, path: /danfeng?ed=2560}
   - {name: 🇭🇰 香港-1A4721D9, server: 47.76.218.163, port: 443, type: ss, password: 3e96ef7d-8637-42c2-ac73-75182196e755, cipher: none, tls: true, skip-cert-verify: false, path: 3e96ef7d-8637-42c2-ac73-75182196e755/?ed=2560}
-  - {name: 🇷🇺 俄罗斯-156643C8, server: 72.56.247.236, port: 443, type: vless, uuid: 19e94f08-d831-4673-8a03-bb8ebe680eb9, tls: true, network: tcp, skip-cert-verify: false}
   - {name: 🇭🇰 香港-1B55A413, server: 178.253.32.49, port: 1103, type: vless, uuid: 26524cce-d514-4014-a426-365fb266a14d, tls: true, network: ws, ws-opts: {path: /danfeng}, headers: {Host: snippet.fgfw.loc.cc}, skip-cert-verify: false, path: /danfeng?ed=2560}
   - {name: 🇭🇰 香港-B56385AA, server: 47.240.15.210, port: 4432, type: vless, uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d, tls: true, network: ws, ws-opts: {headers:}, headers: {Host: sni.111000.v6.navy}, skip-cert-verify: true, path: /?ed=2560&Telegram🇨🇳+@WangCai2}
   - {name: 🇭🇰 香港-D58CDE6F, server: 47.76.218.163, port: 443, type: vless, uuid: 6202b230-417c-4d8e-b624-0f71afa9c75d, tls: true, network: ws, ws-opts: {headers:}, headers: {Host: sni.111000.dynv6.net}, skip-cert-verify: true, path: /?ed=2560&Telegram🇨🇳 @WangCai2}
@@ -80,7 +78,6 @@ proxies:
   - {name: 🇭🇰HK_5 | ⬇️ 1.1MB/s, server: 159.112.235.29, port: 8880, type: vless, uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf, network: ws, ws-opts: {path: /TelegramU0001F1E8U0001F1F3}, headers: {host: hk.laoyoutiao.link}, skip-cert-verify: true, path: /TelegramU0001F1E8U0001F1F3}
   - {name: 🇭🇰HK_2 | ⬇️ 1.4MB/s, server: 141.11.203.29, port: 8880, type: vless, uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf, network: ws, ws-opts: {path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560}, headers: {host: hk.laoyoutiao.link}, skip-cert-verify: true, path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560}
   - {name: 🇭🇰HK_9 | ⬇️ 1.5MB/s, server: 46.254.93.29, port: 8880, type: vless, uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf, network: ws, ws-opts: {path: /TelegramU0001F1E8U0001F1F3}, headers: {host: hk.laoyoutiao.link}, skip-cert-verify: true, path: /TelegramU0001F1E8U0001F1F3}
-  - {name: 🇮🇱IL_1 | ⬇️ 2.8MB/s, server: ilta-wzxrxkdhbjpnprhkkpplsjwawhssvollvxzdhqshiqckwdgrdm.orbnet.xyz, port: 443, type: vless, uuid: 0e8a6896-ad90-4a3b-89a3-77d64aa409e2, tls: true, network: tcp, skip-cert-verify: true}
   - {name: 🇭🇰HK_3 | ⬇️ 1.2MB/s, server: 31.43.179.29, port: 8880, type: vless, uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf, network: ws, ws-opts: {path: /TelegramU0001F1E8U0001F1F3}, headers: {host: hk.laoyoutiao.link}, skip-cert-verify: true, path: /TelegramU0001F1E8U0001F1F3}
   - {name: 🇭🇰HK_8 | ⬇️ 1.4MB/s, server: 46.254.92.29, port: 8880, type: vless, uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf, network: ws, ws-opts: {path: /TelegramU0001F1E8U0001F1F3}, headers: {host: hk.laoyoutiao.link}, skip-cert-verify: true, path: /TelegramU0001F1E8U0001F1F3}
   - {name: 🇭🇰HK_7 | ⬇️ 1.2MB/s, server: 91.193.58.94, port: 8880, type: vless, uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf, network: ws, ws-opts: {path: /Telegram@WangCai2/?ed}, headers: {host: hk.laoyoutiao.link}, skip-cert-verify: true, path: /Telegram@WangCai2/?ed}
@@ -88,7 +85,7 @@ proxies:
   - {name: [VMess] 🇭🇰 香港 电讯盈科有限公司, server: efan.dnsefan04881.com, port: 7754, type: vmess, uuid: 009e558d-3cf4-49d8-b5e4-82c9e14fe1a4, cipher: auto, alterId: 0, tls: false, skip-cert-verify: true}
 
 proxy-groups:
-  - name: 🚀 自动选择最快香港
+  - name: 🚀 自动优选香港
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
@@ -118,7 +115,6 @@ proxy-groups:
       - "🇭🇰 香港-C89FF104"
       - "🇭🇰 香港-F97F33C4"
       - "🇭🇰 香港-92F366B8"
-      - "🇱🇹 立陶宛-E47A4B73"
       - "🇭🇰 香港-74D2D953"
       - "🇭🇰 香港-D7B24817"
       - "🇭🇰 香港-22EA854D"
@@ -135,7 +131,6 @@ proxy-groups:
       - "🇭🇰 香港-CCA6D2A2"
       - "🇭🇰 香港-6D408B9E"
       - "🇭🇰 香港-1A4721D9"
-      - "🇷🇺 俄罗斯-156643C8"
       - "🇭🇰 香港-1B55A413"
       - "🇭🇰 香港-B56385AA"
       - "🇭🇰 香港-D58CDE6F"
@@ -165,7 +160,6 @@ proxy-groups:
       - "🇭🇰HK_5 | ⬇️ 1.1MB/s"
       - "🇭🇰HK_2 | ⬇️ 1.4MB/s"
       - "🇭🇰HK_9 | ⬇️ 1.5MB/s"
-      - "🇮🇱IL_1 | ⬇️ 2.8MB/s"
       - "🇭🇰HK_3 | ⬇️ 1.2MB/s"
       - "🇭🇰HK_8 | ⬇️ 1.4MB/s"
       - "🇭🇰HK_7 | ⬇️ 1.2MB/s"
@@ -175,7 +169,7 @@ proxy-groups:
   - name: 🔰 手动选择节点
     type: select
     proxies:
-      - 🚀 自动选择最快香港
+      - 🚀 自动优选香港
       - "11|🇭🇰 香港|@ripaojiedian"
       - "11"
       - "12|香港|@ripaojiedian"
@@ -201,7 +195,6 @@ proxy-groups:
       - "🇭🇰 香港-C89FF104"
       - "🇭🇰 香港-F97F33C4"
       - "🇭🇰 香港-92F366B8"
-      - "🇱🇹 立陶宛-E47A4B73"
       - "🇭🇰 香港-74D2D953"
       - "🇭🇰 香港-D7B24817"
       - "🇭🇰 香港-22EA854D"
@@ -218,7 +211,6 @@ proxy-groups:
       - "🇭🇰 香港-CCA6D2A2"
       - "🇭🇰 香港-6D408B9E"
       - "🇭🇰 香港-1A4721D9"
-      - "🇷🇺 俄罗斯-156643C8"
       - "🇭🇰 香港-1B55A413"
       - "🇭🇰 香港-B56385AA"
       - "🇭🇰 香港-D58CDE6F"
@@ -248,14 +240,15 @@ proxy-groups:
       - "🇭🇰HK_5 | ⬇️ 1.1MB/s"
       - "🇭🇰HK_2 | ⬇️ 1.4MB/s"
       - "🇭🇰HK_9 | ⬇️ 1.5MB/s"
-      - "🇮🇱IL_1 | ⬇️ 2.8MB/s"
       - "🇭🇰HK_3 | ⬇️ 1.2MB/s"
       - "🇭🇰HK_8 | ⬇️ 1.4MB/s"
       - "🇭🇰HK_7 | ⬇️ 1.2MB/s"
       - "[SS] 🇭🇰 香港 电讯盈科有限公司"
       - "[VMess] 🇭🇰 香港 电讯盈科有限公司"
+      - DIRECT
 
 rules:
-  - DOMAIN-SUFFIX,interactivebrokers.com,🚀 自动选择最快香港
+  - DOMAIN-SUFFIX,interactivebrokers.com,🚀 自动优选香港
+  - DOMAIN-SUFFIX,tradingview.com,🚀 自动优选香港
   - DOMAIN-SUFFIX,google.com,🔰 手动选择节点
   - MATCH,🔰 手动选择节点
