@@ -1,4 +1,4 @@
-name: Final_Format_Perfector
+name: Absolute_Standard_Merger_Final
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Atomic Structural Fix
+      - name: Atomic Content Reconstruction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -38,7 +38,7 @@ jobs:
           ];
 
           async function main() {
-            let allNodeLines = [];
+            let cleanNodes = [];
             let nodeNames = new Set();
 
             for (const url of urls) {
@@ -57,49 +57,38 @@ jobs:
 
                 for (let line of lines) {
                   const trimmed = line.trim();
+                  if (trimmed.toLowerCase().startsWith('proxies:')) { inProxies = true; continue; }
                   
-                  // 1. 发现 proxies 标题，开始抓取，但绝对不搬运这个标题
-                  if (trimmed.toLowerCase().startsWith('proxies:')) {
-                    inProxies = true;
-                    continue;
-                  }
-
                   if (inProxies) {
-                    // 2. 判定段落结束
-                    if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                      inProxies = false;
-                      continue;
-                    }
-
-                    // 3. 核心修复：强制重置缩进，不叠加空格
+                    if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) { inProxies = false; continue; }
+                    
                     if (trimmed.length > 0 && !trimmed.toLowerCase().includes('proxies:')) {
-                      if (trimmed.startsWith('-')) {
-                        // 节点起始行：固定 2 空格
-                        allNodeLines.push('  ' + trimmed);
-                      } else {
-                        // 节点属性行：固定 4 空格
-                        allNodeLines.push('    ' + trimmed);
-                      }
+                      // 1. 物理对齐：确保每一行都有正确的 2/4 缩进
+                      const formatted = trimmed.startsWith('-') ? '  ' + trimmed : '    ' + trimmed;
+                      cleanNodes.push(formatted);
 
-                      const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                      // 2. 提取并清理节点名：处理引号，确保纯净
+                      const nameMatch = line.match(/name:\s*(.+)/);
                       if (nameMatch) {
-                        nodeNames.add(nameMatch[1].trim().replace(/^["']|["']$/g, ''));
+                        let n = nameMatch[1].split(',')[0].trim(); // 处理后面带逗号的情况
+                        n = n.replace(/^["']|["']$/g, ''); // 去掉包裹的引号
+                        if (n) nodeNames.add(n);
                       }
                     }
                   }
                 }
-              } catch (e) { console.log(`Error on ${url}`); }
+              } catch (e) { console.log(`Error: ${url}`); }
             }
 
-            const proxyListStr = Array.from(nodeNames).map(n => `      - "${n}"`).join('\n');
+            // 3. 强制对所有节点名使用单引号包裹，防止特殊字符引发 YAML 解析错误
+            const proxyList = Array.from(nodeNames).map(n => `      - '${n}'`).join('\n');
             
-            // 构造唯一的、绝对整齐的 YAML
             const finalYaml = [
               "allow-left-click: true",
               "mode: rule",
               "unified-delay: true",
               "proxies:",
-              ...allNodeLines,
+              ...cleanNodes,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -107,14 +96,14 @@ jobs:
               "    url: http://www.gstatic.com/generate_204",
               "    interval: 300",
               "    proxies:",
-              proxyListStr,
+              proxyList,
               "",
               "  - name: 🔰 手动切换",
               "    type: select",
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              proxyListStr,
+              proxyList,
               "",
               "rules:",
               "  - MATCH,🔰 手动切换"
@@ -132,5 +121,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Fix Indentation Stairs Error" || exit 0
+          git commit -m "Auto: Fix naming and escaping" || exit 0
           git push origin HEAD
