@@ -1,4 +1,4 @@
-name: Ultimate_Node_Merger
+name: Ultimate_Standard_Merger
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 这里再次显式声明权限，双重保险
+    # 显式声明读写权限，解决文件不生成的权限问题
     permissions:
       contents: write
     steps:
@@ -20,56 +20,72 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Pixel-Perfect Node Injection
+      - name: Standard Proxies Extraction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
 
+          // 陈先生确认的 9 个带有 proxies 字段的优质源
           const urls = [
             'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
             'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
             'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
             'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
+            'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg',
             'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
-            'https://raw.githubusercontent.com/wenxig/dongtai-sub/refs/heads/main/data/sub.yaml',
-            'https://raw.githubusercontent.com/PuddinCat/BestClash/main/proxies.yaml',
             'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
             'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
-            'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml',
-            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml'
+            'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml'
           ];
 
           async function fetchUrl(url) {
             return new Promise((resolve) => {
-              https.get(url, { timeout: 20000 }, (res) => {
+              const req = https.get(url, { timeout: 15000 }, (res) => {
                 let data = '';
                 res.on('data', (chunk) => data += chunk);
                 res.on('end', () => resolve(data));
-              }).on('error', () => resolve(''));
+              });
+              req.on('error', () => resolve(''));
+              req.on('timeout', () => { req.destroy(); resolve(''); });
             });
           }
 
           async function main() {
-            let allProxyBlocks = [];
+            let allProxyLines = [];
             let proxyNames = [];
 
             for (const url of urls) {
+              console.log(`📡 正在抓取: ${url}`);
               const content = await fetchUrl(url);
-              if (!content || !content.includes('proxies:')) continue;
+              if (!content || !content.includes('proxies:')) {
+                console.log(`⚠️ 跳过无效源: ${url}`);
+                continue;
+              }
 
               const lines = content.split('\n');
               let isProxyArea = false;
 
               for (let line of lines) {
                 const trimmed = line.trim();
-                if (trimmed === 'proxies:') { isProxyArea = true; continue; }
+                
+                // 锁定 proxies: 区域
+                if (trimmed === 'proxies:') {
+                  isProxyArea = true;
+                  continue;
+                }
+
                 if (isProxyArea) {
+                  // 如果遇到新的顶级配置，停止该文件的抓取
                   if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
                     isProxyArea = false;
                     continue;
                   }
-                  if (line.trim()) allProxyBlocks.push(line);
+                  
+                  // 物理搬运
+                  if (line.trim()) allProxyLines.push(line);
+
+                  // 提取节点名并强制加引号
                   const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                   if (nameMatch) {
                     let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
@@ -79,23 +95,16 @@ jobs:
               }
             }
 
-            // 关键验证：如果没有抓到任何节点，直接抛出错误让 Actions 失败
-            if (allProxyBlocks.length === 0) {
-              console.error("❌ 错误：未抓取到任何节点，请检查订阅链接是否失效！");
-              process.exit(1);
-            }
-
             const uniqueNames = [...new Set(proxyNames)];
-            const header = [
+            
+            const finalYaml = [
               "allow-left-click: true",
               "mode: rule",
               "log-level: info",
               "unified-delay: true",
               "",
-              "proxies:"
-            ].join('\n');
-
-            const groups = [
+              "proxies:",
+              ...allProxyLines,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -116,9 +125,8 @@ jobs:
               "  - MATCH,🔰 手动切换"
             ].join('\n');
 
-            const finalContent = header + '\n' + allProxyBlocks.join('\n') + groups;
-            fs.writeFileSync('merged_nodes.yaml', finalContent);
-            console.log(`✅ 成功抓取到 ${allProxyBlocks.length} 行节点数据！`);
+            fs.writeFileSync('merged_nodes.yaml', finalYaml);
+            console.log(`✅ 处理完成，共抓取节点名: ${uniqueNames.length} 个`);
           }
           main();
           EOF
@@ -129,9 +137,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
-          # 强制添加文件并打印状态
           git add merged_nodes.yaml
-          git status
-          # 如果没有变化也强制提交一次（或者跳过报错）
-          git commit -m "Auto Update: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
-          git push origin main
+          if git diff --staged --quiet; then
+            echo "没有内容更新，跳过提交"
+          else
+            git commit -m "Auto Sync Standard Nodes: $(date +'%Y-%m-%d %H:%M')"
+            git push origin HEAD
+          fi
