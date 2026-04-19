@@ -1,4 +1,4 @@
-name: Ultimate Raw Mirror
+name: Multi-Source Node Merger
 
 on:
   workflow_dispatch:
@@ -17,83 +17,132 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Pixel-Perfect Reconstruction
+      - name: Advanced Multi-Format Merge
         run: |
-          # 1. 纯净下载源文件
-          curl -sSL https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml -o source.yml
-
           cat << 'EOF' > generator.js
           const fs = require('fs');
-          
-          // 读取原始文件
-          const rawContent = fs.readFileSync('source.yml', 'utf8');
-          
-          // 只抓取 proxies: 下面的所有内容，直到文件结尾或下一个顶级键
-          const lines = rawContent.split('\n');
-          let proxyLines = [];
-          let names = [];
-          let start = false;
+          const https = require('https');
 
-          for (let line of lines) {
-              if (line.trim() === 'proxies:') {
-                  start = true;
-                  continue;
-              }
-              if (start) {
-                  // 如果遇到顶级字段且不带缩进，说明 proxies 结束了
-                  if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) break;
-                  
-                  proxyLines.push(line);
-                  
-                  // 提取名字用于组，必须处理各种表情符号和引号
-                  const nameMatch = line.match(/name:\s*(.*)/);
-                  if (nameMatch) {
-                      let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
-                      if (n) names.push(`      - "${n}"`);
-                  }
-              }
+          const urls = [
+            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
+            'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
+            'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
+            'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
+            'https://542fd54b.996391.xyz/sub/vAfdhHotgHHhuHkhdFCEPCkiyjDII1Vr5XSW.yaml',
+            'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg',
+            'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
+            'https://raw.githubusercontent.com/wenxig/dongtai-sub/refs/heads/main/data/sub.yaml',
+            'https://raw.githubusercontent.com/PuddinCat/BestClash/main/proxies.yaml',
+            'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
+            'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
+            'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml',
+            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml'
+          ];
+
+          async function fetchUrl(url) {
+            return new Promise((resolve) => {
+              https.get(url, { timeout: 30000 }, (res) => {
+                let data = '';
+                res.on('data', (chunk) => data += chunk);
+                res.on('end', () => resolve(data));
+              }).on('error', () => resolve(''));
+            });
           }
 
-          // 重新构造，确保格式和 list.yml 高度一致
-          const output = [
-            "allow-left-click: true",
-            "mode: rule",
-            "log-level: info",
-            "unified-delay: true",
-            "",
-            "proxies:",
-            ...proxyLines,
-            "",
-            "proxy-groups:",
-            "  - name: 🚀 自动选择",
-            "    type: url-test",
-            "    url: http://www.gstatic.com/generate_204",
-            "    interval: 300",
-            "    proxies:",
-            ...new Set(names),
-            "",
-            "  - name: 🔰 手动切换",
-            "    type: select",
-            "    proxies:",
-            "      - 🚀 自动选择",
-            "      - DIRECT",
-            ...new Set(names),
-            "",
-            "rules:",
-            "  - MATCH,🔰 手动切换"
-          ].join('\n');
+          async function main() {
+            let allProxyBlocks = [];
+            let proxyNames = [];
 
-          fs.writeFileSync('merged_nodes.yaml', output);
+            for (const url of urls) {
+              console.log(`📡 正在抓取: ${url}`);
+              let content = await fetchUrl(url);
+              if (!content) continue;
+
+              // 自动识别 Base64 并解码
+              if (!content.includes('proxies:') && !content.includes('server:')) {
+                try { content = Buffer.from(content, 'base64').toString(); } catch(e) {}
+              }
+
+              const lines = content.split('\n');
+              let isProxySection = false;
+              let currentBlock = [];
+
+              for (let line of lines) {
+                const trimmed = line.trim();
+                
+                // 找到 proxies 区域
+                if (trimmed === 'proxies:') {
+                  isProxySection = true;
+                  continue;
+                }
+                
+                // 遇到非缩进的顶级字段则停止
+                if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                  isProxySection = false;
+                }
+
+                if (isProxySection) {
+                  if (trimmed.startsWith('-')) {
+                    if (currentBlock.length > 0) allProxyBlocks.push(currentBlock.join('\n'));
+                    currentBlock = [line];
+                  } else if (currentBlock.length > 0) {
+                    currentBlock.push(line);
+                  }
+
+                  // 提取名字用于组
+                  const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                  if (nameMatch) {
+                    proxyNames.push(nameMatch[1].trim());
+                  }
+                }
+              }
+              if (currentBlock.length > 0) allProxyBlocks.push(currentBlock.join('\n'));
+            }
+
+            // 去重并统一加引号
+            const uniqueNames = [...new Set(proxyNames)].map(n => `      - "${n}"`);
+
+            const finalYaml = [
+              "allow-left-click: true",
+              "mode: rule",
+              "log-level: info",
+              "unified-delay: true",
+              "",
+              "proxies:",
+              ...allProxyBlocks,
+              "",
+              "proxy-groups:",
+              "  - name: 🚀 自动选择",
+              "    type: url-test",
+              "    url: http://www.gstatic.com/generate_204",
+              "    interval: 300",
+              "    proxies:",
+              ...uniqueNames,
+              "",
+              "  - name: 🔰 手动切换",
+              "    type: select",
+              "    proxies:",
+              "      - 🚀 自动选择",
+              "      - DIRECT",
+              ...uniqueNames,
+              "",
+              "rules:",
+              "  - MATCH,🔰 手动切换"
+            ].join('\n');
+
+            fs.writeFileSync('merged_nodes.yaml', finalYaml);
+            console.log(`✅ 合并完成！总节点数: ${allProxyBlocks.length}`);
+          }
+          main();
           EOF
-          
           node generator.js
 
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          # 关键：转换换行符为 LF，确保跨平台兼容性
+          # 关键修正：确保换行符统一为 LF，并清理多余空格
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Full Reconstruction with LF" || exit 0
+          git commit -m "Merge multiple verified sources" || exit 0
           git push
