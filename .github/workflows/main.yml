@@ -1,9 +1,9 @@
 name: Generate Pure HK Subscription
 
 on:
-  workflow_dispatch: # 支持手动触发
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # 每天凌晨自动运行一次
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
 
       - name: Generate Pure Subscription
         env:
-          SUB_LINKS: ${{ secrets.SUB_LINKS }} # 请确保您在 Settings-Secrets 里填好了订阅源链接
+          SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -49,28 +49,25 @@ jobs:
               for (const link of links) {
                   const content = await fetchLink(link.trim());
                   if (!content) continue;
-                  // 统一换行符并分割节点
                   const items = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
                   
                   items.forEach(item => {
-                      // 严格过滤香港节点
                       if (hkRegex.test(item) && !excludeRegex.test(item)) {
                           if (item.includes('name:') && item.includes('server:')) {
-                              // 精准提取大括号内容，并清理格式瑕疵
                               let clean = item.replace(/^[^{]*/, '').replace(/[^}]*$/, '')
                                   .replace(/[\{\}]/g, '')
                                   .trim()
                                   .replace(/\n/g, ', ')
                                   .replace(/\s+/g, ' ')
-                                  .replace(/:\s*,/g, ': "", ')      // 补全空键值，如 ws-opts:,
-                                  .replace(/:\s*}/g, ': ""}')       // 补全末尾空值
-                                  .replace(/,\s*,/g, ',')           // 清理双逗号
-                                  .replace(/,\s*$/g, '');           // 移除最末尾的逗号
+                                  .replace(/:\s*,/g, ': "", ')
+                                  .replace(/:\s*}/g, ': ""}')
+                                  .replace(/,\s*,/g, ',')
+                                  .replace(/,\s*$/g, '');
 
-                              // 提取节点名称，用于构建代理组
                               const nameMatch = clean.match(/name:\s*"?([^",{}]+)"?/);
                               if (nameMatch) {
                                   const name = nameMatch[1].trim();
+                                  // 确保缩进是标准的两个空格
                                   finalNodes.push(`  - {${clean}}`);
                                   nodeNames.push(`      - "${name}"`);
                               }
@@ -79,40 +76,44 @@ jobs:
                   });
               }
 
-              // 核心部分：构建 Mihomo/Clash 必须的完整配置文件结构
-              const configHeader = `
-port: 7890
-socks-port: 7891
-allow-left-click: true
-mode: rule
-log-level: info
-external-controller: 127.0.0.1:9090
+              // 移除重复节点名
+              const uniqueNodes = Array.from(new Set(finalNodes));
+              const uniqueNames = Array.from(new Set(nodeNames));
 
-proxies:
-${Array.from(new Set(finalNodes)).join('\n')}
+              const configHeader = [
+                "port: 7890",
+                "socks-port: 7891",
+                "allow-left-click: true",
+                "mode: rule",
+                "log-level: info",
+                "external-controller: 127.0.0.1:9090",
+                "",
+                "proxies:",
+                ...uniqueNodes,
+                "",
+                "proxy-groups:",
+                "  - name: 🚀 延迟自动选择",
+                "    type: url-test",
+                "    url: http://www.gstatic.com/generate_204",
+                "    interval: 300",
+                "    proxies:",
+                ...uniqueNames,
+                "",
+                "  - name: 🔰 手动切换节点",
+                "    type: select",
+                "    proxies:",
+                "      - 🚀 延迟自动选择",
+                ...uniqueNames,
+                "",
+                "rules:",
+                "  - DOMAIN-SUFFIX,google.com,🔰 手动切换节点",
+                "  - DOMAIN-SUFFIX,github.com,🔰 手动切换节点",
+                "  - DOMAIN-SUFFIX,interactivebrokers.com,🔰 手动切换节点",
+                "  - MATCH,🔰 手动切换节点"
+              ].join('\n');
 
-proxy-groups:
-  - name: 🚀 延迟自动选择
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 300
-    proxies:
-${Array.from(new Set(nodeNames)).join('\n')}
-
-  - name: 🔰 手动切换节点
-    type: select
-    proxies:
-      - 🚀 延迟自动选择
-${Array.from(new Set(nodeNames)).join('\n')}
-
-rules:
-  - DOMAIN-SUFFIX,google.com,🔰 手动切换节点
-  - DOMAIN-SUFFIX,github.com,🔰 手动切换节点
-  - DOMAIN-SUFFIX,interactivebrokers.com,🔰 手动切换节点
-  - MATCH,🔰 手动切换节点
-`;
-              fs.writeFileSync('hk_pure.yaml', configHeader.trim());
-              console.log("✅ 订阅文件生成成功，共包含 " + finalNodes.length + " 个节点");
+              fs.writeFileSync('hk_pure.yaml', configHeader);
+              console.log(`✅ 订阅生成成功，共计 ${uniqueNodes.length} 个香港节点`);
           }
           main();
           EOF
