@@ -1,52 +1,115 @@
-- name: Raw Append Merge
+- name: Pixel-Perfect Node Injection
         run: |
-          # 1. 先创建一个完全干净的头部
-          echo "allow-left-click: true" > merged_nodes.yaml
-          echo "mode: rule" >> merged_nodes.yaml
-          echo "log-level: info" >> merged_nodes.yaml
-          echo "unified-delay: true" >> merged_nodes.yaml
-          echo "" >> merged_nodes.yaml
-          echo "proxies:" >> merged_nodes.yaml
+          cat << 'EOF' > generator.js
+          const fs = require('fs');
+          const https = require('https');
 
-          # 2. 这里的 URL 只放最规范、确定能用的源
-          urls=(
-            "https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml"
-            "https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml"
-            "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml"
-            "https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash"
-          )
+          const urls = [
+            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
+            'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
+            'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
+            'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
+            'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
+            'https://raw.githubusercontent.com/wenxig/dongtai-sub/refs/heads/main/data/sub.yaml',
+            'https://raw.githubusercontent.com/PuddinCat/BestClash/main/proxies.yaml',
+            'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
+            'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
+            'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml',
+            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml'
+          ];
 
-          # 3. 使用 Linux 循环进行“暴力”追加提取
-          for url in "${urls[@]}"; do
-            echo "📡 Processing: $url"
-            # 下载文件
-            curl -sSL "$url" -o temp.yml
-            # 只提取 proxies: 下面带有 '-' 的行及其后续缩进，并直接追加到最终文件
-            # 这种方法不会破坏原始缩进，也不会产生 JS 字符串转义问题
-            sed -n '/^proxies:/,$p' temp.yml | sed '1d' | sed '/^[a-zA-Z]/,$d' >> merged_nodes.yaml
-          done
+          async function fetchUrl(url) {
+            return new Promise((resolve) => {
+              https.get(url, { timeout: 20000 }, (res) => {
+                let data = '';
+                res.on('data', (chunk) => data += chunk);
+                res.on('end', () => resolve(data));
+              }).on('error', () => resolve(''));
+            });
+          }
 
-          # 4. 生成代理组部分（为了稳妥，这一步简单化）
-          echo "" >> merged_nodes.yaml
-          echo "proxy-groups:" >> merged_nodes.yaml
-          echo "  - name: 🚀 自动选择" >> merged_nodes.yaml
-          echo "    type: url-test" >> merged_nodes.yaml
-          echo "    url: http://www.gstatic.com/generate_204" >> merged_nodes.yaml
-          echo "    interval: 300" >> merged_nodes.yaml
-          echo "    proxies: [DIRECT]" >> merged_nodes.yaml # 先用 DIRECT 占位，确保能下载
-          echo "  - name: 🔰 手动切换" >> merged_nodes.yaml
-          echo "    type: select" >> merged_nodes.yaml
-          echo "    proxies: [🚀 自动选择, DIRECT]" >> merged_nodes.yaml
-          echo "" >> merged_nodes.yaml
-          echo "rules:" >> merged_nodes.yaml
-          echo "  - MATCH,🔰 手动切换" >> merged_nodes.yaml
+          async function main() {
+            let allProxyBlocks = [];
+            let proxyNames = [];
+
+            for (const url of urls) {
+              const content = await fetchUrl(url);
+              if (!content || !content.includes('proxies:')) continue;
+
+              const lines = content.split('\n');
+              let isProxyArea = false;
+
+              for (let line of lines) {
+                const trimmed = line.trim();
+                if (trimmed === 'proxies:') { isProxyArea = true; continue; }
+                if (isProxyArea) {
+                  // 遇到非缩进且不是以 '-' 开头的行，停止提取
+                  if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                    isProxyArea = false;
+                    continue;
+                  }
+                  
+                  // 物理存入节点内容
+                  allProxyBlocks.push(line);
+
+                  // 提取名字，强制转换成双引号包裹，这是防止特殊字符导致无法下载的关键
+                  const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                  if (nameMatch) {
+                    let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
+                    if (n) proxyNames.push(`      - "${n}"`);
+                  }
+                }
+              }
+            }
+
+            const uniqueNames = [...new Set(proxyNames)];
+
+            // 构造最稳健的头部
+            const header = [
+              "allow-left-click: true",
+              "mode: rule",
+              "log-level: info",
+              "unified-delay: true",
+              "",
+              "proxies:"
+            ].join('\n');
+
+            // 构造代理组
+            const groups = [
+              "",
+              "proxy-groups:",
+              "  - name: 🚀 自动选择",
+              "    type: url-test",
+              "    url: http://www.gstatic.com/generate_204",
+              "    interval: 300",
+              "    proxies:",
+              ...uniqueNames,
+              "",
+              "  - name: 🔰 手动切换",
+              "    type: select",
+              "    proxies:",
+              "      - 🚀 自动选择",
+              "      - DIRECT",
+              ...uniqueNames,
+              "",
+              "rules:",
+              "  - MATCH,🔰 手动切换"
+            ].join('\n');
+
+            // 最终拼装
+            const finalContent = header + '\n' + allProxyBlocks.join('\n') + groups;
+            fs.writeFileSync('merged_nodes.yaml', finalContent);
+          }
+          main();
+          EOF
+          node generator.js
 
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          # 彻底移除所有可能的 \r
+          # 必须执行：移除所有潜在的换行符和非法缩进
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Pure Raw Append Update" || exit 0
+          git commit -m "Pixel-Perfect Multi-Source Sync" || exit 0
           git push
