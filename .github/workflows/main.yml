@@ -1,4 +1,4 @@
-name: Compare and Merge All Nodes
+name: Precise Node Merger
 
 on:
   workflow_dispatch:
@@ -24,8 +24,7 @@ jobs:
           const https = require('https');
 
           const urls = [
-            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
-            'https://raw.githubusercontent.com/iiio-oiii/Sub-Store-Actions/refs/heads/main/all_nodes.yaml'
+            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml'
           ];
 
           async function fetchUrl(url) {
@@ -43,53 +42,57 @@ jobs:
             let proxyNames = [];
 
             for (const url of urls) {
-              console.log(`📡 正在抓取: ${url}`);
               const content = await fetchUrl(url);
               if (!content) continue;
 
-              // 识别 proxies 列表的开始位置
               const lines = content.split('\n');
               let isProxySection = false;
               let currentProxy = [];
 
-              for (let line of lines) {
-                const trimmed = line.trim();
-                
-                // 寻找 proxies: 标记
+              for (let i = 0; i < lines.length; i++) {
+                let line = lines[i];
+                let trimmed = line.trim();
+
+                // 识别 proxies 区域开始
                 if (trimmed === 'proxies:') {
                   isProxySection = true;
                   continue;
                 }
-                // 如果遇到下一个顶级字段（如 proxy-groups），停止抓取
+                
+                // 识别 proxies 区域结束（遇到下一个顶级字段）
                 if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                  if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
                   isProxySection = false;
-                  break;
                 }
 
                 if (isProxySection) {
-                  // 如果是以 - 开头，说明是新节点的开始
-                  if (line.trim().startsWith('-')) {
-                    if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
+                  // 如果是以 - 开头，代表一个新节点的起始
+                  if (trimmed.startsWith('-')) {
+                    if (currentProxy.length > 0) {
+                      allProxies.push(currentProxy.join('\n'));
+                    }
                     currentProxy = [line];
-                  } else if (currentProxy.length > 0) {
+                  } else if (currentProxy.length > 0 && (line.startsWith(' ') || line === '')) {
+                    // 保持原有的缩进结构
                     currentProxy.push(line);
                   }
                 }
               }
+              // 推入最后一个节点
               if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
             }
 
-            // 提取所有节点名称用于生成代理组
-            allProxies.forEach(proxyBlock => {
-              const nameMatch = proxyBlock.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+            // 提取节点名并确保唯一性
+            allProxies.forEach(block => {
+              const nameMatch = block.match(/name:\s*(.*)/);
               if (nameMatch) {
-                proxyNames.push(`      - "${nameMatch[1].trim()}"`);
+                let name = nameMatch[1].trim().replace(/^["']|["']$/g, '');
+                if (name) proxyNames.push(`      - "${name}"`);
               }
             });
 
             const uniqueNames = [...new Set(proxyNames)];
 
+            // 构造最终的 Mihomo/Clash 配置文件
             const finalYaml = [
               "port: 7890",
               "socks-port: 7891",
@@ -120,7 +123,7 @@ jobs:
             ].join('\n');
 
             fs.writeFileSync('merged_nodes.yaml', finalYaml);
-            console.log(`✅ 合并完成！总计节点数: ${allProxies.length}`);
+            console.log(`✅ 成功复刻节点！总数: ${allProxies.length}`);
           }
           main();
           EOF
@@ -131,5 +134,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add merged_nodes.yaml
-          git commit -m "Merge all nodes from list.yml and all_nodes.yaml" || exit 0
+          git commit -m "Fix indentation and retain all nodes" || exit 0
           git push
