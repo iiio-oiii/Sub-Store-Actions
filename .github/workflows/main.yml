@@ -1,4 +1,23 @@
-- name: Pixel-Perfect Node Injection
+name: Ultimate_Node_Merger
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Pixel-Perfect Node Injection
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -43,16 +62,11 @@
                 const trimmed = line.trim();
                 if (trimmed === 'proxies:') { isProxyArea = true; continue; }
                 if (isProxyArea) {
-                  // 遇到非缩进且不是以 '-' 开头的行，停止提取
                   if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
                     isProxyArea = false;
                     continue;
                   }
-                  
-                  // 物理存入节点内容
                   allProxyBlocks.push(line);
-
-                  // 提取名字，强制转换成双引号包裹，这是防止特殊字符导致无法下载的关键
                   const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                   if (nameMatch) {
                     let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
@@ -63,8 +77,6 @@
             }
 
             const uniqueNames = [...new Set(proxyNames)];
-
-            // 构造最稳健的头部
             const header = [
               "allow-left-click: true",
               "mode: rule",
@@ -74,7 +86,6 @@
               "proxies:"
             ].join('\n');
 
-            // 构造代理组
             const groups = [
               "",
               "proxy-groups:",
@@ -90,26 +101,4 @@
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              ...uniqueNames,
-              "",
-              "rules:",
-              "  - MATCH,🔰 手动切换"
-            ].join('\n');
-
-            // 最终拼装
-            const finalContent = header + '\n' + allProxyBlocks.join('\n') + groups;
-            fs.writeFileSync('merged_nodes.yaml', finalContent);
-          }
-          main();
-          EOF
-          node generator.js
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          # 必须执行：移除所有潜在的换行符和非法缩进
-          sed -i 's/\r$//' merged_nodes.yaml
-          git add merged_nodes.yaml
-          git commit -m "Pixel-Perfect Multi-Source Sync" || exit 0
-          git push
+              ...uniqueNames
