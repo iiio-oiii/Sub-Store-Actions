@@ -1,59 +1,39 @@
 name: HK_Pure_Update
 on:
   schedule:
-    - cron: '0 */4 * * *' # 每 4 小时全自动运行一次
-  workflow_dispatch:      # 允许你在网页上手动点击运行
+    - cron: '0 */4 * * *' 
+  workflow_dispatch:      
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 强制使用 Node.js 24 以消除弃用警告
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Install Sub-Store CLI from GitHub
-        run: |
-          # 直接从 GitHub 仓库安装，绕过 npm 404 错误
-          npm install -g https://github.com/sub-store-org/Sub-Store.git
-          
-          # 检查安装路径并确认命令可用
-          # 如果 sub-store 命令不可用，尝试使用 sub-store-cli 或 npx sub-store
-          if command -v sub-store >/dev/null 2>&1; then
-            sub-store --version
-          else
-            echo "sub-store command not found, checking aliases..."
-          fi
-
-      - name: Generate Pure Subscription
+      - name: Generate Pure Subscription via Docker
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          # 1. 导出订阅链接
+          # 1. 将订阅链接写入临时文件
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 2. 运行转换
-          # 如果直接运行报错，尝试加上 npx
-          npx sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
+          # 2. 使用 Docker 运行 Sub-Store
+          # 我们把当前目录映射到容器里的 /opt/app，直接跑转换
+          docker run --rm \
+            -v $(pwd):/opt/app \
+            -w /opt/app \
+            xream/sub-store \
+            sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml
 
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # 检查文件是否生成成功
           if [ -f "hk_pure.yaml" ]; then
             git add hk_pure.yaml
-            # 只有当内容确实有变动时才提交，防止 Action 报错
-            git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure List (Node 24)"
+            git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure List (Docker)"
             git push
           else
             echo "Error: hk_pure.yaml was not generated!"
