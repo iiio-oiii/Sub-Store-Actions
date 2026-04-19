@@ -30,7 +30,7 @@ jobs:
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
-                  const req = https.get(url, { timeout: 15000 }, (res) => {
+                  const req = https.get(url, { timeout: 20000 }, (res) => {
                       let data = '';
                       res.on('data', (chunk) => data += chunk);
                       res.on('end', () => resolve(data));
@@ -40,57 +40,71 @@ jobs:
               });
           }
 
+          function decodeContent(content) {
+              if (!content) return "";
+              // 如果是 Base64 格式（以 vmess://, ss:// 等开头或无明显 YAML 特征）
+              if (!content.includes('proxies:') && !content.includes('server:')) {
+                  try {
+                      return Buffer.from(content, 'base64').toString();
+                  } catch (e) {
+                      return content;
+                  }
+              }
+              return content;
+          }
+
           async function main() {
-              console.log("🚀 正在扩大搜索范围，抓取更多香港节点...");
+              console.log("🚀 正在从 23 个订阅源中深度挖掘香港节点...");
               let finalNodes = [];
               let nodeNames = [];
 
               for (const link of links) {
-                  const content = await fetchLink(link.trim());
+                  let content = await fetchLink(link.trim());
                   if (!content) continue;
                   
-                  // 针对混淆格式的简单预处理
-                  const items = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
+                  content = decodeContent(content);
                   
-                  items.forEach(item => {
-                      // 只要名字里带香港关键词，且有服务器地址，就抓取
-                      if (hkRegex.test(item) && item.includes('server:')) {
-                          let clean = item.replace(/^[^{]*/, '').replace(/[^}]*$/, '')
-                              .replace(/[\{\}]/g, '')
-                              .trim()
-                              .replace(/\n/g, ', ')
-                              .replace(/\s+/g, ' ')
-                              .replace(/:\s*,/g, ': "", ')
-                              .replace(/:\s*}/g, ': ""}')
-                              .replace(/,\s*,/g, ',')
-                              .replace(/,\s*$/g, '');
+                  // 针对 YAML 格式的增强解析
+                  const blocks = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
+                  
+                  blocks.forEach(block => {
+                      if (hkRegex.test(block) && (block.includes('server:') || block.includes('://'))) {
+                          // 提取字段的通用逻辑
+                          const fields = ['name', 'server', 'port', 'type', 'uuid', 'password', 'cipher', 'alterId', 'tls', 'sni', 'network', 'ws-opts', 'headers', 'skip-cert-verify', 'path'];
+                          let nodeObj = {};
 
-                          const nameMatch = clean.match(/name:\s*"?([^",{}]+)"?/);
-                          if (nameMatch) {
-                              const name = nameMatch[1].trim();
-                              // 存储节点数据和名字
-                              finalNodes.push(`  - {${clean}}`);
-                              nodeNames.push(`      - "${name}"`);
+                          fields.forEach(field => {
+                              const regex = new RegExp(`${field}:\\s*({.*?}|".*?"|'.*?'|[^,\\n\\}]+)`);
+                              const match = block.match(regex);
+                              if (match) {
+                                  nodeObj[field] = match[1].trim().replace(/^["']|["']$/g, '');
+                              }
+                          });
+
+                          // 如果是标准的 YAML 块
+                          if (nodeObj.name && nodeObj.server) {
+                              let kv = Object.entries(nodeObj).map(([k, v]) => {
+                                  if (k === 'ws-opts' || k === 'headers') return `${k}: {${v.replace(/[\{\}]/g, '')}}`;
+                                  return `${k}: ${v}`;
+                              }).join(', ');
+                              
+                              finalNodes.push(`  - {${kv}}`);
+                              nodeNames.push(`      - "${nodeObj.name}"`);
                           }
                       }
                   });
               }
 
-              // 去重并构建完整的 Mihomo 配置
               const uniqueNodes = Array.from(new Set(finalNodes));
               const uniqueNames = Array.from(new Set(nodeNames));
 
-              const configHeader = [
+              const config = [
                 "port: 7890",
                 "socks-port: 7891",
-                "allow-left-click: true",
                 "mode: rule",
                 "log-level: info",
-                "external-controller: 127.0.0.1:9090",
-                "",
                 "proxies:",
                 ...uniqueNodes,
-                "",
                 "proxy-groups:",
                 "  - name: 🚀 延迟自动选择",
                 "    type: url-test",
@@ -98,26 +112,22 @@ jobs:
                 "    interval: 300",
                 "    proxies:",
                 ...uniqueNames,
-                "",
                 "  - name: 🔰 手动切换节点",
                 "    type: select",
                 "    proxies:",
                 "      - 🚀 延迟自动选择",
                 ...uniqueNames,
-                "",
                 "rules:",
                 "  - DOMAIN-SUFFIX,google.com,🔰 手动切换节点",
-                "  - DOMAIN-SUFFIX,github.com,🔰 手动切换节点",
                 "  - DOMAIN-SUFFIX,interactivebrokers.com,🔰 手动切换节点",
                 "  - MATCH,🔰 手动切换节点"
               ].join('\n');
 
-              fs.writeFileSync('hk_pure.yaml', configHeader);
-              console.log(`✅ 搞定！这次共保留了 ${uniqueNodes.length} 个香港节点。`);
+              fs.writeFileSync('hk_pure.yaml', config);
+              console.log(`✅ 深度清理完成！共获得 ${uniqueNodes.length} 个香港节点。`);
           }
           main();
           EOF
-
           node generator.js
 
       - name: Commit and Push
