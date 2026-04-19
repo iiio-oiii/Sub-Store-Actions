@@ -1,4 +1,4 @@
-name: Ultimate_Standard_Merger
+name: Ultimate_Standard_Merger_v3
 
 on:
   workflow_dispatch:
@@ -39,13 +39,11 @@ jobs:
 
           async function fetchUrl(url) {
             return new Promise((resolve) => {
-              const req = https.get(url, { timeout: 15000 }, (res) => {
+              https.get(url, { timeout: 20000 }, (res) => {
                 let data = '';
                 res.on('data', (chunk) => data += chunk);
                 res.on('end', () => resolve(data));
-              });
-              req.on('error', () => resolve(''));
-              req.on('timeout', () => { req.destroy(); resolve(''); });
+              }).on('error', () => resolve(''));
             });
           }
 
@@ -62,25 +60,31 @@ jobs:
 
               for (let line of lines) {
                 const trimmed = line.trim();
+                
+                // 1. 寻找 proxies 标志
                 if (trimmed === 'proxies:') {
                   isProxyArea = true;
                   continue;
                 }
 
                 if (isProxyArea) {
+                  // 2. 如果遇到顶级键（非空、非缩进、非横杠开头），说明该文件 proxies 结束
                   if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
                     isProxyArea = false;
                     continue;
                   }
-                  
-                  // 关键点：如果是以 - 开头的节点行，确保它只缩进两个空格，保持整齐
-                  if (trimmed.startsWith('-')) {
-                    allProxyLines.push("  " + trimmed);
-                  } else if (line.startsWith('    ')) {
-                    // 保持节点内部属性（如 server, port）的缩进
-                    allProxyLines.push(line);
+
+                  // 3. 核心修复：只要是有内容且在区域内的，全部推入
+                  if (trimmed.length > 0) {
+                    // 统一强制使用 2 格缩进，确保 Mihomo 识别
+                    if (trimmed.startsWith('-')) {
+                        allProxyLines.push("  " + trimmed);
+                    } else {
+                        allProxyLines.push("    " + trimmed);
+                    }
                   }
 
+                  // 提取名字用于组
                   const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                   if (nameMatch) {
                     let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
@@ -92,9 +96,12 @@ jobs:
 
             const uniqueNames = [...new Set(proxyNames)];
             
-            // 构建文件：注意这里不加额外的 allow-left-click 等，
-            // 作为一个 provider 文件，越纯净越好。
             const finalYaml = [
+              "allow-left-click: true",
+              "mode: rule",
+              "log-level: info",
+              "unified-delay: true",
+              "",
               "proxies:",
               ...allProxyLines,
               "",
@@ -129,9 +136,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          if git diff --staged --quiet; then
-            echo "No changes"
-          else
-            git commit -m "Fix indentation for Mihomo"
-            git push origin HEAD
-          fi
+          git commit -m "Force full content injection" || exit 0
+          git push origin HEAD
