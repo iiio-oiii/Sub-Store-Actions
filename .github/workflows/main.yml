@@ -1,4 +1,4 @@
-name: Pure Raw Node Merger
+name: Ultimate Raw Mirror
 
 on:
   workflow_dispatch:
@@ -17,103 +17,83 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Merge Nodes
+      - name: Pixel-Perfect Reconstruction
         run: |
+          # 1. 纯净下载源文件
+          curl -sSL https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml -o source.yml
+
           cat << 'EOF' > generator.js
           const fs = require('fs');
-          const https = require('https');
+          
+          // 读取原始文件
+          const rawContent = fs.readFileSync('source.yml', 'utf8');
+          
+          // 只抓取 proxies: 下面的所有内容，直到文件结尾或下一个顶级键
+          const lines = rawContent.split('\n');
+          let proxyLines = [];
+          let names = [];
+          let start = false;
 
-          const url = 'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml';
-
-          async function fetchUrl(url) {
-            return new Promise((resolve) => {
-              https.get(url, { timeout: 30000 }, (res) => {
-                let data = '';
-                res.on('data', (chunk) => data += chunk);
-                res.on('end', () => resolve(data));
-              }).on('error', () => resolve(''));
-            });
+          for (let line of lines) {
+              if (line.trim() === 'proxies:') {
+                  start = true;
+                  continue;
+              }
+              if (start) {
+                  // 如果遇到顶级字段且不带缩进，说明 proxies 结束了
+                  if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) break;
+                  
+                  proxyLines.push(line);
+                  
+                  // 提取名字用于组，必须处理各种表情符号和引号
+                  const nameMatch = line.match(/name:\s*(.*)/);
+                  if (nameMatch) {
+                      let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
+                      if (n) names.push(`      - "${n}"`);
+                  }
+              }
           }
 
-          async function main() {
-            const content = await fetchUrl(url);
-            if (!content) return;
+          // 重新构造，确保格式和 list.yml 高度一致
+          const output = [
+            "allow-left-click: true",
+            "mode: rule",
+            "log-level: info",
+            "unified-delay: true",
+            "",
+            "proxies:",
+            ...proxyLines,
+            "",
+            "proxy-groups:",
+            "  - name: 🚀 自动选择",
+            "    type: url-test",
+            "    url: http://www.gstatic.com/generate_204",
+            "    interval: 300",
+            "    proxies:",
+            ...new Set(names),
+            "",
+            "  - name: 🔰 手动切换",
+            "    type: select",
+            "    proxies:",
+            "      - 🚀 自动选择",
+            "      - DIRECT",
+            ...new Set(names),
+            "",
+            "rules:",
+            "  - MATCH,🔰 手动切换"
+          ].join('\n');
 
-            const lines = content.split('\n');
-            let proxiesList = [];
-            let proxyNames = [];
-            let isProxySection = false;
-
-            for (let line of lines) {
-              const trimmed = line.trim();
-              
-              // 找到 proxies 区域
-              if (trimmed === 'proxies:') {
-                isProxySection = true;
-                continue;
-              }
-              
-              // 遇到下一个顶级配置则停止
-              if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                isProxySection = false;
-              }
-
-              if (isProxySection) {
-                // 1. 收集原始行（不做任何缩进修改，保持 0 缩进开头）
-                proxiesList.push(line);
-
-                // 2. 提取节点名用于生成组
-                const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
-                if (nameMatch) {
-                  proxyNames.push(`      - "${nameMatch[1].trim()}"`);
-                }
-              }
-            }
-
-            const uniqueNames = [...new Set(proxyNames)];
-
-            // 构造最精简、最稳健的配置文件
-            const finalYaml = [
-              "port: 7890",
-              "socks-port: 7891",
-              "allow-left-click: true",
-              "mode: rule",
-              "log-level: info",
-              "unified-delay: true",
-              "",
-              "proxies:",
-              ...proxiesList, // 这里直接填入原始行，不再额外加空格
-              "",
-              "proxy-groups:",
-              "  - name: 🚀 自动选择",
-              "    type: url-test",
-              "    url: http://www.gstatic.com/generate_204",
-              "    interval: 300",
-              "    proxies:",
-              ...uniqueNames,
-              "",
-              "  - name: 🔰 手动切换",
-              "    type: select",
-              "    proxies:",
-              "      - 🚀 自动选择",
-              "      - DIRECT",
-              ...uniqueNames,
-              "",
-              "rules:",
-              "  - MATCH,🔰 手动切换"
-            ].join('\n');
-
-            fs.writeFileSync('merged_nodes.yaml', finalYaml);
-            console.log("✅ 像素级复刻完成！");
-          }
-          main();
+          fs.writeFileSync('merged_nodes.yaml', output);
           EOF
+          
           node generator.js
 
       - name: Commit and Push
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          # 关键：转换换行符为 LF，确保跨平台兼容性
+          sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Ultra-precise raw merge" || exit 0
+          git commit -m "Full Reconstruction with LF" || exit 0
           git push
