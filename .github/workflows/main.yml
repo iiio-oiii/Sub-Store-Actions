@@ -1,4 +1,4 @@
-name: Final_Format_Master
+name: Ultimate_YAML_Purifier
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Atomic Structure Rebuild
+      - name: Atomic Rebuild Logic
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -38,7 +38,7 @@ jobs:
           ];
 
           async function main() {
-            let allNodes = [];
+            let cleanNodes = [];
             let nodeNames = new Set();
 
             for (const url of urls) {
@@ -53,31 +53,31 @@ jobs:
 
                 if (!data) continue;
                 const lines = data.split('\n');
-                let inProxiesSection = false;
+                let inProxies = false;
 
                 for (let line of lines) {
                   const trimmed = line.trim();
                   
-                  // 1. 发现 proxies 段，开始抓取内容，但不搬运这一行标题
+                  // 1. 发现 proxies: 开始，但不搬运这一行
                   if (trimmed.toLowerCase().startsWith('proxies:')) {
-                    inProxiesSection = true;
+                    inProxies = true;
                     continue;
                   }
 
-                  if (inProxiesSection) {
-                    // 2. 遇到其他顶级配置，停止抓取当前文件的节点
+                  if (inProxies) {
+                    // 2. 遇到其他顶级键（非空格、非横杠开头），说明此源抓取结束
                     if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                      inProxiesSection = false;
+                      inProxies = false;
                       continue;
                     }
 
-                    // 3. 剔除多余的标题，只抓取带横杠或空格的内容
+                    // 3. 核心净化：剔除重复标题，强制标准化缩进
                     if (trimmed.length > 0 && !trimmed.toLowerCase().includes('proxies:')) {
-                      // 统一强制缩进：如果是节点开头用 2 空格，属性用 4 空格
-                      const formattedLine = trimmed.startsWith('-') ? '  ' + trimmed : '    ' + trimmed;
-                      allNodes.push(formattedLine);
+                      // 强制节点开头为 2 空格，属性为 4 空格
+                      let formatted = trimmed.startsWith('-') ? '  ' + trimmed : '    ' + trimmed;
+                      cleanNodes.push(formatted);
 
-                      // 提取名字用于去重和组生成
+                      // 提取名字用于 proxy-groups
                       const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                       if (nameMatch) {
                         nodeNames.add(nameMatch[1].trim().replace(/^["']|["']$/g, ''));
@@ -88,16 +88,16 @@ jobs:
               } catch (e) { console.log(`跳过错误源: ${url}`); }
             }
 
-            // 构建最终合法的 YAML
-            const proxyListForGroups = Array.from(nodeNames).map(name => `      - "${name}"`).join('\n');
+            const proxyList = Array.from(nodeNames).map(n => `      - "${n}"`).join('\n');
             
-            const finalContent = [
+            // 构造唯一的、绝对合规的 YAML 结构
+            const finalYaml = [
               "allow-left-click: true",
               "mode: rule",
               "unified-delay: true",
               "",
-              "proxies:", // 整个文件唯一的顶级 proxies 键
-              ...allNodes,
+              "proxies:", // 全文件唯一的 proxies 标题
+              ...cleanNodes,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -105,20 +105,20 @@ jobs:
               "    url: http://www.gstatic.com/generate_204",
               "    interval: 300",
               "    proxies:",
-              proxyListForGroups,
+              proxyList,
               "",
               "  - name: 🔰 手动切换",
               "    type: select",
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              proxyListForGroups,
+              proxyList,
               "",
               "rules:",
               "  - MATCH,🔰 手动切换"
             ].join('\n');
 
-            fs.writeFileSync('merged_nodes.yaml', finalContent);
+            fs.writeFileSync('merged_nodes.yaml', finalYaml);
           }
           main();
           EOF
@@ -130,5 +130,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Fix: Absolute structural integrity for Mihomo" || exit 0
+          git commit -m "Auto: Atomic Structural Rebuild" || exit 0
           git push origin HEAD
