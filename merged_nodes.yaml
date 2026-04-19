@@ -1,28 +1,151 @@
+allow-left-click: true
+mode: rule
+log-level: info
+unified-delay: true
+
 proxies:
   - cipher: aes-256-cfb
+    name: 11|tg频道:@ripaojiedian
+    password: amazonskr05
+    port: 443
+    server: 63.180.254.10
+    type: ss
   - alterId: 2
+    cipher: auto
+    name: 11|🇭🇰 香港|@ripaojiedian
+    port: 30807
+    server: v10.hdacd.com
+    skip-cert-verify: false
+    tls: false
+    type: vmess
+    uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
   - name: 11,12|香港3|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 52687
+    server: 95.40.85.50
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|香港4|@ripaojiedian
+    network: tcp
+    password: BxceQaOe
+    port: 6313
+    server: 54.46.52.70
+    skip-cert-verify: true
+    sni: t.me%2Fripaojiedian
+    type: trojan
   - name: 11,12|香港5|@ripaojiedian
+    network: tcp
+    password: BxceQaOe
+    port: 6313
+    server: 52.69.111.130
+    skip-cert-verify: true
+    sni: t.me%2Fripaojiedian
+    type: trojan
   - name: 11,12|日本|@ripaojiedian
+    network: tcp
+    password: BxceQaOe
+    port: 1951
+    server: 13.112.73.166
+    skip-cert-verify: true
+    sni: t.me%252Fripaojiedian
+    type: trojan
   - name: 11,12|日本2|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 34818
+    server: 54.249.109.55
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|日本3|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 4380
+    server: 54.249.109.55
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|新加坡|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 4674
+    server: 13.115.146.132
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|新加坡2|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 4674
+    server: 54.249.109.55
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|新加坡3|@ripaojiedian
+    network: tcp
+    password: BxceQaOe
+    port: 12070
+    server: 95.40.68.160
+    skip-cert-verify: true
+    sni: t.me%252Fripaojiedian
+    type: trojan
   - name: 11,12|美国|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 4019
+    server: 54.249.109.55
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|美国2|@ripaojiedian
+    network: tcp
+    password: 868ecdaf6aed618ec98cf78585672b2b
+    port: 3057
+    server: 13.115.246.132
+    skip-cert-verify: false
+    sni: www.nintendogames.net
+    type: trojan
   - name: 11,12|美国3|@ripaojiedian
+    network: tcp
+    password: BxceQaOe
+    port: 23255
+    server: 54.46.52.234
+    skip-cert-verify: true
+    sni: t.me%2Fripaojiedian
+    type: trojan
   - alterId: 2
+    cipher: auto
+    name: 12|香港|@ripaojiedian
+    network: tcp
+    port: '30807'
+    server: v10.hdacd.com
+    servername: ''
+    tls: false
+    type: vmess
+    uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
   - name: 13|AT_speednode_0001
+    network: ws
+    password: trojan
+    port: 8888
+    server: 152.53.45.251
+    skip-cert-verify: false
+    sni: jflsjlaf.pages.dev
+    type: trojan
+    udp: true
+    ws-opts:
     headers:
-      Host: jflsjlaf.pages.dev
+    Host: jflsjlaf.pages.dev
     path: /
   - ♻ 自动选择
   - 🔰 延迟最低
   - ✅ 手动选择
   - 🗺️ 选择地区
+    type: select
   - interval: 300
+    name: ♻ 自动选择
+    proxies: &id001
   - 11|tg频道:@ripaojiedian
   - 11,12|日本|@ripaojiedian
   - 11,12|香港4|@ripaojiedian
@@ -39,25 +162,39 @@ proxies:
   - 11,12|美国|@ripaojiedian
   - 11,12|美国2|@ripaojiedian
   - 13|AT_speednode_0001
+    type: fallback
+    url: https://www.google.com/
   - interval: 300
+    name: 🔰 延迟最低
+    proxies: *id001
+    tolerance: 20
+    type: url-test
+    url: https://www.google.com/
   - name: ✅ 手动选择
+    proxies: *id001
+    type: select
   - name: 🌐 突破锁区
   - DIRECT
   - 🚀 选择代理
+    type: select
   - name: ❓ 疑似国内
   - DIRECT
   - 🚀 选择代理
   - REJECT
+    type: select
   - name: 🐟 漏网之鱼
   - DIRECT
   - 🚀 选择代理
+    type: select
   - name: 🚨 病毒网站
   - REJECT
   - DIRECT
+    type: select
   - name: ⛔ 广告拦截
   - REJECT
   - DIRECT
   - 🚀 选择代理
+    type: select
   - name: 🗺️ 选择地区
   - 🇯🇵 日本
   - 🇺🇸 美国
@@ -71,40 +208,53 @@ proxies:
   - 🇰🇷 韩国
   - 🇷🇺 俄罗斯
   - 🇩🇪 德国
+    type: select
   - name: 🇯🇵 日本
   - 11,12|日本|@ripaojiedian
   - 11,12|日本2|@ripaojiedian
   - 11,12|日本3|@ripaojiedian
+    type: select
   - name: 🇺🇸 美国
   - 11,12|美国|@ripaojiedian
   - 11,12|美国2|@ripaojiedian
   - 11,12|美国3|@ripaojiedian
+    type: select
   - name: 🇨🇳 中国
   - REJECT
+    type: select
   - name: 🇭🇰 香港
-  - 11|🇭🇰 香港|@ripaojiedian
+  - 11|��🇰 香港|@ripaojiedian
   - 11,12|香港3|@ripaojiedian
   - 11,12|香港4|@ripaojiedian
   - 11,12|香港5|@ripaojiedian
   - 12|香港|@ripaojiedian
+    type: select
   - name: ❔ 台湾
   - REJECT
+    type: select
   - name: 🇨🇦 加拿大
   - REJECT
+    type: select
   - name: 🇫🇷 法国
   - REJECT
+    type: select
   - name: 🇸🇬 新加坡
   - 11,12|新加坡|@ripaojiedian
   - 11,12|新加坡2|@ripaojiedian
   - 11,12|新加坡3|@ripaojiedian
+    type: select
   - name: 🇬🇧 英国
   - REJECT
+    type: select
   - name: 🇰🇷 韩国
   - REJECT
+    type: select
   - name: 🇷🇺 俄罗斯
   - REJECT
+    type: select
   - name: 🇩🇪 德国
   - REJECT
+    type: select
   - {name: AT_0249b_0001, server: 152.53.45.251, port: 8888, type: trojan, password: trojan, sni: jflsjlaf.pages.dev, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: jflsjlaf.pages.dev}}, udp: true}
   - {name: CN_0249b_0002, server: planb.mojcn.com, port: 16645, type: vmess, uuid: 3958aab8-fa85-43ac-ae60-537f4e642d9f, alterId: 0, cipher: auto, tls: false, skip-cert-verify: false, network: ws, ws-opts: {path: /, headers: {Host: b8503d97efa57c667a0dcb7e848917ca.mobgslb.tbcache.com}}, udp: true}
   - {name: DE_0249b_0003, server: 136.244.80.24, port: 8443, type: ss, cipher: none, password: 79960b0b-7d31-4263-8915-6511b0e137a8, plugin: v2ray-plugin, plugin-opts: {mode: websocket, host: woshinidie-et3.pages.dev, path: "/79960b0b-7d31-4263-8915-6511b0e137a8/?ed=2560", tls: true, mux: false}, udp: true}
@@ -165,6 +315,7 @@ proxies:
   - VN_0249b_0028
   - VN_0249b_0029
   - name: ♻️ automatic
+    type: url-test
   - AT_0249b_0001
   - CN_0249b_0002
   - DE_0249b_0003
@@ -194,6 +345,8 @@ proxies:
   - VN_0249b_0027
   - VN_0249b_0028
   - VN_0249b_0029
+    url: https://www.google.com/favicon.ico
+    interval: 300
   - name: 每天更新，请加电报群防止失联
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -205,9 +358,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
-      headers:
-        Host: TURK1.NET.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
+    headers:
+    Host: TURK1.NET.NET
   - name: 电报群：https://t.me/vvkj11
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -219,9 +372,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /
-      headers:
-        Host: 2001:bc8:32d7:302::10
+    path: /
+    headers:
+    Host: 2001:bc8:32d7:302::10
   - name: 日期：04-19
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -233,7 +386,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?ed=2048@V2Ray_hiddify10--https://t.me/V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--https://t.me/V2Ray_hiddify10
+    path: /?ed=2048@V2Ray_hiddify10--https://t.me/V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--https://t.me/V2Ray_hiddify10
   - name: 免费VPN：https://tt.vg/OWeaF
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -245,7 +398,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: ?ed=2048
+    path: ?ed=2048
   - name: 🇫🇷 法国
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -257,9 +410,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /
-      headers:
-        Host: AZERB.NET
+    path: /
+    headers:
+    Host: AZERB.NET
   - name: 🇫🇷 法国_1
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -271,7 +424,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?ed=2048@V2Ray_hiddify10--https://t.me/V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--https://t.me/V2Ray_hiddify10
+    path: /?ed=2048@V2Ray_hiddify10--https://t.me/V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--V2Ray_hiddify10--https://t.me/V2Ray_hiddify10
   - name: 🇫🇷 法国_2
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -283,9 +436,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?ed=2048
-      headers:
-        Host: 2001:bc8:32d7:302::10
+    path: /?ed=2048
+    headers:
+    Host: 2001:bc8:32d7:302::10
   - name: 🇫🇷 法国_3
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -297,9 +450,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
-      headers:
-        Host: AZERB.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
+    headers:
+    Host: AZERB.NET
   - name: 🇫🇷 法国_4
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -311,9 +464,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
-      headers:
-        Host: AZERB.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
+    headers:
+    Host: AZERB.NET
   - name: 🇫🇷 法国_5
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -325,9 +478,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?ed=2048HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN
-      headers:
-        Host: 2001:bc8:32d7:302::10
+    path: /?ed=2048HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN
+    headers:
+    Host: 2001:bc8:32d7:302::10
   - name: "11"
     type: trojan
     server: ct.090227.xyz
@@ -337,7 +490,7 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /dl/proxyip=45.196.239.151,167.253.153.161,45.196.239.238,45.196.238.248,45.196.238.145,223.165.4.57,85.237.207.19,167.253.153.80?ed=2560
+    path: /dl/proxyip=45.196.239.151,167.253.153.161,45.196.239.238,45.196.238.248,45.196.238.145,223.165.4.57,85.237.207.19,167.253.153.80?ed=2560
   - name: 🇫🇷 法国_6
     type: vmess
     server: 2001:bc8:32d7:302::11
@@ -349,9 +502,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
-      headers:
-        Host: TABRIZ.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
+    headers:
+    Host: TABRIZ.NET
   - name: 🇫🇷 法国_7
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -363,7 +516,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?ed=2048HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN
+    path: /?ed=2048HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN--HiByeVPNN
   - name: 🇫🇷 法国_8
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -375,7 +528,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_9
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -387,9 +540,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
-      headers:
-        Host: AZERB.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
+    headers:
+    Host: AZERB.NET
   - name: 🇫🇷 法国_10
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -401,7 +554,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?ed=2048
+    path: /?ed=2048
   - name: "17"
     type: trojan
     server: jp.111000.cc.cd
@@ -413,9 +566,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /?ed=2560&proxyip=ip.111000.de5.net:443
-      headers:
-        Host: sni.111000.dynv6.net
+    path: /?ed=2560&proxyip=ip.111000.de5.net:443
+    headers:
+    Host: sni.111000.dynv6.net
   - name: "18"
     type: vless
     server: jp.111000.cc.cd
@@ -426,9 +579,9 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /?ed=2560&proxyip=ip.111000.de5.net:443
-      headers:
-        Host: sni.111000.dynv6.net
+    path: /?ed=2560&proxyip=ip.111000.de5.net:443
+    headers:
+    Host: sni.111000.dynv6.net
   - name: "19"
     type: trojan
     server: 104.16.148.10
@@ -438,9 +591,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /buy/proxyip=45.196.239.151,167.253.153.161,45.196.239.238,45.196.238.248,45.196.238.145,223.165.4.57,85.237.207.19,167.253.153.80
-      headers:
-        Host: cm22-bgphhh.pages.dev
+    path: /buy/proxyip=45.196.239.151,167.253.153.161,45.196.239.238,45.196.238.248,45.196.238.145,223.165.4.57,85.237.207.19,167.253.153.80
+    headers:
+    Host: cm22-bgphhh.pages.dev
   - name: "20"
     type: trojan
     server: join.my.telegram.channel.cmliussss.to.unlock.more.premium.nodes.cf.090227.xyz
@@ -450,9 +603,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: _acme-challenge.sb.cloudns.biz
+    path: /
+    headers:
+    Host: _acme-challenge.sb.cloudns.biz
   - name: "21"
     type: trojan
     server: www.shopify.com
@@ -462,9 +615,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: cm22-bgphhh.pages.dev
+    path: /
+    headers:
+    Host: cm22-bgphhh.pages.dev
   - name: "22"
     type: trojan
     server: ct.090227.xyz
@@ -474,7 +627,7 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国
     type: vless
     server: 188.209.141.114
@@ -485,7 +638,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: "24"
     type: trojan
     server: mfa.gov.ua
@@ -495,9 +648,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: cm22-bgphhh.pages.dev
+    path: /
+    headers:
+    Host: cm22-bgphhh.pages.dev
   - name: 🇫🇷 法国_11
     type: vless
     server: 57.128.183.108
@@ -507,7 +660,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇩🇪 德国
     type: vless
     server: 5.187.0.232
@@ -517,7 +670,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_12
     type: vless
     server: 57.128.183.248
@@ -527,7 +680,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_13
     type: vless
     server: 38.242.229.125
@@ -537,7 +690,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "29"
     type: trojan
     server: cmcc.090227.xyz
@@ -547,9 +700,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: cm22-bgphhh.pages.dev
+    path: /
+    headers:
+    Host: cm22-bgphhh.pages.dev
   - name: 🇬🇧 英国
     type: vless
     server: 57.129.137.235
@@ -559,7 +712,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "31"
     type: vless
     server: 104.18.16.56
@@ -569,7 +722,7 @@ proxies:
     servername: vip.yaml7.ggff.net
     tls: false
     ws-opts:
-      path: /+@irshum2
+    path: /+@irshum2
   - name: 🇺🇸 美国_1
     type: vless
     server: 135.84.74.155
@@ -579,7 +732,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_14
     type: vless
     server: 51.75.23.189
@@ -589,7 +742,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_15
     type: vless
     server: 57.128.181.18
@@ -599,7 +752,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_16
     type: vless
     server: 62.84.183.222
@@ -609,7 +762,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "36"
     type: vless
     server: time.is
@@ -619,7 +772,7 @@ proxies:
     servername: 1-bhn.pages.dev
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "37"
     type: trojan
     server: 104.18.12.149
@@ -629,9 +782,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.calmlunch.com
+    path: /assignment
+    headers:
+    Host: www.calmlunch.com
   - name: "38"
     type: vless
     server: 104.18.16.56
@@ -641,7 +794,7 @@ proxies:
     servername: 2026.hhhhh.eu.org
     tls: true
     ws-opts:
-      path: /222.167.202.31:7443
+    path: /222.167.202.31:7443
   - name: 🇳🇱 荷兰
     type: vless
     server: 91.84.101.164
@@ -651,7 +804,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_17
     type: vless
     server: 51.91.249.126
@@ -661,7 +814,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇱🇻 拉脱维亚
     type: vless
     server: 31.128.32.98
@@ -671,7 +824,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇳🇱 荷兰_1
     type: vless
     server: 212.118.52.236
@@ -681,7 +834,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "43"
     type: vless
     server: 8.6.112.6
@@ -692,7 +845,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /test
+    path: /test
   - name: 🇳🇱 荷兰_2
     type: vless
     server: 103.97.88.133
@@ -702,7 +855,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_18
     type: vless
     server: 51.91.100.128
@@ -712,7 +865,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_19
     type: vless
     server: 188.130.207.92
@@ -722,7 +875,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇯🇵 日本
     type: vless
     server: 140.238.51.35
@@ -732,7 +885,7 @@ proxies:
     servername: edtunnel-eiz.pages.dev
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "48"
     type: trojan
     server: 104.18.12.149
@@ -744,9 +897,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /Tel-@V2rayAlpha
-      headers:
-        Host: sni.111000.dynv6.net
+    path: /Tel-@V2rayAlpha
+    headers:
+    Host: sni.111000.dynv6.net
   - name: "49"
     type: vless
     server: 104.18.12.149
@@ -756,7 +909,7 @@ proxies:
     servername: fire.rezazzz.ir
     tls: true
     ws-opts:
-      path: /movie
+    path: /movie
   - name: "50"
     type: vless
     server: 104.18.13.149
@@ -766,7 +919,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /?Telegram+@WangCai2
+    path: /?Telegram+@WangCai2
   - name: 🇳🇱 荷兰_3
     type: vless
     server: 185.246.152.159
@@ -776,7 +929,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_2
     type: vless
     server: 199.107.164.217
@@ -786,7 +939,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_1
     type: vless
     server: 57.129.137.83
@@ -796,7 +949,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_2
     type: vless
     server: 57.129.137.62
@@ -806,7 +959,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "55"
     type: vless
     server: 104.17.72.206
@@ -816,7 +969,7 @@ proxies:
     servername: 2026.hhhhh.eu.org
     tls: true
     ws-opts:
-      path: /222.167.202.31:7443
+    path: /222.167.202.31:7443
   - name: "56"
     type: vless
     server: 172.64.149.54
@@ -827,7 +980,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /222.167.202.31:7443
+    path: /222.167.202.31:7443
   - name: "57"
     type: vless
     server: 8.6.112.0
@@ -837,7 +990,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /?Telegram🇨🇳+@WangCai2
+    path: /?Telegram🇨🇳+@WangCai2
   - name: 🇫🇷 法国_20
     type: vless
     server: 51.77.140.38
@@ -847,7 +1000,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "59"
     type: vless
     server: v1.dabache.top
@@ -857,7 +1010,7 @@ proxies:
     servername: vip.yaml7.ggff.net
     tls: false
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_3
     type: vless
     server: 135.84.64.66
@@ -867,7 +1020,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_21
     type: vless
     server: 51.91.255.121
@@ -877,7 +1030,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_22
     type: vless
     server: 37.59.96.48
@@ -887,7 +1040,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "63"
     type: vless
     server: 104.18.16.56
@@ -897,7 +1050,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /?Telegram🇨🇳+@WangCai2
+    path: /?Telegram🇨🇳+@WangCai2
   - name: "64"
     type: trojan
     server: 104.18.12.149
@@ -907,9 +1060,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: sni.111000.dynv6.nethttp/1.1
+    path: /
+    headers:
+    Host: sni.111000.dynv6.nethttp/1.1
   - name: 🇩🇪 德国_1
     type: vless
     server: 57.129.63.152
@@ -919,7 +1072,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_3
     type: vless
     server: 57.129.137.80
@@ -929,7 +1082,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇳🇱 荷兰_4
     type: vless
     server: 212.34.141.125
@@ -939,7 +1092,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "68"
     type: vless
     server: 8.6.112.6
@@ -949,7 +1102,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_4
     type: vless
     server: 135.84.74.43
@@ -959,7 +1112,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_23
     type: vless
     server: 51.91.101.216
@@ -969,7 +1122,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "71"
     type: vless
     server: 188.114.98.0
@@ -979,7 +1132,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_24
     type: vless
     server: 51.210.150.65
@@ -989,7 +1142,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "73"
     type: vless
     server: ip.sb
@@ -999,7 +1152,7 @@ proxies:
     servername: 3-9sp.pages.dev
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇮🇷 伊朗
     type: vless
     server: 5.239.245.250
@@ -1009,7 +1162,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /?Telegram🇨🇳+@WangCai2
+    path: /?Telegram🇨🇳+@WangCai2
   - name: 🇳🇱 荷兰_5
     type: vless
     server: 45.87.3.224
@@ -1019,7 +1172,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "76"
     type: vless
     server: 198.41.209.193
@@ -1029,7 +1182,7 @@ proxies:
     servername: wr.ssdxz.cn
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "77"
     type: vless
     server: 172.64.155.209
@@ -1039,7 +1192,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /?Telegram🇨🇳+@WangCai2
+    path: /?Telegram🇨🇳+@WangCai2
   - name: "78"
     type: vless
     server: 8.6.112.0
@@ -1049,7 +1202,7 @@ proxies:
     servername: vip.yaml7.ggff.net
     tls: false
     ws-opts:
-      path: /+@ProxyVPN11
+    path: /+@ProxyVPN11
   - name: 🇺🇸 美国_5
     type: vless
     server: 135.84.73.184
@@ -1059,7 +1212,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇳🇱 荷兰_6
     type: vless
     server: 91.84.99.166
@@ -1069,7 +1222,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "81"
     type: vless
     server: e1-f55.pages.dev
@@ -1079,7 +1232,7 @@ proxies:
     servername: e1-f55.pages.dev
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "82"
     type: trojan
     server: bestcf.030101.xyz
@@ -1089,9 +1242,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: sni.111000.dynv6.nethttp/1.1
+    path: /
+    headers:
+    Host: sni.111000.dynv6.nethttp/1.1
   - name: 🇹🇼 台湾
     type: vless
     server: 167.253.153.214
@@ -1102,7 +1255,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /167.253.153.214:443
+    path: /167.253.153.214:443
   - name: 🇩🇪 德国_2
     type: vless
     server: 94.130.132.180
@@ -1113,7 +1266,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_6
     type: vless
     server: 135.84.74.152
@@ -1123,7 +1276,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_4
     type: vless
     server: 57.129.137.233
@@ -1133,7 +1286,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "87"
     type: vless
     server: 172.64.152.23
@@ -1143,7 +1296,7 @@ proxies:
     servername: 2026.hhhhh.eu.org
     tls: true
     ws-opts:
-      path: /222.167.202.31:7443
+    path: /222.167.202.31:7443
   - name: 🇫🇷 法国_25
     type: vless
     server: 146.59.159.111
@@ -1153,7 +1306,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_26
     type: vless
     server: 57.128.183.225
@@ -1163,7 +1316,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /?telegram
+    path: /?telegram
   - name: 🇺🇸 美国_7
     type: vless
     server: 160.153.1.23
@@ -1173,7 +1326,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "91"
     type: vless
     server: 104.17.72.206
@@ -1183,7 +1336,7 @@ proxies:
     servername: vip.yaml7.ggff.net
     tls: false
     ws-opts:
-      path: /+@ProxyVPN11
+    path: /+@ProxyVPN11
   - name: "92"
     type: vless
     server: 104.18.4.130
@@ -1193,7 +1346,7 @@ proxies:
     servername: cdnhtzner.yas-baaq.ir
     tls: false
     ws-opts:
-      path: /index.html
+    path: /index.html
   - name: 🇩🇪 德国_3
     type: vless
     server: 134.209.246.179
@@ -1203,7 +1356,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "94"
     type: vless
     server: 104.17.145.59
@@ -1213,7 +1366,7 @@ proxies:
     servername: vip.yaml7.ggff.net
     tls: false
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_27
     type: vless
     server: 51.195.37.32
@@ -1223,7 +1376,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_8
     type: vless
     server: 135.84.73.42
@@ -1233,7 +1386,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇩🇪 德国_4
     type: vless
     server: 57.129.14.56
@@ -1243,7 +1396,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_28
     type: vless
     server: 51.91.248.253
@@ -1253,7 +1406,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_9
     type: vless
     server: 45.144.112.52
@@ -1263,7 +1416,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇹🇼 台湾_1
     type: vless
     server: 103.137.63.227
@@ -1274,7 +1427,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /103.137.63.227:8443
+    path: /103.137.63.227:8443
   - name: 🇫🇷 法国_29
     type: vless
     server: 54.36.98.76
@@ -1284,7 +1437,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "102"
     type: vless
     server: 104.18.13.149
@@ -1294,7 +1447,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_10
     type: vless
     server: 141.193.213.11
@@ -1304,7 +1457,7 @@ proxies:
     servername: qyi.fqjd663.ggff.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_30
     type: vless
     server: 62.133.62.104
@@ -1314,7 +1467,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇱🇻 拉脱维亚_1
     type: vless
     server: 90.156.254.74
@@ -1324,7 +1477,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇩🇪 德国_5
     type: vless
     server: 57.129.63.144
@@ -1334,7 +1487,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇹🇼 台湾_2
     type: vless
     server: 213.210.4.131
@@ -1345,7 +1498,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /213.210.4.131:443
+    path: /213.210.4.131:443
   - name: 🇪🇸 西班牙
     type: trojan
     server: 109.234.211.66
@@ -1355,9 +1508,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: store.timimi.dpdns.org
+    path: /
+    headers:
+    Host: store.timimi.dpdns.org
   - name: "109"
     type: vless
     server: 162.159.36.5
@@ -1367,7 +1520,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "110"
     type: vless
     server: ciallo-egb.pages.dev
@@ -1377,7 +1530,7 @@ proxies:
     servername: CiallO-eGb.pAGEs.Dev
     tls: true
     ws-opts:
-      path: //
+    path: //
   - name: 🇫🇷 法国_31
     type: vless
     server: 54.37.51.238
@@ -1387,7 +1540,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_11
     type: vless
     server: 209.102.207.162
@@ -1397,7 +1550,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_12
     type: vless
     server: 149.248.7.25
@@ -1407,7 +1560,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_32
     type: vless
     server: 51.91.255.152
@@ -1417,7 +1570,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_33
     type: vless
     server: 37.59.96.47
@@ -1427,7 +1580,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "116"
     type: vless
     server: ciallo-egb.pages.dev
@@ -1437,7 +1590,7 @@ proxies:
     servername: CiaLLO-egb.PAGeS.dEV
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "117"
     type: vless
     server: 162.159.38.62
@@ -1447,7 +1600,7 @@ proxies:
     servername: vip.yaml7.ggff.net
     tls: false
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_34
     type: vless
     server: 31.59.121.227
@@ -1457,7 +1610,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇳🇱 荷兰_7
     type: trojan
     server: 103.136.70.115
@@ -1467,9 +1620,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: jflsjlaf.pages.dev
+    path: /
+    headers:
+    Host: jflsjlaf.pages.dev
   - name: 🇺🇸 美国_13
     type: vless
     server: 135.84.74.203
@@ -1479,7 +1632,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "121"
     type: vless
     server: 162.159.12.151
@@ -1489,7 +1642,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_5
     type: vless
     server: 158.220.88.180
@@ -1499,8 +1652,8 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
-  - name: 🇫🇷 法国_35
+    path: /
+  - name: ��🇷 法国_35
     type: vless
     server: 146.59.230.8
     port: 8443
@@ -1509,7 +1662,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_36
     type: vless
     server: 54.36.99.75
@@ -1519,7 +1672,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "125"
     type: vless
     server: fm3.pages.dev
@@ -1529,7 +1682,7 @@ proxies:
     servername: fm3.pages.dev
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_14
     type: vless
     server: 160.153.0.78
@@ -1539,7 +1692,7 @@ proxies:
     servername: qyi.fqjd663.ggff.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_15
     type: vless
     server: 160.153.1.122
@@ -1549,7 +1702,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_37
     type: vless
     server: 51.38.226.4
@@ -1559,7 +1712,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "129"
     type: vless
     server: serviceshub.samsclub.com
@@ -1569,7 +1722,7 @@ proxies:
     servername: we.ssdxz.cn
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_16
     type: vless
     server: 199.34.228.41
@@ -1579,7 +1732,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇳🇱 荷兰_8
     type: vless
     server: 77.238.248.80
@@ -1589,7 +1742,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_38
     type: vless
     server: 57.128.180.80
@@ -1599,7 +1752,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_17
     type: vless
     server: 135.84.72.18
@@ -1609,7 +1762,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_39
     type: vless
     server: 51.77.213.238
@@ -1619,7 +1772,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇩🇪 德国_6
     type: vless
     server: 31.192.237.186
@@ -1629,7 +1782,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_40
     type: vless
     server: 146.59.229.78
@@ -1639,7 +1792,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇷 韩国
     type: vless
     server: 123.98.220.86
@@ -1650,7 +1803,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇩🇪 德国_7
     type: vless
     server: 64.238.203.14
@@ -1660,7 +1813,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇭🇰 香港
     type: vless
     server: 8.223.63.150
@@ -1671,7 +1824,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
+    path: /
   - name: 🇩🇪 德国_8
     type: vless
     server: 159.223.24.65
@@ -1681,7 +1834,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇺🇸 美国_18
     type: vless
     server: 167.88.160.144
@@ -1691,7 +1844,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇹🇼 台湾_3
     type: vless
     server: 167.253.153.73
@@ -1702,7 +1855,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /167.253.153.73:443
+    path: /167.253.153.73:443
   - name: 🇱🇻 拉脱维亚_2
     type: vless
     server: 5.34.209.231
@@ -1712,7 +1865,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_41
     type: vless
     server: 57.128.183.6
@@ -1722,7 +1875,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_6
     type: vless
     server: 57.129.137.206
@@ -1732,7 +1885,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: "146"
     type: vless
     server: bestcf.030101.xyz
@@ -1742,7 +1895,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_42
     type: vless
     server: 51.91.248.215
@@ -1752,7 +1905,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇭🇰 香港_1
     type: vless
     server: 143.14.189.132
@@ -1763,7 +1916,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
+    path: /
   - name: 🇩🇪 德国_9
     type: vless
     server: 57.129.47.67
@@ -1773,7 +1926,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_43
     type: vmess
     server: m.cnmjin.net
@@ -1785,9 +1938,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /
-      headers:
-        Host: 3416cbe57b7c52733721859d4e23be39.mobgslb.tbcache.com
+    path: /
+    headers:
+    Host: 3416cbe57b7c52733721859d4e23be39.mobgslb.tbcache.com
   - name: 🇹🇼 台湾_4
     type: vless
     server: 167.253.153.47
@@ -1798,7 +1951,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /167.253.153.47:443
+    path: /167.253.153.47:443
   - name: 🇫🇷 法国_44
     type: vless
     server: 57.128.183.90
@@ -1808,7 +1961,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_7
     type: vless
     server: 178.62.67.149
@@ -1818,7 +1971,7 @@ proxies:
     servername: 3-7gj.pages.dev
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_45
     type: vless
     server: 51.91.249.93
@@ -1828,7 +1981,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇭🇰 香港_2
     type: vless
     server: xianggang2.zqjsqapi.com
@@ -1839,7 +1992,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /proxy
+    path: /proxy
   - name: 🇺🇸 美国_19
     type: vless
     server: 69.63.208.141
@@ -1849,7 +2002,7 @@ proxies:
     servername: snippet.gfw.qzz.io
     tls: true
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇸🇬 新加坡
     type: vless
     server: 43.160.204.190
@@ -1859,7 +2012,7 @@ proxies:
     servername: xinjiapo1.zqjsqapi.com
     tls: true
     ws-opts:
-      path: /proxy
+    path: /proxy
   - name: 🇸🇬 新加坡_1
     type: vless
     server: xinjiapo1.zqjsqapi.com
@@ -1869,7 +2022,7 @@ proxies:
     servername: xinjiapo1.zqjsqapi.com
     tls: true
     ws-opts:
-      path: /proxy
+    path: /proxy
   - name: 🇫🇷 法国_46
     type: vless
     server: 51.91.253.60
@@ -1879,7 +2032,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇨🇿 捷克
     type: vless
     server: 195.85.23.138
@@ -1889,7 +2042,7 @@ proxies:
     servername: sni.111000.indevs.in
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇷 韩国_1
     type: vless
     server: 221.147.173.70
@@ -1900,7 +2053,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇳🇱 荷兰_9
     type: trojan
     server: 152.53.60.198
@@ -1910,7 +2063,7 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇷 韩国_2
     type: vless
     server: 112.163.117.142
@@ -1921,7 +2074,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇺🇸 美国_20
     type: vless
     server: 128.121.7.10
@@ -1932,7 +2085,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇫🇷 法国_47
     type: vmess
     server: 2001:bc8:32d7:302::11
@@ -1944,9 +2097,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
-      headers:
-        Host: Azerb.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
+    headers:
+    Host: Azerb.NET
   - name: 🇦🇹 奥地利
     type: trojan
     server: 152.53.200.98
@@ -1956,9 +2109,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /
-      headers:
-        Host: jflsjlaf.pages.dev
+    path: /
+    headers:
+    Host: jflsjlaf.pages.dev
   - name: 🇸🇪 瑞典
     type: vless
     server: shop.app
@@ -1968,7 +2121,7 @@ proxies:
     servername: qyi.fqjd663.ggff.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇫🇷 法国_48
     type: vmess
     server: 2001:bc8:32d7:302::14
@@ -1980,9 +2133,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
-      headers:
-        Host: TABRIZ.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1?ed=2560
+    headers:
+    Host: TABRIZ.NET
   - name: 🇦🇹 奥地利_1
     type: trojan
     server: 152.53.200.167
@@ -1992,7 +2145,7 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇷 韩国_3
     type: vless
     server: 168.126.209.118
@@ -2003,7 +2156,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇫🇷 法国_49
     type: vmess
     server: 2001:bc8:32d7:302::16
@@ -2015,9 +2168,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
-      headers:
-        Host: AZERB.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
+    headers:
+    Host: AZERB.NET
   - name: 🇹🇭 泰国
     type: vless
     server: mangu1.zqjsqapi.com
@@ -2027,7 +2180,7 @@ proxies:
     servername: mangu1.zqjsqapi.com
     tls: true
     ws-opts:
-      path: /proxy
+    path: /proxy
   - name: 🇰🇷 韩国_4
     type: vless
     server: 222.113.237.204
@@ -2038,7 +2191,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇺🇸 美国_21
     type: vless
     server: 142.171.156.141
@@ -2049,7 +2202,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇫🇷 法国_50
     type: vmess
     server: 2001:bc8:32d7:302::10
@@ -2070,7 +2223,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇰🇷 韩国_5
     type: vless
     server: 222.114.198.232
@@ -2081,7 +2234,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇫🇷 法国_51
     type: vmess
     server: 2001:bc8:32d7:302::17
@@ -2093,9 +2246,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
-      headers:
-        Host: AZERB.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
+    headers:
+    Host: AZERB.NET
   - name: 🇫🇷 法国_52
     type: vmess
     server: 2001:bc8:32d7:302::15
@@ -2107,9 +2260,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
-      headers:
-        Host: TURK.NET
+    path: /?BIA_TELEGRAM@AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1_AZARBAYJAB1
+    headers:
+    Host: TURK.NET
   - name: "180"
     type: vless
     server: 162.159.36.20
@@ -2119,7 +2272,7 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇷 韩国_6
     type: vless
     server: 220.127.122.167
@@ -2130,7 +2283,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: 🇮🇳 印度
     type: vless
     server: 144.24.126.26
@@ -2140,7 +2293,7 @@ proxies:
     servername: g.sandesh.qzz.io
     tls: true
     ws-opts:
-      path: /vless
+    path: /vless
   - name: 🇮🇳 印度_1
     type: vmess
     server: 152.67.8.205
@@ -2152,7 +2305,7 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /
+    path: /
   - name: 🇬🇧 英国_8
     type: vless
     server: 57.129.137.87
@@ -2162,7 +2315,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇵🇱 波兰
     type: vless
     server: 185.241.208.70
@@ -2171,7 +2324,7 @@ proxies:
     network: ws
     tls: false
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇷 韩国_7
     type: vmess
     server: chuncheon03.zgjok.com
@@ -2183,9 +2336,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /
-      headers:
-        Host: chuncheon03.zgjok.com
+    path: /
+    headers:
+    Host: chuncheon03.zgjok.com
   - name: "187"
     type: trojan
     server: 8.6.112.0
@@ -2195,9 +2348,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.multiplydose.com
+    path: /assignment
+    headers:
+    Host: www.multiplydose.com
   - name: "188"
     type: trojan
     server: www.calmlunch.com
@@ -2207,9 +2360,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.calmlunch.com
+    path: /assignment
+    headers:
+    Host: www.calmlunch.com
   - name: "189"
     type: trojan
     server: 8.6.112.6
@@ -2219,9 +2372,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.creationlong.org
+    path: /assignment
+    headers:
+    Host: www.creationlong.org
   - name: "190"
     type: trojan
     server: www.gossipglove.com
@@ -2230,7 +2383,7 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
+    path: /assignment
   - name: "191"
     type: trojan
     server: 172.64.152.23
@@ -2240,9 +2393,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.creationlong.org
+    path: /assignment
+    headers:
+    Host: www.creationlong.org
   - name: "192"
     type: trojan
     server: 104.18.32.47
@@ -2252,9 +2405,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: "193"
     type: trojan
     server: www.multiplydose.com
@@ -2264,9 +2417,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: //assignment
-      headers:
-        Host: www.multiplydose.com
+    path: //assignment
+    headers:
+    Host: www.multiplydose.com
   - name: "194"
     type: trojan
     server: 188.114.99.0
@@ -2276,9 +2429,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: "195"
     type: trojan
     server: 104.21.40.34
@@ -2288,9 +2441,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: 🇨🇭 瑞士
     type: trojan
     server: 185.18.250.252
@@ -2300,9 +2453,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: "197"
     type: trojan
     server: 104.18.13.149
@@ -2312,9 +2465,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.ignitelimit.com
+    path: /assignment
+    headers:
+    Host: www.ignitelimit.com
   - name: "198"
     type: trojan
     server: 172.64.149.54
@@ -2324,9 +2477,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: 🇳🇱 荷兰_10
     type: vless
     server: nl-90w-c.southnetworks.cloud
@@ -2335,7 +2488,7 @@ proxies:
     network: ws
     tls: false
     ws-opts:
-      path: /getWorkerUpdates
+    path: /getWorkerUpdates
   - name: "200"
     type: trojan
     server: 162.159.17.189
@@ -2345,9 +2498,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.multiplydose.com
+    path: /assignment
+    headers:
+    Host: www.multiplydose.com
   - name: "201"
     type: trojan
     server: 172.64.147.24
@@ -2357,9 +2510,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: 🇺🇸 美国_23
     type: vmess
     server: 209.126.84.189
@@ -2371,9 +2524,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /vmessws
-      headers:
-        Host: v2ray.codefyinc.com
+    path: /vmessws
+    headers:
+    Host: v2ray.codefyinc.com
   - name: "203"
     type: trojan
     server: 104.18.11.110
@@ -2383,7 +2536,7 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
+    path: /assignment
   - name: 🇭🇰 香港_3
     type: vless
     server: 103.224.172.99
@@ -2394,7 +2547,7 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /danfeng
+    path: /danfeng
   - name: "205"
     type: trojan
     server: v3.dabache.top
@@ -2404,9 +2557,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.gossipglove.com
+    path: /assignment
+    headers:
+    Host: www.gossipglove.com
   - name: "206"
     type: trojan
     server: 188.114.96.3
@@ -2416,9 +2569,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.creationlong.org
+    path: /assignment
+    headers:
+    Host: www.creationlong.org
   - name: "207"
     type: trojan
     server: 188.114.98.0
@@ -2428,9 +2581,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.calmlunch.com
+    path: /assignment
+    headers:
+    Host: www.calmlunch.com
   - name: "208"
     type: vless
     server: 104.18.16.56
@@ -2440,7 +2593,7 @@ proxies:
     servername: aref.tsabad.com
     tls: false
     ws-opts:
-      path: /
+    path: /
   - name: "209"
     type: trojan
     server: v1.dabache.top
@@ -2450,9 +2603,9 @@ proxies:
     skip-cert-verify: false
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.multiplydose.com
+    path: /assignment
+    headers:
+    Host: www.multiplydose.com
   - name: 🇺🇸 美国_24
     type: vmess
     server: v2ray.codefyinc.com
@@ -2464,9 +2617,9 @@ proxies:
     skip-cert-verify: false
     network: ws
     ws-opts:
-      path: /vmessws
-      headers:
-        Host: v2ray.codefyinc.com
+    path: /vmessws
+    headers:
+    Host: v2ray.codefyinc.com
   - name: 🇺🇸 美国_25
     type: trojan
     server: 208.103.161.110
@@ -2476,9 +2629,9 @@ proxies:
     skip-cert-verify: true
     tls: true
     ws-opts:
-      path: /assignment
-      headers:
-        Host: www.creationlong.org
+    path: /assignment
+    headers:
+    Host: www.creationlong.org
   - name: 🇨🇾 塞浦路斯
     type: vless
     server: 45.15.178.124
@@ -2488,7 +2641,7 @@ proxies:
     servername: pq-bosniaandherzegovina1.09vpn.com
     tls: false
     ws-opts:
-      path: /vless/
+    path: /vless/
   - name: 🇸🇪 瑞典_1
     type: vless
     server: 109.120.132.6
@@ -2498,7 +2651,7 @@ proxies:
     servername: sni.111000.v6.navy
     tls: true
     ws-opts:
-      path: /
+    path: /
   - name: 🇰🇿 哈萨克斯坦
     type: vless
     server: 104.238.24.247
@@ -2509,9 +2662,9 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
-      headers:
-        Host: 3-7v4.pages.dev
+    path: /
+    headers:
+    Host: 3-7v4.pages.dev
   - name: 🇹🇼 台湾_5
     type: vless
     server: 125.227.233.197
@@ -2522,9 +2675,9 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
-      headers:
-        Host: gsgsdgreyrehjsrteargsfhtrhsrwrhtruiekghmg.pages.dev
+    path: /
+    headers:
+    Host: gsgsdgreyrehjsrteargsfhtrhsrwrhtruiekghmg.pages.dev
   - name: "216"
     type: vless
     server: 162.159.45.28
@@ -2534,9 +2687,9 @@ proxies:
     servername: snippet.fgfw.loc.cc
     tls: true
     ws-opts:
-      path: /danfeng?ed=2560
-      headers:
-        Host: snippet.fgfw.loc.cc
+    path: /danfeng?ed=2560
+    headers:
+    Host: snippet.fgfw.loc.cc
   - name: 🇳🇱 荷兰_11
     type: vless
     server: 193.233.16.39
@@ -2547,9 +2700,9 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
-      headers:
-        Host: 1-brc.pages.dev
+    path: /
+    headers:
+    Host: 1-brc.pages.dev
   - name: 🇫🇷 法国_53
     type: vless
     server: 77.221.152.21
@@ -2560,9 +2713,9 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
-      headers:
-        Host: sni.111000.v6.navy
+    path: /
+    headers:
+    Host: sni.111000.v6.navy
   - name: "219"
     type: vless
     server: 162.159.36.20
@@ -2572,9 +2725,9 @@ proxies:
     servername: sni.111000.dynv6.net
     tls: true
     ws-opts:
-      path: /?proxyip=ip.111000.de5.net:443
-      headers:
-        Host: sni.111000.dynv6.net
+    path: /?proxyip=ip.111000.de5.net:443
+    headers:
+    Host: sni.111000.dynv6.net
   - name: 🇭🇰 香港_4
     type: vless
     server: 8.218.118.182
@@ -2585,9 +2738,9 @@ proxies:
     tls: true
     client-fingerprint: chrome
     ws-opts:
-      path: /
-      headers:
-        Host: sn1.skylee5.cloudns.ch
+    path: /
+    headers:
+    Host: sn1.skylee5.cloudns.ch
   - name: 🇭🇰 香港_5
     type: vmess
     server: n1753356378.4u9ma.icu
@@ -2600,9 +2753,9 @@ proxies:
     servername: n1753356378.4u9ma.icu
     network: ws
     ws-opts:
-      path: /
-      headers:
-        Host: n1753356378.4u9ma.icu
+    path: /
+    headers:
+    Host: n1753356378.4u9ma.icu
   - ♻️ 自动选择
   - DIRECT
   - 每天更新，请加电报群防止失联
@@ -2976,7 +3129,7 @@ proxies:
   - "146"
   - 🇫🇷 法国_42
   - 🇭🇰 香港_1
-  - ����🇪 德国_9
+  - 🇩🇪 德国_9
   - 🇫🇷 法国_43
   - 🇹🇼 台湾_4
   - 🇫🇷 法国_44
@@ -3687,7 +3840,7 @@ proxies:
   - 🇫🇷 法国_51
   - 🇫🇷 法国_52
   - "180"
-  - ��🇷 韩国_6
+  - 🇰🇷 韩国_6
   - 🇮🇳 印度
   - 🇮🇳 印度_1
   - 🇬🇧 英国_8
@@ -4377,8 +4530,8 @@ proxies:
     client-fingerprint: ios
     servername: iosapps.itunes.apple.com
     reality-opts:
-      public-key: qkP2pqQ3NHNBkyzqsC2W9wChp3OfeXdVjOhUv8vQW0o
-      short-id: aac4df9d05a5ba8f
+    public-key: qkP2pqQ3NHNBkyzqsC2W9wChp3OfeXdVjOhUv8vQW0o
+    short-id: aac4df9d05a5ba8f
     alterId: 0
     cipher: ""
     sni: iosapps.itunes.apple.com
@@ -4395,9 +4548,9 @@ proxies:
     servername: d2-us1.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/us1
-      headers:
-        Host: d2-us1.djwstlsweb.top
+    path: /djjc/us1
+    headers:
+    Host: d2-us1.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-us1.djwstlsweb.top
@@ -4414,9 +4567,9 @@ proxies:
     servername: d2-us3.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/us3
-      headers:
-        Host: d2-us3.djwstlsweb.top
+    path: /djjc/us3
+    headers:
+    Host: d2-us3.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-us3.djwstlsweb.top
@@ -4433,9 +4586,9 @@ proxies:
     servername: d2-us4.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/us4
-      headers:
-        Host: d2-us4.djwstlsweb.top
+    path: /djjc/us4
+    headers:
+    Host: d2-us4.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-us4.djwstlsweb.top
@@ -4452,9 +4605,9 @@ proxies:
     servername: d2-jp1.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/jp1
-      headers:
-        Host: d2-jp1.djwstlsweb.top
+    path: /djjc/jp1
+    headers:
+    Host: d2-jp1.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-jp1.djwstlsweb.top
@@ -4471,9 +4624,9 @@ proxies:
     servername: d2-jp2.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/jp2
-      headers:
-        Host: d2-jp2.djwstlsweb.top
+    path: /djjc/jp2
+    headers:
+    Host: d2-jp2.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-jp2.djwstlsweb.top
@@ -4490,9 +4643,9 @@ proxies:
     servername: d2-jp2.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/jp2
-      headers:
-        Host: d2-jp2.djwstlsweb.top
+    path: /djjc/jp2
+    headers:
+    Host: d2-jp2.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-jp2.djwstlsweb.top
@@ -4509,9 +4662,9 @@ proxies:
     servername: d2-jp2.djwstlsweb.top
     network: ws
     ws-opts:
-      path: /djjc/jp2
-      headers:
-        Host: d2-jp2.djwstlsweb.top
+    path: /djjc/jp2
+    headers:
+    Host: d2-jp2.djwstlsweb.top
     alterId: 0
     cipher: ""
     sni: d2-jp2.djwstlsweb.top
@@ -4631,19 +4784,108 @@ proxies:
   - 不限速不限设备不限地区
   - 新疆西藏福建可用
   - name: A
+    server: hk2.mutoujs.top
+    port: 20000
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: QqvCBoJpDEflbOYm
   - name: B
+    server: hk2.mutoujs.top
+    port: 20000
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: QqvCBoJpDEflbOYm
   - name: C
+    server: speedhk1.jiasujd.top
+    port: 24955
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: Ey8WkRLz34SadllK
   - name: D
+    server: speedhk1.jiasujd.top
+    port: 24955
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: Ey8WkRLz34SadllK
   - name: E
+    server: speedhk1.jiasujd.top
+    port: 24140
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: 4fGB35PQ2BODBA08
   - name: F
+    server: speedhkt1.jiasujd.top
+    port: 24960
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: TrpFAMHMJYi7Tbt0
   - name: G
+    server: speedhkt1.jiasujd.top
+    port: 24160
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: 9PpXFrMtphwxHFee
   - name: H
+    server: dsaugspeed-dh.jiasujd.top
+    port: 20011
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: IbQQe9VBf3vnq46v
   - name: I
+    server: dsaugspeed-dh.jiasujd.top
+    port: 20111
+    type: hysteria2
+    password: 2be51282-389c-472f-9cbd-844dedf885d6
+    auth: 2be51282-389c-472f-9cbd-844dedf885d6
+    skip-cert-verify: false
+    obfs: salamander
+    obfs-password: 7VLRnZkPl9S6hv8P
   - name: J
+    server: 78a6a0b1-t75z40-ta5i1s-1j61y.hk2.hyhuawei.com
+    port: 443
+    type: hysteria2
+    password: f13f964e-f06c-11ec-a858-f23c91cfbbc9
+    auth: f13f964e-f06c-11ec-a858-f23c91cfbbc9
+    sni: 78a6a0b1-t75z40-ta5i1s-1j61y.hk2.hyhuawei.com
+    skip-cert-verify: false
   - name: K
+    server: cf.877774.xyz
+    port: 443
+    type: vless
+    uuid: c9912c7f-e3f5-465d-8e10-4d528484fed3
+    tls: true
+    tfo: false
+    skip-cert-verify: false
+    servername: yf.xhya.nyc.mn
+    network: ws
+    ws-opts:
     path: /
     headers:
-      Host: yf.xhya.nyc.mn
+    Host: yf.xhya.nyc.mn
   - A
   - B
   - C
@@ -4665,9 +4907,9 @@ proxies:
     servername: rayan-10.parastoo.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /@Rayan_Config
-      headers:
-        host: rayan-10.parastoo.dpdns.org
+    path: /@Rayan_Config
+    headers:
+    host: rayan-10.parastoo.dpdns.org
     uuid: 4e4768df-0fbb-4cc1-8fd3-7c6fea95742a
     client-fingerprint: chrome
   - name: https://t.me/xyfqzy ⚡_2
@@ -4680,7 +4922,7 @@ proxies:
     password: Aimer
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560&proxyip=ts.hpc.tw
+    path: /?ed=2560&proxyip=ts.hpc.tw
     alpn:
   - h3
     client-fingerprint: randomized
@@ -4694,9 +4936,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2560
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2560
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
     client-fingerprint: chrome
   - name: https://t.me/xyfqzy ⚡_4
@@ -4709,9 +4951,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2560
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2560
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
     client-fingerprint: chrome
   - name: https://t.me/xyfqzy ⚡_5
@@ -4722,9 +4964,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: https://t.me/xyfqzy ⚡_6
     port: 8880
@@ -4735,9 +4977,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: https://t.me/xyfqzy ⚡_7
     port: 8880
@@ -4748,9 +4990,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: https://t.me/xyfqzy ⚡_8
     port: 8880
@@ -4760,9 +5002,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: sk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: sk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: https://t.me/xyfqzy ⚡_9
     port: 8880
@@ -4773,9 +5015,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram��🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram��🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: https://t.me/xyfqzy ⚡_10
     port: 8880
@@ -4785,9 +5027,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: tw.laoyoutiao.link
+    path: /
+    headers:
+    host: tw.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: https://t.me/xyfqzy ⚡_11
     port: 443
@@ -4799,7 +5041,7 @@ proxies:
     password: Aimer
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560&proxyip=ts.hpc.tw
+    path: /?ed=2560&proxyip=ts.hpc.tw
     alpn:
   - h3
     client-fingerprint: randomized
@@ -4812,9 +5054,9 @@ proxies:
     servername: us.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳@WangCai2/?ed
-      headers:
-        host: us.laoyoutiao.link
+    path: /Telegram🇨🇳@WangCai2/?ed
+    headers:
+    host: us.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: https://t.me/xyfqzy ⚡_13
     port: 8443
@@ -4825,7 +5067,7 @@ proxies:
     servername: www.apple.com.cn
     skip-cert-verify: true
     reality-opts:
-      public-key: 1jupCbzD9RB34YhWct4C6_I1bx_O5Ct7ZnT5dfCiV18
+    public-key: 1jupCbzD9RB34YhWct4C6_I1bx_O5Ct7ZnT5dfCiV18
     uuid: d1bcd5ee-7bdb-4de9-9aa7-48f54a97390d
     flow: xtls-rprx-vision
     client-fingerprint: chrome
@@ -4838,9 +5080,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+    headers:
+    host: bitget1.asdasd.click
     uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
   - name: 🇺🇸US_13 | ⬇️ 1.2MB/s
     port: 8880
@@ -4850,9 +5092,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: 🇸🇬SG_3 | ⬇️ 1.2MB/s
     port: 8880
@@ -4862,9 +5104,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2048
-      headers:
-        host: sg.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2048
+    headers:
+    host: sg.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_76 | ⬇️ 2.8MB/s
     port: 8880
@@ -4874,9 +5116,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@V2ray_Alpha/?ed=2560
-      headers:
-        host: www.speedtest.net.zula.ir.cfp1.a2hdhjdxjbxjsjdjd.ddns-ip.nEt.
+    path: /Telegram@V2ray_Alpha/?ed=2560
+    headers:
+    host: www.speedtest.net.zula.ir.cfp1.a2hdhjdxjbxjsjdjd.ddns-ip.nEt.
     uuid: 6ec52bc7-fcd7-4841-ab69-70d6e03a6eda
   - name: ❓Other_14 | ⬇️ 1.0MB/s
     port: 8880
@@ -4887,9 +5129,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_64 | ⬇️ 1.2MB/s
     port: 8880
@@ -4900,9 +5142,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560fp=chrome
-      headers:
-        host: jp.laoyoutiao.link
+    path: /?ed=2560fp=chrome
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇫🇮FI_9 | ⬇️ 1.6MB/s
     port: 443
@@ -4914,9 +5156,9 @@ proxies:
     servername: GgGgr.PaGES.dEV
     skip-cert-verify: true
     ws-opts:
-      path: /gLHWGBXwDuMKHx2C?ed=2560
-      headers:
-        host: ggggr.pages.dev
+    path: /gLHWGBXwDuMKHx2C?ed=2560
+    headers:
+    host: ggggr.pages.dev
     alpn:
   - h2,http/1.1
     uuid: 9368b093-d790-4096-9d8a-1265e82f9e2f
@@ -4930,9 +5172,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇺🇸US_47 | ⬇️ 1.2MB/s
     port: 8880
@@ -4943,9 +5185,9 @@ proxies:
     servername: sk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: sk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: sk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_63 | ⬇️ 1.9MB/s
     port: 8880
@@ -4956,9 +5198,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_59 | ⬇️ 1.5MB/s
     port: 8880
@@ -4968,9 +5210,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_11 | ⬇️ 2.9MB/s
     port: 8880
@@ -4981,9 +5223,9 @@ proxies:
     servername: us.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3 @MxlShare @WangCai2 /?ed=2560
-      headers:
-        host: us.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @MxlShare @WangCai2 /?ed=2560
+    headers:
+    host: us.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_29 | ⬇️ 1.4MB/s
     port: 8880
@@ -4994,9 +5236,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram
-      headers:
-        host: cf.d3z.net
+    path: /Telegram
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: ❓Other_28 | ⬇️ 1.1MB/s
     port: 8880
@@ -5007,9 +5249,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_37 | ⬇️ 1.6MB/s
     port: 8880
@@ -5020,9 +5262,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: ❓Other_44 | ⬇️ 1.6MB/s
     port: 8880
@@ -5033,9 +5275,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: 🇺🇸US_45 | ⬇️ 1.3MB/s
     port: 8880
@@ -5045,9 +5287,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: 🇺🇸US_50 | ⬇️ 1.2MB/s
     port: 8880
@@ -5057,9 +5299,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560fp=chrome
-      headers:
-        host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560fp=chrome
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: 🇭🇰HK_11 | ⬇️ 1.2MB/s
     port: 8880
@@ -5069,9 +5311,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: hk.laoyoutiao.link
+    path: /
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_75 | ⬇️ 2.1MB/s
     port: 8880
@@ -5082,9 +5324,9 @@ proxies:
     servername: us.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: us.laoyoutiao.link
+    path: /Telegram🇨🇳
+    headers:
+    host: us.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_67 | ⬇️ 3.3MB/s
     port: 443
@@ -5096,9 +5338,9 @@ proxies:
     servername: vipren.biz.id
     skip-cert-verify: true
     ws-opts:
-      path: /Neoxide-X/121.169.228.177-17050
-      headers:
-        host: vipren.biz.id
+    path: /Neoxide-X/121.169.228.177-17050
+    headers:
+    host: vipren.biz.id
     uuid: bbbbbbbb-cccc-4ddd-eeee-ffffffffffff
     client-fingerprint: chrome
   - name: 🇰🇷KR_13 | ⬇️ 1.2MB/s
@@ -5110,9 +5352,9 @@ proxies:
     servername: ip.langmanshanxi.top
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_12 | ⬇️ 1.1MB/s
     port: 8880
@@ -5123,9 +5365,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_17 | ⬇️ 1.7MB/s
     port: 8880
@@ -5136,9 +5378,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇨🇦CA_1 | ⬇️ 1.8MB/s
     port: 2083
@@ -5150,9 +5392,9 @@ proxies:
     servername: e.exedu.ip-ddns.com
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@V2ray_Alpha/?ed=2048
-      headers:
-        host: e.exedu.ip-ddns.com
+    path: /Telegram@V2ray_Alpha/?ed=2048
+    headers:
+    host: e.exedu.ip-ddns.com
     uuid: 8f320d6a-9953-4065-b61c-d62f89a6767f
     client-fingerprint: chrome
   - name: 🇯🇵JP_3 | ⬇️ 1.3MB/s
@@ -5164,9 +5406,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_26 | ⬇️ 1.4MB/s
     port: 8880
@@ -5176,9 +5418,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_34 | ⬇️ 2.3MB/s
     port: 8880
@@ -5189,9 +5431,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_36 | ⬇️ 1.1MB/s
     port: 8880
@@ -5202,9 +5444,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_42 | ⬇️ 2.5MB/s
     port: 8880
@@ -5215,9 +5457,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_49 | ⬇️ 1.2MB/s
     port: 8880
@@ -5228,9 +5470,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇩🇪DE_12 | ⬇️ 1.2MB/s
     port: 16704
@@ -5253,9 +5495,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳@WangCai2/?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳@WangCai2/?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇰🇷KR_7 | ⬇️ 1.2MB/s
     port: 8880
@@ -5266,9 +5508,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_79 | ⬇️ 1.2MB/s
     port: 8880
@@ -5278,9 +5520,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_44 | ⬇️ 1.7MB/s
     port: 8880
@@ -5291,9 +5533,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+    headers:
+    host: bitget1.asdasd.click
     uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
   - name: ❓Other_53 | ⬇️ 2.0MB/s
     port: 8880
@@ -5304,9 +5546,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_65 | ⬇️ 1.4MB/s
     port: 8880
@@ -5316,9 +5558,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇭🇰HK_10 | ⬇️ 1.7MB/s
     port: 8880
@@ -5329,9 +5571,9 @@ proxies:
     servername: hk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: hk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_82 | ⬇️ 1.0MB/s
     port: 8443
@@ -5343,9 +5585,9 @@ proxies:
     servername: gGHDFa.pAgeS.Dev
     skip-cert-verify: true
     ws-opts:
-      path: /Tel-@V2ray_Alpha/?ed=2560
-      headers:
-        host: gghdfa.pages.dev
+    path: /Tel-@V2ray_Alpha/?ed=2560
+    headers:
+    host: gghdfa.pages.dev
     uuid: a396b860-11b7-4af3-9950-146caf79735e
     client-fingerprint: randomized
   - name: 🇺🇸US_61 | ⬇️ 2.2MB/s
@@ -5357,9 +5599,9 @@ proxies:
     servername: sk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3?ed=2048
-      headers:
-        host: sk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3?ed=2048
+    headers:
+    host: sk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_3 | ⬇️ 3.6MB/s
     port: 443
@@ -5371,7 +5613,7 @@ proxies:
     password: tg-fq521free
     skip-cert-verify: false
     ws-opts:
-      path: /
+    path: /
     client-fingerprint: chrome
   - name: ❓Other_9 | ⬇️ 2.3MB/s
     port: 2083
@@ -5383,9 +5625,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: ex.sue.x10.mx
+    path: /?ed=2560
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
     client-fingerprint: chrome
   - name: 🇰🇷KR_5 | ⬇️ 1.9MB/s
@@ -5398,9 +5640,9 @@ proxies:
     servername: nEwMTPROxI.PAGes.DEv
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: nEwMTPROxI.PAGes.DEv
+    path: /
+    headers:
+    host: nEwMTPROxI.PAGes.DEv
     uuid: 2cec2733-389a-46a7-9053-218594a6336d
     client-fingerprint: chrome
   - name: 🇺🇸US_43 | ⬇️ 2.3MB/s
@@ -5411,9 +5653,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: yg.bantony199.top
+    path: /Telegram🇨🇳
+    headers:
+    host: yg.bantony199.top
     uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
   - name: ❓Other_57 | ⬇️ 1.7MB/s
     port: 8880
@@ -5424,9 +5666,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇩🇪DE_6 | ⬇️ 1.1MB/s
     port: 443
@@ -5438,9 +5680,9 @@ proxies:
     servername: faruzan.changli.ddns-ip.net
     skip-cert-verify: true
     ws-opts:
-      path: /proxyip=navia.shorekeeper.ir
-      headers:
-        host: faruzan.changli.ddns-ip.net
+    path: /proxyip=navia.shorekeeper.ir
+    headers:
+    host: faruzan.changli.ddns-ip.net
     alpn:
   - http/1.1
     uuid: a739ad80-0aab-40b2-9b0e-8192c74287ef
@@ -5454,9 +5696,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇸🇬SG_10 | ⬇️ 1.8MB/s
     port: 8880
@@ -5467,9 +5709,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2048
-      headers:
-        host: sg.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2048
+    headers:
+    host: sg.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_80 | ⬇️ 2.3MB/s
     port: 8880
@@ -5479,9 +5721,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+    headers:
+    host: bitget1.asdasd.click
     uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
   - name: ❓Other_39 | ⬇️ 1.1MB/s
     port: 8880
@@ -5492,9 +5734,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_54 | ⬇️ 1.7MB/s
     port: 8880
@@ -5505,9 +5747,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇭🇰HK_5 | ⬇️ 1.1MB/s
     port: 8880
@@ -5518,9 +5760,9 @@ proxies:
     servername: hk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: hk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇰🇷KR_9 | ⬇️ 1.2MB/s
     port: 8880
@@ -5531,9 +5773,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇺🇸US_60 | ⬇️ 1.8MB/s
     port: 443
@@ -5545,9 +5787,9 @@ proxies:
     servername: barayeiranmahsang.ghormehsabzi.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /@warp_city
-      headers:
-        host: barayeiranmahsang.ghormehsabzi.dpdns.org
+    path: /@warp_city
+    headers:
+    host: barayeiranmahsang.ghormehsabzi.dpdns.org
     uuid: e6236ebc-7334-4bed-977f-0c20bcdfcc00
     client-fingerprint: chrome
   - name: 🇺🇸US_74 | ⬇️ 3.0MB/s
@@ -5558,9 +5800,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @MxlShare @WangCai2 /
-      headers:
-        host: sk.laoyoutiao.link
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /
+    headers:
+    host: sk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇮🇪IE_1 | ⬇️ 1.3MB/s
     port: 443
@@ -5572,9 +5814,9 @@ proxies:
     servername: faruzan.changli.ddns-ip.net
     skip-cert-verify: true
     ws-opts:
-      path: /proxyip=navia.shorekeeper.ir
-      headers:
-        host: faruzan.changli.ddns-ip.net
+    path: /proxyip=navia.shorekeeper.ir
+    headers:
+    host: faruzan.changli.ddns-ip.net
     alpn:
   - http/1.1
     uuid: a739ad80-0aab-40b2-9b0e-8192c74287ef
@@ -5587,9 +5829,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_8 | ⬇️ 1.6MB/s
     port: 8880
@@ -5599,9 +5841,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳@WangCai2/?ed=2048
-      headers:
-        host: tw.laoyoutiao.link
+    path: /Telegram🇨🇳@WangCai2/?ed=2048
+    headers:
+    host: tw.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇫🇷FR_1 | ⬇️ 1.2MB/s
     port: 56817
@@ -5613,7 +5855,7 @@ proxies:
     servername: amir021.amir021.tech
     skip-cert-verify: true
     ws-opts:
-      path: /@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-?ed=2560
+    path: /@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-@vpn_Zvpn-?ed=2560
     alpn:
   - h3,h2,http/1.1
     uuid: 7b601ebe-d8ac-470a-b745-1bca7d89ee14
@@ -5628,9 +5870,9 @@ proxies:
     servername: aboringdad.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: aboringdad.dpdns.org
+    path: /?ed=2560
+    headers:
+    host: aboringdad.dpdns.org
     uuid: 601e7e24-0697-4fed-9715-f3336ad5094c
     client-fingerprint: chrome
   - name: 🇩🇪DE_4 | ⬇️ 2.2MB/s
@@ -5643,9 +5885,9 @@ proxies:
     servername: vNgSUppLy.IP-dDnS.COm
     skip-cert-verify: true
     ws-opts:
-      path: /eJ5JZ3A1HxfU0bPO?ed=2560/?JOKERRVPN_BIA_CHANEL@JOKERRVPN
-      headers:
-        host: vngsupply.ip-ddns.com
+    path: /eJ5JZ3A1HxfU0bPO?ed=2560/?JOKERRVPN_BIA_CHANEL@JOKERRVPN
+    headers:
+    host: vngsupply.ip-ddns.com
     alpn:
   - http/1.1
     uuid: e9979910-79d1-4621-a93c-b2a579c44ba7
@@ -5658,9 +5900,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-      headers:
-        host: hk.laoyoutiao.link
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇵🇭PH_3 | ⬇️ 1.5MB/s
     port: 443
@@ -5672,9 +5914,9 @@ proxies:
     servername: ConFIgmr.PaGeS.dEV
     skip-cert-verify: true
     ws-opts:
-      path: /--JoiN--@FREEV2RNG--Bia--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG?ed=2560
-      headers:
-        host: configmr.pages.dev
+    path: /--JoiN--@FREEV2RNG--Bia--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG?ed=2560
+    headers:
+    host: configmr.pages.dev
     alpn:
   - h2,http/1.1
     uuid: 63005378-e32e-4e23-bc6e-84812f147a6f
@@ -5689,9 +5931,9 @@ proxies:
     servername: barayeiranmahsang.sabzipolobamahi.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /Join---@MTMVPN---Join---@MTMVPN---Join---@MTMVPN---Join---@MTMVPN?ed=2560
-      headers:
-        host: barayeiranmahsang.sabzipolobamahi.dpdns.org
+    path: /Join---@MTMVPN---Join---@MTMVPN---Join---@MTMVPN---Join---@MTMVPN?ed=2560
+    headers:
+    host: barayeiranmahsang.sabzipolobamahi.dpdns.org
     uuid: b55ec078-3b17-4ed1-a697-71f464cdcaaa
     client-fingerprint: chrome
   - name: 🇬🇧GB_3 | ⬇️ 2.3MB/s
@@ -5704,9 +5946,9 @@ proxies:
     servername: faruzan.changli.ddns-ip.net
     skip-cert-verify: true
     ws-opts:
-      path: /Tel-@V2ray_Alpha
-      headers:
-        host: faruzan.changli.ddns-ip.net
+    path: /Tel-@V2ray_Alpha
+    headers:
+    host: faruzan.changli.ddns-ip.net
     alpn:
   - http/1.1
     uuid: a739ad80-0aab-40b2-9b0e-8192c74287ef
@@ -5720,9 +5962,9 @@ proxies:
     servername: us.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: us.laoyoutiao.link
+    path: /
+    headers:
+    host: us.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_77 | ⬇️ 1.1MB/s
     port: 8880
@@ -5732,9 +5974,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇩🇪DE_1 | ⬇️ 1.4MB/s
     port: 443
@@ -5746,7 +5988,7 @@ proxies:
     password: Aimer
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560&proxyip=ts.hpc.tw
+    path: /?ed=2560&proxyip=ts.hpc.tw
     alpn:
   - h3
     client-fingerprint: randomized
@@ -5758,9 +6000,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_22 | ⬇️ 1.6MB/s
     port: 8880
@@ -5771,9 +6013,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇰🇷KR_11 | ⬇️ 3.7MB/s
     port: 443
@@ -5785,9 +6027,9 @@ proxies:
     servername: nuclear.us.kg
     skip-cert-verify: true
     ws-opts:
-      path: /free/1.226.227.169:50001
-      headers:
-        host: nuclear.us.kg
+    path: /free/1.226.227.169:50001
+    headers:
+    host: nuclear.us.kg
     uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
     client-fingerprint: chrome
   - name: 🇺🇸US_34 | ⬇️ 1.3MB/s
@@ -5800,9 +6042,9 @@ proxies:
     servername: nuclear.us.kg
     skip-cert-verify: true
     ws-opts:
-      path: /free/103.101.153.32:443
-      headers:
-        host: nuclear.us.kg
+    path: /free/103.101.153.32:443
+    headers:
+    host: nuclear.us.kg
     uuid: 2bcfbfba-b446-4ad5-93ad-72af9e008f61
     client-fingerprint: chrome
   - name: 🇩🇪DE_18 | ⬇️ 1.5MB/s
@@ -5815,8 +6057,8 @@ proxies:
     skip-cert-verify: true
     grpc-opts: {}
     reality-opts:
-      public-key: Wkuh9iexXuhWaaFt1saCWk8iGS0h1mEiMtDsmoJSgAk
-      short-id: "93"
+    public-key: Wkuh9iexXuhWaaFt1saCWk8iGS0h1mEiMtDsmoJSgAk
+    short-id: "93"
     uuid: c23c9151-c696-4e0a-8dc5-75edfcc4a271
     client-fingerprint: chrome
   - name: 🇯🇵JP_1 | ⬇️ 1.2MB/s
@@ -5827,9 +6069,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇸🇪SE_1 | ⬇️ 1.4MB/s
     port: 443
@@ -5841,9 +6083,9 @@ proxies:
     servername: carlotta.shoorekeeper.cloudns.org
     skip-cert-verify: true
     ws-opts:
-      path: /proxyip=zani.yaemiko.ggff.net
-      headers:
-        host: carlotta.shoorekeeper.cloudns.org
+    path: /proxyip=zani.yaemiko.ggff.net
+    headers:
+    host: carlotta.shoorekeeper.cloudns.org
     alpn:
   - http/1.1
     uuid: 30f2d443-af46-4dd6-83c9-b5e17299ebd2
@@ -5857,9 +6099,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /?ed=2560fp=chrome
-      headers:
-        host: jp.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /?ed=2560fp=chrome
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇸🇪SE_2 | ⬇️ 1.2MB/s
     port: 443
@@ -5871,9 +6113,9 @@ proxies:
     servername: carlotta.shoorekeeper.cloudns.org
     skip-cert-verify: true
     ws-opts:
-      path: /proxyip=zani.yaemiko.ggff.net
-      headers:
-        host: carlotta.shoorekeeper.cloudns.org
+    path: /proxyip=zani.yaemiko.ggff.net
+    headers:
+    host: carlotta.shoorekeeper.cloudns.org
     alpn:
   - http/1.1
     uuid: 30f2d443-af46-4dd6-83c9-b5e17299ebd2
@@ -5888,9 +6130,9 @@ proxies:
     servername: barayeiranmahsang.juveitaly.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: barayeiranmahsang.juveitaly.dpdns.org
+    path: /?ed=2560
+    headers:
+    host: barayeiranmahsang.juveitaly.dpdns.org
     uuid: dfdf1c0a-5e52-4746-88bd-19d4e4ac7853
     client-fingerprint: chrome
   - name: ❓Other_41 | ⬇️ 1.2MB/s
@@ -5902,9 +6144,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_36 | ⬇️ 1.1MB/s
     port: 443
@@ -5916,9 +6158,9 @@ proxies:
     servername: F1.paRsa.fiLegEar-Sg.Me
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: f1.parsa.filegear-sg.me
+    path: /?ed=2560
+    headers:
+    host: f1.parsa.filegear-sg.me
     uuid: 8df60790-c903-4661-b85d-64c0009378e5
     client-fingerprint: chrome
   - name: 🇫🇮FI_6 | ⬇️ 1.4MB/s
@@ -5931,9 +6173,9 @@ proxies:
     servername: XLZ767V2RAy.PAGES.dEv
     skip-cert-verify: true
     ws-opts:
-      path: /t3fgslbvys9sp8zt?ed=2560
-      headers:
-        host: XLZ767V2RAy.PAGES.dEv
+    path: /t3fgslbvys9sp8zt?ed=2560
+    headers:
+    host: XLZ767V2RAy.PAGES.dEv
     uuid: b9b8cf4c-29a3-4288-9c6c-8811dc37beec
     client-fingerprint: chrome
   - name: 🇺🇸US_81 | ⬇️ 1.3MB/s
@@ -5946,9 +6188,9 @@ proxies:
     servername: gGHDFa.pAgeS.Dev
     skip-cert-verify: true
     ws-opts:
-      path: /Tel-@V2ray_Alpha/?ed=2560
-      headers:
-        host: gghdfa.pages.dev
+    path: /Tel-@V2ray_Alpha/?ed=2560
+    headers:
+    host: gghdfa.pages.dev
     uuid: a396b860-11b7-4af3-9950-146caf79735e
     client-fingerprint: randomized
   - name: 🇵🇭PH_2 | ⬇️ 2.8MB/s
@@ -5961,9 +6203,9 @@ proxies:
     servername: ConFIgmr.PaGeS.dEV
     skip-cert-verify: true
     ws-opts:
-      path: /--JoiN--@FREEV2RNG--Bia--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG?ed=2560
-      headers:
-        host: configmr.pages.dev
+    path: /--JoiN--@FREEV2RNG--Bia--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG--@FREEV2RNG?ed=2560
+    headers:
+    host: configmr.pages.dev
     alpn:
   - h2,http/1.1
     uuid: 63005378-e32e-4e23-bc6e-84812f147a6f
@@ -5977,11 +6219,11 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram
-      headers:
-        host: yg.bantony199.top
+    path: /Telegram
+    headers:
+    host: yg.bantony199.top
     uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
-  - name: 🇩🇪DE_5 | ⬇��� 1.4MB/s
+  - name: 🇩🇪DE_5 | ⬇️ 1.4MB/s
     port: 2087
     server: 188.114.97.11
     type: vless
@@ -5991,9 +6233,9 @@ proxies:
     servername: Xlz767V2Ray.PAGEs.DEv
     skip-cert-verify: true
     ws-opts:
-      path: /bethzrzkz5ljs32v?ed=2560
-      headers:
-        host: Xlz767V2Ray.PAGEs.DEv
+    path: /bethzrzkz5ljs32v?ed=2560
+    headers:
+    host: Xlz767V2Ray.PAGEs.DEv
     uuid: b9b8cf4c-29a3-4288-9c6c-8811dc37beec
     client-fingerprint: chrome
   - name: 🇺🇸US_46 | ⬇️ 1.7MB/s
@@ -6004,9 +6246,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: cf.d3z.net
+    path: /
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: 🇺🇸US_21 | ⬇️ 1.9MB/s
     port: 443
@@ -6018,9 +6260,9 @@ proxies:
     servername: F1.paRsa.fiLegEar-Sg.Me
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: f1.parsa.filegear-sg.me
+    path: /?ed=2560
+    headers:
+    host: f1.parsa.filegear-sg.me
     uuid: 8df60790-c903-4661-b85d-64c0009378e5
     client-fingerprint: chrome
   - name: 🇺🇸US_32 | ⬇️ 1.5MB/s
@@ -6040,9 +6282,9 @@ proxies:
     servername: sg.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: sg.laoyoutiao.link
+    path: /
+    headers:
+    host: sg.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_72 | ⬇️ 1.8MB/s
     port: 8880
@@ -6053,9 +6295,9 @@ proxies:
     servername: sk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: sk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: sk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_35 | ⬇️ 1.0MB/s
     port: 8880
@@ -6066,9 +6308,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: ❓Other_62 | ⬇️ 1.4MB/s
     port: 8880
@@ -6079,9 +6321,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: 🇸🇬SG_8 | ⬇️ 2.7MB/s
     port: 443
@@ -6093,9 +6335,9 @@ proxies:
     servername: zoomgov.vipren.biz.id
     skip-cert-verify: true
     ws-opts:
-      path: /15.235.199.103=8443
-      headers:
-        host: zoomgov.vipren.biz.id
+    path: /15.235.199.103=8443
+    headers:
+    host: zoomgov.vipren.biz.id
     uuid: f9eae0f4-9b13-467d-ac46-a0f86ea21cf2
     client-fingerprint: chrome
   - name: 🇺🇸US_41 | ⬇️ 1.2MB/s
@@ -6108,9 +6350,9 @@ proxies:
     servername: jack.jack-cq.click
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: jack.jack-cq.click
+    path: /?ed=2560
+    headers:
+    host: jack.jack-cq.click
     uuid: 72982133-27fb-46fc-9061-61113e77e201
     client-fingerprint: random
   - name: 🇫🇮FI_3 | ⬇️ 2.0MB/s
@@ -6121,9 +6363,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: dl1-fi-cdn.easy-upload.org
+    path: /
+    headers:
+    host: dl1-fi-cdn.easy-upload.org
     uuid: ee2bb495-2632-445b-b1f8-3c476a50b78b
   - name: 🇺🇸US_51 | ⬇️ 1.2MB/s
     port: 8880
@@ -6134,9 +6376,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+    headers:
+    host: bitget1.asdasd.click
     uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
   - name: 🇺🇸US_42 | ⬇️ 1.5MB/s
     port: 8880
@@ -6147,9 +6389,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+    headers:
+    host: bitget1.asdasd.click
     uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
   - name: ❓Other_46 | ⬇️ 2.0MB/s
     port: 8880
@@ -6160,9 +6402,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨����
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: 🇸🇬SG_7 | ⬇️ 1.4MB/s
     port: 443
@@ -6174,9 +6416,9 @@ proxies:
     servername: aio.xtradata.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /aioproxybot/129.150.49.58-18650
-      headers:
-        host: aio.xtradata.dpdns.org
+    path: /aioproxybot/129.150.49.58-18650
+    headers:
+    host: aio.xtradata.dpdns.org
     uuid: f282b878-8711-45a1-8c69-5564172123c1
     client-fingerprint: chrome
   - name: 🇨🇦CA_2 | ⬇️ 1.5MB/s
@@ -6188,8 +6430,8 @@ proxies:
     servername: www.yahoo.com
     skip-cert-verify: true
     reality-opts:
-      public-key: LiHpb4jWrgHBSpi1mjKH3I8m2ahpVNexeNDh-sMW3Xo
-      short-id: f430927d
+    public-key: LiHpb4jWrgHBSpi1mjKH3I8m2ahpVNexeNDh-sMW3Xo
+    short-id: f430927d
     uuid: 2429bee3-e0c1-47dd-b420-75e6512b184b
     flow: xtls-rprx-vision
     client-fingerprint: chrome
@@ -6203,9 +6445,9 @@ proxies:
     servername: loscdn.bm04.xyz
     skip-cert-verify: true
     ws-opts:
-      path: /workspace/stream/
-      headers:
-        host: loscdn.bm04.xyz
+    path: /workspace/stream/
+    headers:
+    host: loscdn.bm04.xyz
     alpn:
   - h3,h2,http/1.1
     uuid: 94cf288d-f764-4ce9-a547-a7228144f056
@@ -6219,9 +6461,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: 🇺🇸US_5 | ⬇️ 3.0MB/s
     port: 443
@@ -6233,7 +6475,7 @@ proxies:
     password: f69b7304-9bea-4740-a555-797514012a53
     skip-cert-verify: false
     ws-opts:
-      path: /MxtuuhyCwC29auSeckWI9
+    path: /MxtuuhyCwC29auSeckWI9
     alpn:
   - http/1.1
     client-fingerprint: chrome
@@ -6246,9 +6488,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇺🇸US_3 | ⬇️ 1.8MB/s
     port: 443
@@ -6260,7 +6502,7 @@ proxies:
     password: fa050497-fc2a-45ee-89c0-96670c4ecb65
     skip-cert-verify: false
     ws-opts:
-      path: /DZxb5QZyWgQPuXTwt
+    path: /DZxb5QZyWgQPuXTwt
     alpn:
   - http/1.1
     client-fingerprint: chrome
@@ -6273,9 +6515,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_84 | ⬇️ 1.1MB/s
     port: 8880
@@ -6285,9 +6527,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: cf.d3z.net
+    path: /Telegram🇨🇳
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: ❓Other_50 | ⬇️ 1.1MB/s
     port: 8880
@@ -6298,9 +6540,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_10 | ⬇️ 3.5MB/s
     port: 443
@@ -6313,9 +6555,9 @@ proxies:
     servername: aio.zipzap.biz.id
     skip-cert-verify: true
     ws-opts:
-      path: /aioproxybot/146.190.192.43-80
-      headers:
-        host: aio.zipzap.biz.id
+    path: /aioproxybot/146.190.192.43-80
+    headers:
+    host: aio.zipzap.biz.id
     cipher: auto
     uuid: f282b878-8711-45a1-8c69-5564172123c1
     alterId: 0
@@ -6329,9 +6571,9 @@ proxies:
     servername: 4W.003330333.XYZ
     skip-cert-verify: true
     ws-opts:
-      path: /XKkmZUl83R8RsRHVp4fx59ry
-      headers:
-        host: 4w.003330333.xyz
+    path: /XKkmZUl83R8RsRHVp4fx59ry
+    headers:
+    host: 4w.003330333.xyz
     alpn:
   - http/1.1
     uuid: 6e5925c0-f39e-4449-93e9-2e2e9772b17b
@@ -6353,9 +6595,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: ❓Other_25 | ⬇️ 1.4MB/s
     port: 8880
@@ -6366,9 +6608,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560fp=chrome
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560fp=chrome
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇩🇪DE_10 | ⬇️ 1.2MB/s
     port: 443
@@ -6380,9 +6622,9 @@ proxies:
     servername: rayan-07.leila.dpdns.org
     skip-cert-verify: true
     ws-opts:
-      path: /@Rayan_Config
-      headers:
-        host: rayan-07.leila.dpdns.org
+    path: /@Rayan_Config
+    headers:
+    host: rayan-07.leila.dpdns.org
     uuid: 7a80a8d9-92f9-4f0a-8352-9005a8215ab8
     client-fingerprint: chrome
   - name: 🇺🇸US_25 | ⬇️ 3.0MB/s
@@ -6395,9 +6637,9 @@ proxies:
     servername: ttttttt67.459.pp.ua
     skip-cert-verify: true
     ws-opts:
-      path: /5UW2C42lpZ7Dj4VDwVOkZfoq
-      headers:
-        host: ttttttt67.459.pp.ua
+    path: /5UW2C42lpZ7Dj4VDwVOkZfoq
+    headers:
+    host: ttttttt67.459.pp.ua
     uuid: 07a3df8f-2a2c-42f8-ad92-65889d90f3bf
     client-fingerprint: chrome
   - name: 🇳🇱NL_3 | ⬇️ 2.8MB/s
@@ -6408,9 +6650,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420?ed=80
-      headers:
-        host: Kk78.4qwertyuiopasdfghjklzxcvbnmmnbvccjzlkjhgfdsapoiuytre0107252.sub420-mohamad.OnlinE.
+    path: /Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420/Telegram,@EXPRESSVPN_420?ed=80
+    headers:
+    host: Kk78.4qwertyuiopasdfghjklzxcvbnmmnbvccjzlkjhgfdsapoiuytre0107252.sub420-mohamad.OnlinE.
     uuid: b3fb50dd-35ce-4c4a-9280-acaeb1677640
   - name: 🇩🇪DE_8 | ⬇️ 1.4MB/s
     port: 1419
@@ -6421,8 +6663,8 @@ proxies:
     servername: journalofbigdata.springeropen.com
     skip-cert-verify: true
     reality-opts:
-      public-key: 0L-XvEVE4KLbDk-evkkxEWK3y-Nkz0E181t0PD_o4h4
-      short-id: ae439107157c97
+    public-key: 0L-XvEVE4KLbDk-evkkxEWK3y-Nkz0E181t0PD_o4h4
+    short-id: ae439107157c97
     uuid: 57a5d042-6618-4042-a2de-1a2169c4ce9d
     client-fingerprint: chrome
   - name: 🇺🇸US_78 | ⬇️ 1.9MB/s
@@ -6435,9 +6677,9 @@ proxies:
     servername: tTTtTTT67.459.PP.uA
     skip-cert-verify: true
     ws-opts:
-      path: /5UW2C42lpZ7Dj4VDwVOkZfoq
-      headers:
-        host: ttttttt67.459.pp.ua
+    path: /5UW2C42lpZ7Dj4VDwVOkZfoq
+    headers:
+    host: ttttttt67.459.pp.ua
     alpn:
   - http/1.1
     uuid: 07a3df8f-2a2c-42f8-ad92-65889d90f3bf
@@ -6452,7 +6694,7 @@ proxies:
     password: e4cbe8b8-37db-4aaa-8469-b84f34c51ebc
     skip-cert-verify: false
     ws-opts:
-      path: /dilyfCPEmLvYr5hYXD
+    path: /dilyfCPEmLvYr5hYXD
     alpn:
   - http/1.1
     client-fingerprint: chrome
@@ -6466,8 +6708,8 @@ proxies:
     servername: microsoft.com
     skip-cert-verify: true
     reality-opts:
-      public-key: gi8v7_r3NbWuPl9kjt8ZZLDavCMz1w0rVeNhcVnVxEM
-      short-id: 9d56b1e4
+    public-key: gi8v7_r3NbWuPl9kjt8ZZLDavCMz1w0rVeNhcVnVxEM
+    short-id: 9d56b1e4
     uuid: 38e45e75-cabb-4b98-8e2f-9d65843b7efa
     flow: xtls-rprx-vision
     client-fingerprint: chrome
@@ -6482,9 +6724,9 @@ proxies:
     servername: ""
     skip-cert-verify: true
     ws-opts:
-      path: /SHToRcqfiraYkzOdf
-      headers:
-        host: tttgggbnh.4444936.xyz
+    path: /SHToRcqfiraYkzOdf
+    headers:
+    host: tttgggbnh.4444936.xyz
     cipher: auto
     uuid: 20e89a95-cedf-4fe3-9421-517ce66be170
     alterId: 0
@@ -6498,9 +6740,9 @@ proxies:
     servername: HHhhhHhhhhH.777198.xYz
     skip-cert-verify: true
     ws-opts:
-      path: /OjdW89Bpg4ykd4O
-      headers:
-        host: hhhhhhhhhhh.777198.xyz
+    path: /OjdW89Bpg4ykd4O
+    headers:
+    host: hhhhhhhhhhh.777198.xyz
     alpn:
   - http/1.1
     uuid: c226ac5d-65e9-4379-95c3-fb542bc242d8
@@ -6515,9 +6757,9 @@ proxies:
     servername: XXCsDERT6.777159.XyZ
     skip-cert-verify: true
     ws-opts:
-      path: /O9jlBCbIm3xr1D40NK
-      headers:
-        host: xxcsdert6.777159.xyz
+    path: /O9jlBCbIm3xr1D40NK
+    headers:
+    host: xxcsdert6.777159.xyz
     alpn:
   - http/1.1
     uuid: ffcf7ec1-3e09-4821-b3d9-b426a107b73b
@@ -6531,9 +6773,9 @@ proxies:
     servername: hk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: hk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_37 | ⬇️ 1.2MB/s
     port: 443
@@ -6545,9 +6787,9 @@ proxies:
     servername: ddddddccccccccccccccvv.131.pp.ua
     skip-cert-verify: true
     ws-opts:
-      path: /eAbAcRHV1QuhyXWGxgFnoFPw1
-      headers:
-        host: ddddddccccccccccccccvv.131.pp.ua
+    path: /eAbAcRHV1QuhyXWGxgFnoFPw1
+    headers:
+    host: ddddddccccccccccccccvv.131.pp.ua
     alpn:
   - http/1.1
     uuid: 4174b95d-115e-4d39-add6-1f8db95bb860
@@ -6562,8 +6804,8 @@ proxies:
     servername: i2pd.website
     skip-cert-verify: true
     reality-opts:
-      public-key: YVDo7U4O-AT2fa5H9E7hyYHKgfZd1vB6UdbAf2ggWQE
-      short-id: 55e6af1a35e64a98
+    public-key: YVDo7U4O-AT2fa5H9E7hyYHKgfZd1vB6UdbAf2ggWQE
+    short-id: 55e6af1a35e64a98
     uuid: 0e8a6896-ad90-4a3b-89a3-77d64aa409e2
     flow: xtls-rprx-vision
     client-fingerprint: chrome
@@ -6575,9 +6817,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: yd.laoyoutiao.link
+    path: /
+    headers:
+    host: yd.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_8 | ⬇️ 1.3MB/s
     port: 8880
@@ -6587,9 +6829,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
-      headers:
-        host: us.laoyoutiao.link
+    path: /Telegram🇨🇳 @MxlShare @WangCai2 /?ed=2560
+    headers:
+    host: us.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_22 | ⬇️ 1.3MB/s
     port: 443
@@ -6601,9 +6843,9 @@ proxies:
     servername: F1.paRsa.fiLegEar-Sg.Me
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560
-      headers:
-        host: f1.parsa.filegear-sg.me
+    path: /?ed=2560
+    headers:
+    host: f1.parsa.filegear-sg.me
     uuid: 8df60790-c903-4661-b85d-64c0009378e5
     client-fingerprint: chrome
   - name: 🇺🇸US_65 | ⬇️ 1.2MB/s
@@ -6616,7 +6858,7 @@ proxies:
     password: 9c67ebbe-d620-4b6d-ad82-1ebc675e22c6
     skip-cert-verify: false
     ws-opts:
-      path: /profile/telegram@ssrsub
+    path: /profile/telegram@ssrsub
     client-fingerprint: chrome
   - name: ❓Other_66 | ⬇️ 1.5MB/s
     port: 8880
@@ -6627,9 +6869,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇨🇦CA_4 | ⬇️ 2.1MB/s
     port: 80
@@ -6639,9 +6881,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /?ed=2560/?BIA_TELEGRAM@MARAMBASHI_MARAMBASHI_MARAMBASHI
-      headers:
-        host: blaze-can-118.blazecanada.site
+    path: /?ed=2560/?BIA_TELEGRAM@MARAMBASHI_MARAMBASHI_MARAMBASHI
+    headers:
+    host: blaze-can-118.blazecanada.site
     uuid: 3ac2de34-47c5-4dd5-afc0-8fb4b05d4077
   - name: ❓Other_40 | ⬇️ 1.1MB/s
     port: 8880
@@ -6652,9 +6894,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: ❓Other_19 | ⬇️ 1.1MB/s
     port: 8880
@@ -6665,9 +6907,9 @@ proxies:
     servername: yd.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: yd.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: yd.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇬🇧GB_2 | ⬇️ 1.2MB/s
     port: 443
@@ -6679,9 +6921,9 @@ proxies:
     servername: escoffier.changli.ddns-ip.net
     skip-cert-verify: true
     ws-opts:
-      path: /proxyip=navia.shorekeeper.ir
-      headers:
-        host: escoffier.changli.ddns-ip.net
+    path: /proxyip=navia.shorekeeper.ir
+    headers:
+    host: escoffier.changli.ddns-ip.net
     alpn:
   - http/1.1
     uuid: 1e610976-fef5-4ca4-a447-f3530e70603e
@@ -6695,9 +6937,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇰🇷KR_8 | ⬇️ 1.0MB/s
     port: 8880
@@ -6708,9 +6950,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇸🇬SG_11 | ⬇️ 1.1MB/s
     port: 8880
@@ -6721,9 +6963,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /?ed
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3 @WangCai2 /?ed
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_72 | ⬇️ 1.4MB/s
     port: 8880
@@ -6734,9 +6976,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇺🇸US_83 | ⬇️ 1.2MB/s
     port: 443
@@ -6760,9 +7002,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_configCANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config
-      headers:
-        host: 185.232.70.52.www.speedtest.net.www.debian.org.www.speedtest.net自己不去看啥事情基本没啥事事自己不去看啥事情基本没啥事事.teHran-PC.infO.
+    path: /CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_configCANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config--TELEGRAM--jet_config--CANALTELEGRAM--jet_config
+    headers:
+    host: 185.232.70.52.www.speedtest.net.www.debian.org.www.speedtest.net自己不去看啥事情基本没啥事事自己不去看啥事情基本没啥事事.teHran-PC.infO.
     uuid: 2658fffa-e35a-43cd-9df8-5ad29576931b
   - name: 🇰🇿KZ_1 | ⬇️ 1.5MB/s
     port: 19747
@@ -6773,8 +7015,8 @@ proxies:
     servername: yahoo.com
     skip-cert-verify: true
     reality-opts:
-      public-key: ZO9dTeg1slvTXgVsBsaJ1BDvz_YUImTLJjbHs-GdVyM
-      short-id: "2001"
+    public-key: ZO9dTeg1slvTXgVsBsaJ1BDvz_YUImTLJjbHs-GdVyM
+    short-id: "2001"
     uuid: 2a9ed01e-5455-44b4-a66a-76ee8165f0ac
     client-fingerprint: chrome
   - name: 🇸🇬SG_9 | ⬇️ 1.0MB/s
@@ -6786,9 +7028,9 @@ proxies:
     servername: sg.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2048
-      headers:
-        host: sg.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2048
+    headers:
+    host: sg.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_66 | ⬇️ 2.3MB/s
     port: 443
@@ -6800,9 +7042,9 @@ proxies:
     servername: SsSSSSSsSSSD.890606.Xyz
     skip-cert-verify: true
     ws-opts:
-      path: /kSIHD28dr9nkaMBYIsgt
-      headers:
-        host: SsSSSSSsSSSD.890606.Xyz
+    path: /kSIHD28dr9nkaMBYIsgt
+    headers:
+    host: SsSSSSSsSSSD.890606.Xyz
     alpn:
   - http/1.1
     uuid: 357b1bba-6400-4944-baff-1b933311ff28
@@ -6817,9 +7059,9 @@ proxies:
     servername: F1.paRsa.fiLegEar-Sg.Me
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@V2ray_Alpha=?ed=2560
-      headers:
-        host: f1.parsa.filegear-sg.me
+    path: /Telegram@V2ray_Alpha=?ed=2560
+    headers:
+    host: f1.parsa.filegear-sg.me
     alpn:
   - h2,http/1.1
     uuid: 8df60790-c903-4661-b85d-64c0009378e5
@@ -6833,9 +7075,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed=2560
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed=2560
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_30 | ⬇️ 1.4MB/s
     port: 8880
@@ -6845,9 +7087,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_76 | ⬇️ 1.1MB/s
     port: 8880
@@ -6857,9 +7099,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: https://t.me/xyfqzy ⚡_16
     port: 443
@@ -6871,7 +7113,7 @@ proxies:
     password: bce0c7cb-08d1-46a7-b77b-7bff8b46252f
     skip-cert-verify: false
     grpc-opts:
-      grpc-service-name: x9F83IcyjcEyBX5Ttq58yozYn
+    grpc-service-name: x9F83IcyjcEyBX5Ttq58yozYn
     alpn:
   - h2
     client-fingerprint: chrome
@@ -6883,9 +7125,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: hk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇫🇮FI_4 | ⬇️ 1.7MB/s
     port: 443
@@ -6897,9 +7139,9 @@ proxies:
     servername: GgGgr.PaGES.dEV
     skip-cert-verify: true
     ws-opts:
-      path: /g...
-      headers:
-        host: ggggr.pages.dev
+    path: /g...
+    headers:
+    host: ggggr.pages.dev
     uuid: 9368b093-d790-4096-9d8a-1265e82f9e2f
     client-fingerprint: chrome
   - name: ❓Other_70 | ⬇️ 2.4MB/s
@@ -6910,9 +7152,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: jp.laoyoutiao.link
+    path: /
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_62 | ⬇️ 1.1MB/s
     port: 443
@@ -6924,9 +7166,9 @@ proxies:
     servername: xCVbNNMklo.00890604.xyZ
     skip-cert-verify: true
     ws-opts:
-      path: /xZjr7v1DqrYyamxeTh7sLJtI1
-      headers:
-        host: xcvbnnmklo.00890604.xyz
+    path: /xZjr7v1DqrYyamxeTh7sLJtI1
+    headers:
+    host: xcvbnnmklo.00890604.xyz
     uuid: a7c9c017-db10-4d15-b01b-0634db498b57
     client-fingerprint: chrome
   - name: ❓Other_75 | ⬇️ 1.4MB/s
@@ -6937,9 +7179,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: us.laoyoutiao.link
+    path: /
+    headers:
+    host: us.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_40 | ⬇️ 1.9MB/s
     port: 8880
@@ -6950,9 +7192,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: bitget1.asdasd.click
+    path: /Telegram🇨🇳
+    headers:
+    host: bitget1.asdasd.click
     uuid: b5441b0d-2147-4898-8a6a-9b2c87f58382
   - name: 🇰🇷KR_10 | ⬇️ 1.0MB/s
     port: 8880
@@ -6963,9 +7205,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇨🇦CA_5 | ⬇️ 1.7MB/s
     port: 443
@@ -6977,9 +7219,9 @@ proxies:
     servername: 999O0.859886.xyz
     skip-cert-verify: true
     ws-opts:
-      path: /e49RZLgIb0TdfgF5HdHEIupMZeK
-      headers:
-        host: 999o0.859886.xyz
+    path: /e49RZLgIb0TdfgF5HdHEIupMZeK
+    headers:
+    host: 999o0.859886.xyz
     alpn:
   - http/1.1
     uuid: 288124da-0d68-42f4-9f48-70dc4dcc55a6
@@ -6993,9 +7235,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: ip.langmanshanxi.top
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: ip.langmanshanxi.top
     uuid: 583ceab3-4022-4553-9158-9bedc625ad4e
   - name: 🇺🇸US_77 | ⬇️ 2.6MB/s
     port: 8880
@@ -7005,9 +7247,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: cf.d3z.net
+    path: /
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: 🇺🇸US_17 | ⬇️ 1.6MB/s
     port: 8880
@@ -7017,9 +7259,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: cf.d3z.net
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: cf.d3z.net
     uuid: 0132166f-e702-48ed-a9e7-b07af768faf8
   - name: 🇵🇱PL_1 | ⬇️ 3.0MB/s
     port: 443
@@ -7031,9 +7273,9 @@ proxies:
     servername: frieren.albedo.ddns-ip.net
     skip-cert-verify: true
     ws-opts:
-      path: /proxyip=ayaka.shorekeeper.ir
-      headers:
-        host: frieren.albedo.ddns-ip.net
+    path: /proxyip=ayaka.shorekeeper.ir
+    headers:
+    host: frieren.albedo.ddns-ip.net
     alpn:
   - http/1.1
     uuid: c1601a96-febd-4baa-8fe3-17ca8f4121bd
@@ -7048,9 +7290,9 @@ proxies:
     servername: VNGsUppLY.IP-ddnS.COm
     skip-cert-verify: true
     ws-opts:
-      path: /ycqlKbi40f2kVjZS?ed=2560
-      headers:
-        host: vngsupply.ip-ddns.com
+    path: /ycqlKbi40f2kVjZS?ed=2560
+    headers:
+    host: vngsupply.ip-ddns.com
     alpn:
   - http/1.1
     uuid: e9979910-79d1-4621-a93c-b2a579c44ba7
@@ -7066,9 +7308,9 @@ proxies:
     servername: rak2d3.89060004.xyz
     skip-cert-verify: true
     ws-opts:
-      path: /
-      headers:
-        host: rak2d3.89060004.xyz
+    path: /
+    headers:
+    host: rak2d3.89060004.xyz
     cipher: auto
     uuid: 350e2b01-d410-44a6-90ba-6483f1062972
     alterId: 0
@@ -7081,9 +7323,9 @@ proxies:
     servername: hk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /TelegramU0001F1E8U0001F1F3
-      headers:
-        host: hk.laoyoutiao.link
+    path: /TelegramU0001F1E8U0001F1F3
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: https://t.me/xyfqzy ⚡_18
     port: 443
@@ -7095,9 +7337,9 @@ proxies:
     servername: jjJjjjjjjjjj.000890604.xYZ
     skip-cert-verify: true
     ws-opts:
-      path: /Ryxyg63Pk7cFSnZBROjL3Q5vTymr
-      headers:
-        host: jjjjjjjjjjjj.000890604.xyz
+    path: /Ryxyg63Pk7cFSnZBROjL3Q5vTymr
+    headers:
+    host: jjjjjjjjjjjj.000890604.xyz
     alpn:
   - http/1.1
     uuid: bce0c7cb-08d1-46a7-b77b-7bff8b46252f
@@ -7110,9 +7352,9 @@ proxies:
     udp: true
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram@WangCai2/?ed
-      headers:
-        host: hk.laoyoutiao.link
+    path: /Telegram@WangCai2/?ed
+    headers:
+    host: hk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: ❓Other_32 | ⬇️ 1.2MB/s
     port: 8880
@@ -7123,9 +7365,9 @@ proxies:
     servername: Telegram-channel-WangCai2
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳 @WangCai2 /?ed=2560
-      headers:
-        host: kjgx.laoyoutiao.link
+    path: /Telegram🇨🇳 @WangCai2 /?ed=2560
+    headers:
+    host: kjgx.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇰🇷KR_3 | ⬇️ 2.9MB/s
     port: 443
@@ -7137,9 +7379,9 @@ proxies:
     servername: VNGsUppLY.IP-ddnS.COm
     skip-cert-verify: true
     ws-opts:
-      path: /ycqlKbi40f2kVjZS?ed=2560
-      headers:
-        host: vngsupply.ip-ddns.com
+    path: /ycqlKbi40f2kVjZS?ed=2560
+    headers:
+    host: vngsupply.ip-ddns.com
     alpn:
   - http/1.1
     uuid: e9979910-79d1-4621-a93c-b2a579c44ba7
@@ -7154,9 +7396,9 @@ proxies:
     servername: XcdvfGBnHU7.0890604.XyZ
     skip-cert-verify: true
     ws-opts:
-      path: /xZjr7v1DqrYyamxeTh7sLJtI1
-      headers:
-        host: xcdvfgbnhu7.0890604.xyz
+    path: /xZjr7v1DqrYyamxeTh7sLJtI1
+    headers:
+    host: xcdvfgbnhu7.0890604.xyz
     alpn:
   - http/1.1
     uuid: a7c9c017-db10-4d15-b01b-0634db498b57
@@ -7170,9 +7412,9 @@ proxies:
     servername: jp.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram
-      headers:
-        host: jp.laoyoutiao.link
+    path: /Telegram
+    headers:
+    host: jp.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇸🇬SG_4 | ⬇️ 1.4MB/s
     port: 8880
@@ -7183,9 +7425,9 @@ proxies:
     servername: sg.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: sg.laoyoutiao.link
+    path: /Telegram🇨🇳
+    headers:
+    host: sg.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - name: 🇺🇸US_27 | ⬇️ 1.7MB/s
     port: 443
@@ -7197,9 +7439,9 @@ proxies:
     servername: dDDDvvbHY7.000890604.xYz
     skip-cert-verify: true
     ws-opts:
-      path: /WfxcqrR5ycVpIit2OdWk0KwirdY
-      headers:
-        host: ddddvvbhy7.000890604.xyz
+    path: /WfxcqrR5ycVpIit2OdWk0KwirdY
+    headers:
+    host: ddddvvbhy7.000890604.xyz
     alpn:
   - http/1.1
     uuid: 13e26f64-2e0c-4461-92cd-d83294cc18f0
@@ -7213,9 +7455,9 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram🇨🇳
-      headers:
-        host: ex.sue.x10.mx
+    path: /Telegram🇨🇳
+    headers:
+    host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
   - name: 🇺🇸US_48 | ⬇️ 1.5MB/s
     port: 8880
@@ -7226,9 +7468,9 @@ proxies:
     servername: sk.laoyoutiao.link
     skip-cert-verify: true
     ws-opts:
-      path: /Telegram
-      headers:
-        host: sk.laoyoutiao.link
+    path: /Telegram
+    headers:
+    host: sk.laoyoutiao.link
     uuid: fab7bf9c-ddb9-4563-8a04-fb01ce6c0fbf
   - ♻️ 自动选择
   - DIRECT
@@ -8895,14 +9137,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/mihomo-party-org/mihomo-party/resources/icon.png
+    icon: https://cdn.jsdelivr.net/gh/mihomo-party-org/mihomo-party/resources/icon.png
   - name: Cloudflare
-      type: select
-      interval: 300
-      url: https://gstatic.com/generate_204
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://gstatic.com/generate_204
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - Proxy
   - DIRECT
   - "\U0001F1ED\U0001F1F0 香港节点"
@@ -8922,14 +9164,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/cloudflare.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/cloudflare.png
   - name: Bing
-      type: select
-      interval: 300
-      url: https://gstatic.com/generate_204
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://gstatic.com/generate_204
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - DIRECT
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
@@ -8949,14 +9191,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft-bing.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft-bing.png
   - name: Github
-      type: select
-      interval: 300
-      url: https://github.com
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://github.com
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
   - "\U0001F1EF\U0001F1F5 日本节点"
@@ -8975,14 +9217,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/github.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/github.png
   - name: OpenAI
-      type: select
-      interval: 300
-      url: https://openai.com
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://openai.com
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - "\U0001F64F 自动选择"
   - "\U0001F4AA 手动选择"
   - "\U0001F1FA\U0001F1F8 美国节点"
@@ -9003,14 +9245,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/chatgpt.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/chatgpt.png
   - name: Netflix
-      type: select
-      interval: 300
-      url: https://netflix.com
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://netflix.com
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - "\U0001F64F 自动选择"
   - "\U0001F4AA 手动选择"
   - "\U0001F1FA\U0001F1F8 美国节点"
@@ -9031,14 +9273,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/netflix.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/netflix.png
   - name: Disney+
-      type: select
-      interval: 300
-      url: https://disney.com
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://disney.com
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - "\U0001F64F 自动选择"
   - "\U0001F4AA 手动选择"
   - "\U0001F1FA\U0001F1F8 美国节点"
@@ -9059,14 +9301,14 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/disney-plus.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/disney-plus.png
   - name: YouTube
-      type: select
-      interval: 300
-      url: https://youtube.com
-      lazy: true
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    interval: 300
+    url: https://youtube.com
+    lazy: true
+    timeout: 2000
+    max-failed-times: 3
   - "\U0001F64F 自动选择"
   - "\U0001F4AA 手动选择"
   - "\U0001F1FA\U0001F1F8 美国节点"
@@ -9087,9 +9329,9 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/youtube.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/youtube.png
   - name: TikTok
-      type: select
+    type: select
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
   - "\U0001F1EF\U0001F1F5 日本节点"
@@ -9108,9 +9350,9 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/tiktok.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/tiktok.png
   - name: Spotify
-      type: select
+    type: select
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
   - "\U0001F1EF\U0001F1F5 日本节点"
@@ -9129,13 +9371,13 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/spotify.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/spotify.png
   - name: Telegram
-      type: select
-      url: https://telegram.org
-      interval: 300
-      timeout: 2000
-      max-failed-times: 3
+    type: select
+    url: https://telegram.org
+    interval: 300
+    timeout: 2000
+    max-failed-times: 3
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
   - "\U0001F1EF\U0001F1F5 日本节点"
@@ -9154,9 +9396,9 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/telegram.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/telegram.png
   - name: Microsoft
-      type: select
+    type: select
   - Proxy
   - DIRECT
   - "\U0001F1ED\U0001F1F0 香港节点"
@@ -9176,9 +9418,9 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft.png
   - name: Onedrive
-      type: select
+    type: select
   - DIRECT
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
@@ -9198,9 +9440,9 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft-onedrive.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/microsoft-onedrive.png
   - name: Apple
-      type: select
+    type: select
   - DIRECT
   - Proxy
   - "\U0001F1ED\U0001F1F0 香港节点"
@@ -9220,16 +9462,16 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/apple.png
+    icon: https://cdn.jsdelivr.net/gh/selfhst/icons/png/apple.png
   - name: Gamer
-      type: select
-      include-all: true
-      filter: "^(?=.*((?i)游戏|\U0001F3AE|(\\b(GAME)\\b)))(?!.*((?i)回国|校园)).*$"
+    type: select
+    include-all: true
+    filter: "^(?=.*((?i)游戏|\U0001F3AE|(\\b(GAME)\\b)))(?!.*((?i)回国|校园)).*$"
   - DIRECT
   - Proxy
-      icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Game.png
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Game.png
   - name: GlobalMedia
-      type: select
+    type: select
   - Proxy
   - DIRECT
   - "\U0001F1ED\U0001F1F0 香港节点"
@@ -9249,209 +9491,209 @@ proxies:
   - "\U0001F1F5\U0001F1F1 波兰节点"
   - "\U0001F1EE\U0001F1F9 意大利节点"
   - "\U0001F1EE\U0001F1F7 伊朗节点"
-      icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ForeignMedia.png
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/ForeignMedia.png
   - name: "\U0001F4AA 手动选择"
-      type: select
-      include-all: true
+    type: select
+    include-all: true
   - name: "\U0001F64F 自动选择"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    include-all: true
   - name: "\U0001F3A1负载均衡"
-      type: load-balance
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      disable-udp: false
-      timeout: 2000
-      max-failed-times: 3
-      strategy: sticky-sessions
-      include-all: true
+    type: load-balance
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    disable-udp: false
+    timeout: 2000
+    max-failed-times: 3
+    strategy: sticky-sessions
+    include-all: true
   - name: "\U0001F1ED\U0001F1F0 香港节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)HK|香港|港"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)HK|香港|港"
+    include-all: true
   - name: "\U0001F1F9\U0001F1FC 台湾节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)TW|台湾|台"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)TW|台湾|台"
+    include-all: true
   - name: "\U0001F1EF\U0001F1F5 日本节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)JP"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)JP"
+    include-all: true
   - name: "\U0001F1F0\U0001F1F7 韩国节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)KR|韩国|韩"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)KR|韩国|韩"
+    include-all: true
   - name: "\U0001F1F8\U0001F1EC 新加坡节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)SG|新加坡|狮城"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)SG|新加坡|狮城"
+    include-all: true
   - name: "\U0001F1FA\U0001F1F8 美国节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)US|美国|美"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)US|美国|美"
+    include-all: true
   - name: "\U0001F1EC\U0001F1E7 英国节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)UK|GB|英国|英"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)UK|GB|英国|英"
+    include-all: true
   - name: "\U0001F1EB\U0001F1F7 法国节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)FR|法国|法"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)FR|法国|法"
+    include-all: true
   - name: "\U0001F1E9\U0001F1EA 德国节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)DE|德国|德"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)DE|德国|德"
+    include-all: true
   - name: "\U0001F1E8\U0001F1E6 加拿大节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)CA|加拿大"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)CA|加拿大"
+    include-all: true
   - name: "\U0001F1E6\U0001F1FA 澳大利亚节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)AU|澳大利亚|澳洲"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)AU|澳大利亚|澳洲"
+    include-all: true
   - name: "\U0001F1F3\U0001F1F1 荷兰节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)NL|荷兰"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)NL|荷兰"
+    include-all: true
   - name: "\U0001F1F7\U0001F1FA 俄罗斯节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)RU|俄罗斯|俄"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)RU|俄罗斯|俄"
+    include-all: true
   - name: "\U0001F1ED\U0001F1FA 匈牙利节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)HU|匈牙利"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)HU|匈牙利"
+    include-all: true
   - name: "\U0001F1FA\U0001F1E6 乌克兰节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)UA|乌克兰"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)UA|乌克兰"
+    include-all: true
   - name: "\U0001F1F5\U0001F1F1 波兰节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)PL|波兰"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)PL|波兰"
+    include-all: true
   - name: "\U0001F1EE\U0001F1F9 意大利节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)IT|意大利"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)IT|意大利"
+    include-all: true
   - name: "\U0001F1EE\U0001F1F7 伊朗节点"
-      type: url-test
-      tolerance: 100
-      interval: 60
-      lazy: true
-      url: https://gstatic.com/generate_204
-      timeout: 2000
-      max-failed-times: 3
-      filter: "(?i)IR|伊朗"
-      include-all: true
+    type: url-test
+    tolerance: 100
+    interval: 60
+    lazy: true
+    url: https://gstatic.com/generate_204
+    timeout: 2000
+    max-failed-times: 3
+    filter: "(?i)IR|伊朗"
+    include-all: true
   - {"cipher":"aes-256-gcm","name":" t.me/PFSub | 🇯🇵 JP 001 | ⬇️ 15MB/s","password":"dada1203","port":80,"server":"52.192.212.50","type":"ss","udp":true}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 002 | ⬇️ 20KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 003 | ⬇️ 133KB/s","network":"ws","port":55185,"server":"47.243.135.74","tls":false,"type":"vmess","uuid":"1375985e-334a-4c25-8f64-52a182bc8037","ws-opts":{"headers":{},"path":"/Notif_Chat"}}
@@ -10852,7 +11094,7 @@ proxy-groups:
       - "🇺🇸 美国_13"
       - "121"
       - "🇬🇧 英国_5"
-      - "🇫🇷 法国_35"
+      - "��🇷 法国_35"
       - "🇫🇷 法国_36"
       - "125"
       - "fm3.pages.dev"
@@ -11142,7 +11384,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
@@ -11529,7 +11771,7 @@ proxy-groups:
       - "🇺🇸 美国_13"
       - "121"
       - "🇬🇧 英国_5"
-      - "🇫🇷 法国_35"
+      - "��🇷 法国_35"
       - "🇫🇷 法国_36"
       - "125"
       - "fm3.pages.dev"
@@ -11819,7 +12061,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
