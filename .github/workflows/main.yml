@@ -27,7 +27,6 @@ jobs:
 
           const links = process.env.SUB_LINKS.split('\n').filter(l => l.trim().startsWith('http'));
           const hkRegex = /(香港|HK|HongKong|🇭🇰|HKG)/i;
-          const excludeRegex = /(美国|US|Japan|日本|Singapore|新加坡|Taiwan|台湾|Russia|俄罗斯|🏁|未知)/i;
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
@@ -42,41 +41,42 @@ jobs:
           }
 
           async function main() {
-              console.log("🚀 开始为陈先生生成 Mihomo 专用订阅...");
+              console.log("🚀 正在扩大搜索范围，抓取更多香港节点...");
               let finalNodes = [];
               let nodeNames = [];
 
               for (const link of links) {
                   const content = await fetchLink(link.trim());
                   if (!content) continue;
+                  
+                  // 针对混淆格式的简单预处理
                   const items = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
                   
                   items.forEach(item => {
-                      if (hkRegex.test(item) && !excludeRegex.test(item)) {
-                          if (item.includes('name:') && item.includes('server:')) {
-                              let clean = item.replace(/^[^{]*/, '').replace(/[^}]*$/, '')
-                                  .replace(/[\{\}]/g, '')
-                                  .trim()
-                                  .replace(/\n/g, ', ')
-                                  .replace(/\s+/g, ' ')
-                                  .replace(/:\s*,/g, ': "", ')
-                                  .replace(/:\s*}/g, ': ""}')
-                                  .replace(/,\s*,/g, ',')
-                                  .replace(/,\s*$/g, '');
+                      // 只要名字里带香港关键词，且有服务器地址，就抓取
+                      if (hkRegex.test(item) && item.includes('server:')) {
+                          let clean = item.replace(/^[^{]*/, '').replace(/[^}]*$/, '')
+                              .replace(/[\{\}]/g, '')
+                              .trim()
+                              .replace(/\n/g, ', ')
+                              .replace(/\s+/g, ' ')
+                              .replace(/:\s*,/g, ': "", ')
+                              .replace(/:\s*}/g, ': ""}')
+                              .replace(/,\s*,/g, ',')
+                              .replace(/,\s*$/g, '');
 
-                              const nameMatch = clean.match(/name:\s*"?([^",{}]+)"?/);
-                              if (nameMatch) {
-                                  const name = nameMatch[1].trim();
-                                  // 确保缩进是标准的两个空格
-                                  finalNodes.push(`  - {${clean}}`);
-                                  nodeNames.push(`      - "${name}"`);
-                              }
+                          const nameMatch = clean.match(/name:\s*"?([^",{}]+)"?/);
+                          if (nameMatch) {
+                              const name = nameMatch[1].trim();
+                              // 存储节点数据和名字
+                              finalNodes.push(`  - {${clean}}`);
+                              nodeNames.push(`      - "${name}"`);
                           }
                       }
                   });
               }
 
-              // 移除重复节点名
+              // 去重并构建完整的 Mihomo 配置
               const uniqueNodes = Array.from(new Set(finalNodes));
               const uniqueNames = Array.from(new Set(nodeNames));
 
@@ -113,7 +113,7 @@ jobs:
               ].join('\n');
 
               fs.writeFileSync('hk_pure.yaml', configHeader);
-              console.log(`✅ 订阅生成成功，共计 ${uniqueNodes.length} 个香港节点`);
+              console.log(`✅ 搞定！这次共保留了 ${uniqueNodes.length} 个香港节点。`);
           }
           main();
           EOF
