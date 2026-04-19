@@ -10,6 +10,7 @@ proxies:
   - {name: 🇭🇰 香港3|@ripaojiedian, server: 95.40.85.50, port: 52687, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, skip-cert-verify: false}
   - {name: 🇭🇰 香港4|@ripaojiedian, server: 54.46.52.70, port: 6313, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
   - {name: 🇭🇰 香港5|@ripaojiedian, server: 52.69.111.130, port: 6313, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
+  - {name: "[VMess] 🇨🇳 _TW_台湾->🇺🇸_US_美国", server: 107.167.182.230, port: 80, type: vmess, uuid: efcb7d7c-c582-46f5-eeff-0e553342528d, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, network: ws, ws-opts: path: /tg@hkaa0, headers: Host: br.gy.youxuan-1.66688888.xyz, udp: true}
   - {name: "[SS] 🇭🇰 香港 电讯盈科有限公司", server: chengbai02.ascwt179.com, port: 13223, type: ss, cipher: aes-128-gcm, password: JVrsLLN1tkN8oXZO, udp: true}
   - {name: "[VMess] 🇭🇰 香港 电讯盈科有限公司", server: efan.dnsefan04881.com, port: 7754, type: vmess, uuid: 009e558d-3cf4-49d8-b5e4-82c9e14fe1a4, alterId: 0, cipher: auto, tls: false, skip-cert-verify: true, udp: true}
 
@@ -23,6 +24,7 @@ proxy-groups:
       - "🇭🇰 香港3|@ripaojiedian"
       - "🇭🇰 香港4|@ripaojiedian"
       - "🇭🇰 香港5|@ripaojiedian"
+      - "[VMess] 🇨🇳 _TW_台湾->🇺🇸_US_美国"
       - "[SS] 🇭🇰 香港 电讯盈科有限公司"
       - "[VMess] 🇭🇰 香港 电讯盈科有限公司"
 
@@ -34,6 +36,7 @@ proxy-groups:
       - "🇭🇰 香港3|@ripaojiedian"
       - "🇭🇰 香港4|@ripaojiedian"
       - "🇭🇰 香港5|@ripaojiedian"
+      - "[VMess] 🇨🇳 _TW_台湾->🇺🇸_US_美国"
       - "[SS] 🇭🇰 香港 电讯盈科有限公司"
       - "[VMess] 🇭🇰 香港 电讯盈科有限公司"
 
