@@ -1649,7 +1649,7 @@ proxies:
     tls: true
     ws-opts:
     path: /
-  - name: ��🇷 法国_35
+  - name: 🇫🇷 法国_35
     type: vless
     server: 146.59.230.8
     port: 8443
@@ -6219,7 +6219,7 @@ proxies:
     headers:
     host: yg.bantony199.top
     uuid: 34c01e61-f4f3-4afb-a83b-406caf8caa33
-  - name: 🇩🇪DE_5 | ⬇��� 1.4MB/s
+  - name: 🇩🇪DE_5 | ⬇️ 1.4MB/s
     port: 2087
     server: 188.114.97.11
     type: vless
@@ -6398,7 +6398,7 @@ proxies:
     servername: ex.sue.x10.mx
     skip-cert-verify: true
     ws-opts:
-    path: /Telegram🇨🇳
+    path: /Telegram🇨����
     headers:
     host: ex.sue.x10.mx
     uuid: d60fc3c5-9f07-4cdb-b81f-70af27936bdc
@@ -9148,7 +9148,7 @@ proxies:
   - "\U0001F1EC\U0001F1E7 英国节点"
   - "\U0001F1EB\U0001F1F7 法国节点"
   - "\U0001F1E9\U0001F1EA 德国节点"
-  - "\U0001F1E8\U0001F1E6 加��大节点"
+  - "\U0001F1E8\U0001F1E6 加拿大节点"
   - "\U0001F1E6\U0001F1FA 澳大利亚节点"
   - "\U0001F1F3\U0001F1F1 荷兰节点"
   - "\U0001F1F7\U0001F1FA 俄罗斯节点"
@@ -9378,7 +9378,7 @@ proxies:
   - "\U0001F1F8\U0001F1EC 新加坡节点"
   - "\U0001F1FA\U0001F1F8 美国节点"
   - "\U0001F1EC\U0001F1E7 英国节点"
-  - "\U0001F1EB\U0001F1F7 法��节点"
+  - "\U0001F1EB\U0001F1F7 法国节点"
   - "\U0001F1E9\U0001F1EA 德国节点"
   - "\U0001F1E8\U0001F1E6 加拿大节点"
   - "\U0001F1E6\U0001F1FA 澳大利亚节点"
@@ -11088,7 +11088,7 @@ proxy-groups:
       - "🇺🇸 美国_13"
       - "121"
       - "🇬🇧 英国_5"
-      - "��🇷 法国_35"
+      - "🇫🇷 法国_35"
       - "🇫🇷 法国_36"
       - "125"
       - "fm3.pages.dev"
@@ -11378,7 +11378,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
@@ -11766,7 +11766,7 @@ proxy-groups:
       - "🇺🇸 美国_13"
       - "121"
       - "🇬🇧 英国_5"
-      - "��🇷 法国_35"
+      - "🇫🇷 法国_35"
       - "🇫🇷 法国_36"
       - "125"
       - "fm3.pages.dev"
@@ -12056,7 +12056,7 @@ proxy-groups:
       - "🇺🇸US_81 | ⬇️ 1.3MB/s"
       - "🇵🇭PH_2 | ⬇️ 2.8MB/s"
       - "🇺🇸US_52 | ⬇️ 1.1MB/s"
-      - "🇩🇪DE_5 | ⬇��� 1.4MB/s"
+      - "🇩🇪DE_5 | ⬇️ 1.4MB/s"
       - "Xlz767V2Ray.PAGEs.DEv"
       - "🇺🇸US_46 | ⬇️ 1.7MB/s"
       - "🇺🇸US_21 | ⬇️ 1.9MB/s"
