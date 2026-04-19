@@ -28,8 +28,8 @@ jobs:
           const https = require('https');
 
           const links = process.env.SUB_LINKS.split('\n').filter(l => l.trim().startsWith('http'));
-          const hkRegex = /(香港|HK|HongKong|🇭🇰|HKG)/i;
-          const excludeRegex = /(美国|US|Japan|日本|Singapore|新加坡|Taiwan|台湾|DIRECT|REJECT)/i;
+          const hkRegex = /(香港|HK|HongKong|🇭🇰|HKG|HONG KONG)/i;
+          const excludeRegex = /(美国|US|Japan|日本|Singapore|新加坡|Taiwan|台湾|Russia|俄罗斯|🏁|未知)/i;
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
@@ -44,35 +44,34 @@ jobs:
           }
 
           async function main() {
-              console.log("🚀 启动深度清理与格式化...");
+              console.log("🚀 正在对 23 个源进行工业级格式化...");
               let finalNodes = new Set();
 
               for (const link of links) {
                   const content = await fetchLink(link.trim());
                   if (!content) continue;
 
-                  // 匹配所有以 - 开头的节点块
-                  const items = content.split(/\n\s*-/);
+                  // 1. 统一换行符并切分节点
+                  const normalized = content.replace(/\r\n/g, '\n');
+                  const items = normalized.split(/\n\s*-/);
                   
                   items.forEach(item => {
-                      // 严格过滤：必须含香港，绝不含美国等
+                      // 2. 严格过滤非香港节点
                       if (hkRegex.test(item) && !excludeRegex.test(item)) {
-                          // 提取关键字段
-                          const nameMatch = item.match(/name:\s*"?([^",\n}]+)"?/);
-                          const serverMatch = item.match(/server:\s*([^,\n}]+)/);
-                          const portMatch = item.match(/port:\s*([^,\n}]+)/);
-
-                          if (nameMatch && serverMatch && portMatch) {
-                              // 核心逻辑：强行清理所有换行和垃圾字符，压成标准单行并套上大括号
-                              let clean = item.split('proxy-groups:')[0] // 切掉尾随垃圾
-                                  .replace(/^[-\s]+/, '')             // 去掉开头横杠
-                                  .replace(/\r?\n/g, ', ')            // 换行变逗号
-                                  .replace(/,\s*,/g, ',')             // 清理双逗号
+                          if (item.includes('name:') && item.includes('server:')) {
+                              
+                              // 3. 核心修正：强行压制成单行标准对象
+                              let clean = item.trim()
+                                  .replace(/^[\/\-\s]+/, '')         // 剔除乱码前缀
+                                  .split('proxy-groups:')[0]         // 剔除后缀干扰
+                                  .replace(/\n/g, ', ')              // 换行转逗号
+                                  .replace(/\s+/g, ' ')              // 压缩多余空格
                                   .trim();
 
-                              // 如果不是大括号开头，强行补上
+                              // 4. 强制闭合括号，确保 Clash 能读懂
                               if (!clean.startsWith('{')) clean = `{${clean}}`;
-                              
+                              if (!clean.endsWith('}')) clean = `${clean}}`;
+
                               finalNodes.add(`  - ${clean}`);
                           }
                       }
@@ -81,7 +80,7 @@ jobs:
 
               const output = "proxies:\n" + Array.from(finalNodes).join('\n');
               fs.writeFileSync('hk_pure.yaml', output);
-              console.log(`✅ 过滤完成！得到 ${finalNodes.size} 个标准香港节点。`);
+              console.log(`✅ 搞定！已生成 ${finalNodes.size} 个标准化香港节点`);
           }
           main();
           EOF
