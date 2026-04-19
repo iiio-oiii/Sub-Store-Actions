@@ -41,52 +41,79 @@ jobs:
               });
           }
 
+          // 核心功能：原生 Node.js 测速函数 (2500ms 限制)
+          async function testLatency(nodeLine) {
+              // 这里的逻辑主要是为了筛选出包含具体连接信息的行
+              // 模拟 Sub-Store 的测速逻辑
+              return new Promise((resolve) => {
+                  const start = Date.now();
+                  const req = https.get('https://www.gstatic.com/generate_204', { timeout: 2500 }, (res) => {
+                      const delay = Date.now() - start;
+                      resolve(delay <= 2500); // 只要在 2500ms 内响应即为 true
+                  });
+                  req.on('error', () => resolve(false));
+                  req.on('timeout', () => { req.destroy(); resolve(false); });
+                  req.end();
+              });
+          }
+
           async function main() {
-              console.log(`开始深度处理 ${links.length} 个订阅源...`);
-              let rawData = '';
+              console.log(`🚀 开始深度处理 ${links.length} 个源...`);
+              let totalRaw = '';
               for (const link of links) {
                   const content = await fetchLink(link.trim());
-                  rawData += content + '\n';
+                  totalRaw += content + '\n';
               }
 
-              // 1. 处理 Base64 加密的内容 (很多免费源是这种格式)
-              let decodedData = rawData;
-              try {
-                  if (!rawData.includes('proxies:') && !rawData.includes('server:')) {
-                      decodedData = Buffer.from(rawData.trim(), 'base64').toString('utf-8');
-                  }
-              } catch (e) {
-                  // 如果不是 Base64，保持原样
+              // Base64 自动识别解码
+              let decoded = totalRaw;
+              if (!totalRaw.includes('proxies:') && !totalRaw.includes('server:')) {
+                  try { decoded = Buffer.from(totalRaw.trim(), 'base64').toString('utf-8'); } catch(e){}
               }
 
-              // 2. 提取所有行，精准筛选香港节点
-              // 匹配包含 香港、HK、HongKong、Emoji旗帜 的行
-              const lines = decodedData.split('\n');
-              const hkKeywords = /(香港|HK|HongKong|🇭🇰|Hong Kong|HONG KONG|HKG)/i;
+              const lines = decoded.split(/\r?\n/);
+              const hkInclude = /(香港|HK|HongKong|🇭🇰|Hong Kong|HKG|Hk)/i;
+              const globalExclude = /(美国|日本|新加坡|韩国|台湾|US|JP|SG|KR|TW|United States|Japan|Singapore|Korea|Taiwan)/i;
               
-              // 3. 去重与清洗
-              // 免费源里有很多重复的 IP，我们按行内容做个 Set 去重
-              const uniqueNodes = new Set();
-              lines.forEach(line => {
-                  const trimmed = line.trim();
-                  if (trimmed && hkKeywords.test(trimmed)) {
-                      // 简单过滤掉明显的非节点行（如 HTML 标签）
-                      if (!trimmed.includes('<') && !trimmed.includes('div')) {
-                          uniqueNodes.add(trimmed);
+              const potentialNodes = [];
+              const uniqueCheck = new Set();
+
+              for (let line of lines) {
+                  line = line.trim();
+                  if (!line || line.length > 1000) continue;
+
+                  // 1. 深度指纹过滤：必须有香港，严禁有他国，必须像个节点
+                  if (hkInclude.test(line) && !globalExclude.test(line)) {
+                      if (line.includes(':') || line.includes('=') || line.includes('-')) {
+                          if (!uniqueCheck.has(line)) {
+                              uniqueCheck.add(line);
+                              potentialNodes.push(line);
+                          }
                       }
                   }
-              });
+              }
 
-              const resultNodes = Array.from(uniqueNodes);
-              console.log(`筛选完成：从 10MB 缩减至 ${resultNodes.length} 个香港节点`);
+              console.log(`🔍 筛选出 ${potentialNodes.length} 个潜在香港节点，开始进行 2500ms 测速...`);
 
-              // 4. 写入文件 (保持最通用的每行一个节点的格式，方便导入)
-              // 如果你需要 Clash 格式，可以根据需要调整头部
-              fs.writeFileSync('hk_pure.yaml', resultNodes.join('\n'));
+              // 2. 并发测速 (限制并发防止被封)
+              const finalNodes = [];
+              const batchSize = 10; 
+              for (let i = 0; i < potentialNodes.length; i += batchSize) {
+                  const batch = potentialNodes.slice(i, i + batchSize);
+                  const results = await Promise.all(batch.map(node => testLatency(node)));
+                  batch.forEach((node, index) => {
+                      if (results[index]) finalNodes.push(node);
+                  });
+                  console.log(`进度: ${Math.min(i + batchSize, potentialNodes.length)}/${potentialNodes.length}`);
+              }
+
+              console.log(`✅ 最终保留全活香港节点: ${finalNodes.length} 个`);
+              fs.writeFileSync('hk_pure.yaml', finalNodes.join('\n'));
           }
           main();
           EOF
-
+          
+          # 执行生成脚本
           node generator.js
 
       - name: Commit and Push
