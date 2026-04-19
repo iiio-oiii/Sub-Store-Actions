@@ -11,27 +11,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate Pure Subscription (Direct Execution)
+      - name: Generate Pure Subscription (Using Official Command)
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
           # 1. 写入链接文件
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 2. 直接使用 Node 镜像，通过远程下载脚本的方式运行
-          # 我们不再 npm install，而是直接运行 xream 提供的核心逻辑
+          # 2. 使用 Docker 运行，不写任何 path，直接调用封装好的 sub-store 命令
+          # 这个镜像是专门为这个命令设计的，它应该能直接响应
           docker run --rm \
             -v $(pwd):/opt/app \
             -w /opt/app \
-            node:22-slim \
-            sh -c "
-              echo '--- 正在下载执行环境 ---' &&
-              apt-get update && apt-get install -y wget &&
-              wget -O sub-store-cli.js https://raw.githubusercontent.com/sub-store-org/Sub-Store/master/cli/sub-store-cli.js || wget -O sub-store-cli.js https://github.com/sub-store-org/Sub-Store/raw/master/sub-store-cli.js &&
-              
-              echo '--- 正在处理 23 个订阅源 ---' &&
-              node sub-store-cli.js convert --source links.txt --script ./process.js --output hk_pure.yaml
-            "
+            xream/sub-store \
+            sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml
             
       - name: Commit and Push
         run: |
