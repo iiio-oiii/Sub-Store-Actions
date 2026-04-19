@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 这里再次显式声明权限，双重保险
+    permissions:
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -66,7 +69,7 @@ jobs:
                     isProxyArea = false;
                     continue;
                   }
-                  allProxyBlocks.push(line);
+                  if (line.trim()) allProxyBlocks.push(line);
                   const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                   if (nameMatch) {
                     let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
@@ -74,6 +77,12 @@ jobs:
                   }
                 }
               }
+            }
+
+            // 关键验证：如果没有抓到任何节点，直接抛出错误让 Actions 失败
+            if (allProxyBlocks.length === 0) {
+              console.error("❌ 错误：未抓取到任何节点，请检查订阅链接是否失效！");
+              process.exit(1);
             }
 
             const uniqueNames = [...new Set(proxyNames)];
@@ -101,4 +110,28 @@ jobs:
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              ...uniqueNames
+              ...uniqueNames,
+              "",
+              "rules:",
+              "  - MATCH,🔰 手动切换"
+            ].join('\n');
+
+            const finalContent = header + '\n' + allProxyBlocks.join('\n') + groups;
+            fs.writeFileSync('merged_nodes.yaml', finalContent);
+            console.log(`✅ 成功抓取到 ${allProxyBlocks.length} 行节点数据！`);
+          }
+          main();
+          EOF
+          node generator.js
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          sed -i 's/\r$//' merged_nodes.yaml
+          # 强制添加文件并打印状态
+          git add merged_nodes.yaml
+          git status
+          # 如果没有变化也强制提交一次（或者跳过报错）
+          git commit -m "Auto Update: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
+          git push origin main
