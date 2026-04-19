@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Sub-Store CLI
         run: |
-          npm install -g @sub-store/cli
+          npm install -g sub-store/cli
           echo "Sub-Store CLI version: $(sub-store --version)"
 
       - name: Generate Pure Subscription
@@ -39,7 +39,7 @@ jobs:
           # --source 指定输入文件
           # --script 指定你的 process.js 逻辑
           # --output 指定输出文件名
-          npx sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
+          sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
 
       - name: Commit and Push
         run: |
