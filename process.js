@@ -1,3 +1,4 @@
+if (validProxies.length > 3000) validProxies = validProxies.slice(0, 3000);
 async function operator(proxies) {
     // 1. 深度安全检查：过滤掉订阅源中可能产生的空值或非对象
     const validProxies = (proxies || []).filter(p => p && typeof p === 'object' && p.server);
