@@ -1,8 +1,8 @@
 name: HK_Pure_Update
 on:
   schedule:
-    - cron: '0 */4 * * *' 
-  workflow_dispatch:      
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -11,32 +11,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate Pure Subscription (Auto-Detect Command)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' # 使用稳定的 Node.js 22
+
+      - name: Generate Pure Subscription
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
+          # 1. 准备订阅链接
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 先搜索可用命令，再执行
-          docker run --rm \
-            -v $(pwd):/opt/app \
-            -w /opt/app \
-            xream/sub-store \
-            sh -c "
-              CMD=\$(command -v sub-store || command -v sub-store-cli || echo 'node /opt/sub-store/dist/cli.js')
-              \$CMD convert --source links.txt --script ./process.js --output hk_pure.yaml
-            "
-            
+          # 2. 直接从核心库执行转换逻辑 (这是最暴力但也最有效的方法)
+          # 我们使用 npx 直接运行 sub-store 核心，不需要预先安装
+          echo "开始从 23 个订阅源提取香港节点..."
+          
+          # 核心修正：使用 npx 调用 sub-store-cli 的完整包名执行
+          npx sub-store-cli convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
+
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
           if [ -f "hk_pure.yaml" ]; then
             git add hk_pure.yaml
-            git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure List (Docker)"
+            git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure List"
             git push
           else
-            echo "Error: hk_pure.yaml was not generated!"
+            echo "错误: 未能生成 hk_pure.yaml"
             exit 1
           fi
