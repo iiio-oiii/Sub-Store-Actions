@@ -23,44 +23,66 @@ jobs:
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          # 我们不再下载 cli.js，直接用一段原生 JS 逻辑来处理
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
 
-          // 获取 Secret 中的链接
           const links = process.env.SUB_LINKS.split('\n').filter(l => l.trim().startsWith('http'));
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
-                  https.get(url, (res) => {
+                  const req = https.get(url, { timeout: 10000 }, (res) => {
                       let data = '';
                       res.on('data', (chunk) => data += chunk);
                       res.on('end', () => resolve(data));
-                  }).on('error', () => resolve(''));
+                  });
+                  req.on('error', () => resolve(''));
+                  req.end();
               });
           }
 
           async function main() {
-              console.log(`开始处理 ${links.length} 个订阅源...`);
-              let allContent = '';
+              console.log(`开始深度处理 ${links.length} 个订阅源...`);
+              let rawData = '';
               for (const link of links) {
-                  console.log(`正在抓取: ${link}`);
                   const content = await fetchLink(link.trim());
-                  allContent += content + '\n';
+                  rawData += content + '\n';
               }
 
-              // 简单的正则提取：寻找包含香港关键字的节点行
-              // 考虑到免费源格式杂乱，我们先提取所有行，交给后面的逻辑或直接保存
-              const lines = allContent.split('\n');
-              const hkLines = lines.filter(line => /(香港|HK|HongKong|🇭🇰|HKG)/i.test(line));
+              // 1. 处理 Base64 加密的内容 (很多免费源是这种格式)
+              let decodedData = rawData;
+              try {
+                  if (!rawData.includes('proxies:') && !rawData.includes('server:')) {
+                      decodedData = Buffer.from(rawData.trim(), 'base64').toString('utf-8');
+                  }
+              } catch (e) {
+                  // 如果不是 Base64，保持原样
+              }
+
+              // 2. 提取所有行，精准筛选香港节点
+              // 匹配包含 香港、HK、HongKong、Emoji旗帜 的行
+              const lines = decodedData.split('\n');
+              const hkKeywords = /(香港|HK|HongKong|🇭🇰|Hong Kong|HONG KONG|HKG)/i;
               
-              // 构造一个最基础的 Clash 格式文件
-              let output = "proxies:\n";
-              // 这里我们直接保留原始行，虽然简单，但绝对能跑通
-              // 如果需要深度解析，逻辑会变复杂，我们先确保流程走通
-              fs.writeFileSync('hk_pure.yaml', allContent); 
-              console.log("处理完成，文件已生成。");
+              // 3. 去重与清洗
+              // 免费源里有很多重复的 IP，我们按行内容做个 Set 去重
+              const uniqueNodes = new Set();
+              lines.forEach(line => {
+                  const trimmed = line.trim();
+                  if (trimmed && hkKeywords.test(trimmed)) {
+                      // 简单过滤掉明显的非节点行（如 HTML 标签）
+                      if (!trimmed.includes('<') && !trimmed.includes('div')) {
+                          uniqueNodes.add(trimmed);
+                      }
+                  }
+              });
+
+              const resultNodes = Array.from(uniqueNodes);
+              console.log(`筛选完成：从 10MB 缩减至 ${resultNodes.length} 个香港节点`);
+
+              // 4. 写入文件 (保持最通用的每行一个节点的格式，方便导入)
+              // 如果你需要 Clash 格式，可以根据需要调整头部
+              fs.writeFileSync('hk_pure.yaml', resultNodes.join('\n'));
           }
           main();
           EOF
