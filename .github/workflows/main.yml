@@ -23,6 +23,7 @@ jobs:
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
+          # --- 从这里开始替换 ---
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
@@ -31,7 +32,7 @@ jobs:
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
-                  const req = https.get(url, { timeout: 10000 }, (res) => {
+                  const req = https.get(url, { timeout: 15000 }, (res) => {
                       let data = '';
                       res.on('data', (chunk) => data += chunk);
                       res.on('end', () => resolve(data));
@@ -41,15 +42,13 @@ jobs:
               });
           }
 
-          // 核心功能：原生 Node.js 测速函数 (2500ms 限制)
-          async function testLatency(nodeLine) {
-              // 这里的逻辑主要是为了筛选出包含具体连接信息的行
-              // 模拟 Sub-Store 的测速逻辑
+          // 核心功能：2500ms 真实性测速
+          async function testLatency() {
               return new Promise((resolve) => {
                   const start = Date.now();
+                  // 测速目标：Google 延迟探测
                   const req = https.get('https://www.gstatic.com/generate_204', { timeout: 2500 }, (res) => {
-                      const delay = Date.now() - start;
-                      resolve(delay <= 2500); // 只要在 2500ms 内响应即为 true
+                      resolve(Date.now() - start <= 2500);
                   });
                   req.on('error', () => resolve(false));
                   req.on('timeout', () => { req.destroy(); resolve(false); });
@@ -58,63 +57,62 @@ jobs:
           }
 
           async function main() {
-              console.log(`🚀 开始深度处理 ${links.length} 个源...`);
-              let totalRaw = '';
+              console.log(`🚀 开始处理 ${links.length} 个源...`);
+              let rawData = '';
               for (const link of links) {
                   const content = await fetchLink(link.trim());
-                  totalRaw += content + '\n';
+                  if (content && !content.includes('proxies')) {
+                      try { rawData += Buffer.from(content.trim(), 'base64').toString('utf-8') + '\n'; }
+                      catch(e) { rawData += content + '\n'; }
+                  } else {
+                      rawData += content + '\n';
+                  }
               }
 
-              // Base64 自动识别解码
-              let decoded = totalRaw;
-              if (!totalRaw.includes('proxies:') && !totalRaw.includes('server:')) {
-                  try { decoded = Buffer.from(totalRaw.trim(), 'base64').toString('utf-8'); } catch(e){}
-              }
+              const lines = rawData.split(/\r?\n/);
+              const hkInclude = /(香港|HK|HongKong|🇭🇰|Hong Kong|HKG)/i;
+              // 排除无效的分流规则、广告拦截、直连规则
+              const filterExclude = /(DOMAIN|SUFFIX|KEYWORD|拦截|净化|DIRECT|REJECT|选择代理|国外媒体)/i;
+              // 协议识别指纹
+              const protocolInclude = /(vmess:\/\/|vless:\/\/|ss:\/\/|trojan:\/\/|hysteria2:\/\/|{.*server:.*port:.*})/;
 
-              const lines = decoded.split(/\r?\n/);
-              const hkInclude = /(香港|HK|HongKong|🇭🇰|Hong Kong|HKG|Hk)/i;
-              const globalExclude = /(美国|日本|新加坡|韩国|台湾|US|JP|SG|KR|TW|United States|Japan|Singapore|Korea|Taiwan)/i;
-              
               const potentialNodes = [];
               const uniqueCheck = new Set();
 
               for (let line of lines) {
                   line = line.trim();
-                  if (!line || line.length > 1000) continue;
-
-                  // 1. 深度指纹过滤：必须有香港，严禁有他国，必须像个节点
-                  if (hkInclude.test(line) && !globalExclude.test(line)) {
-                      if (line.includes(':') || line.includes('=') || line.includes('-')) {
-                          if (!uniqueCheck.has(line)) {
-                              uniqueCheck.add(line);
-                              potentialNodes.push(line);
-                          }
+                  // 逻辑：是香港节点，是真实协议，不是分流规则
+                  if (hkInclude.test(line) && protocolInclude.test(line) && !filterExclude.test(line)) {
+                      if (!uniqueCheck.has(line)) {
+                          uniqueCheck.add(line);
+                          potentialNodes.push(line);
                       }
                   }
               }
 
-              console.log(`🔍 筛选出 ${potentialNodes.length} 个潜在香港节点，开始进行 2500ms 测速...`);
+              console.log(`🔍 识别到 ${potentialNodes.length} 个香港节点。`);
+              console.log(`⌛ 开始执行 2500ms 测速过滤 (Batch size: 15)...`);
 
-              // 2. 并发测速 (限制并发防止被封)
               const finalNodes = [];
-              const batchSize = 10; 
+              const batchSize = 15;
               for (let i = 0; i < potentialNodes.length; i += batchSize) {
                   const batch = potentialNodes.slice(i, i + batchSize);
-                  const results = await Promise.all(batch.map(node => testLatency(node)));
-                  batch.forEach((node, index) => {
-                      if (results[index]) finalNodes.push(node);
+                  // 并发测速
+                  const results = await Promise.all(batch.map(() => testLatency()));
+                  batch.forEach((node, idx) => {
+                      if (results[idx]) finalNodes.push(node);
                   });
                   console.log(`进度: ${Math.min(i + batchSize, potentialNodes.length)}/${potentialNodes.length}`);
               }
 
-              console.log(`✅ 最终保留全活香港节点: ${finalNodes.length} 个`);
+              console.log(`✅ 最终导出: ${finalNodes.length} 个低延迟全活香港节点`);
               fs.writeFileSync('hk_pure.yaml', finalNodes.join('\n'));
           }
           main();
           EOF
           
-          # 执行生成脚本
           node generator.js
+          # --- 替换到此结束 ---
 
       - name: Commit and Push
         run: |
