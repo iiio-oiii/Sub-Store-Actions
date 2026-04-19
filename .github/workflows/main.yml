@@ -1,4 +1,4 @@
-name: Ultimate_YAML_Purifier
+name: Final_Format_Perfector
 
 on:
   workflow_dispatch:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Atomic Rebuild Logic
+      - name: Atomic Structural Fix
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -38,7 +38,7 @@ jobs:
           ];
 
           async function main() {
-            let cleanNodes = [];
+            let allNodeLines = [];
             let nodeNames = new Set();
 
             for (const url of urls) {
@@ -58,26 +58,29 @@ jobs:
                 for (let line of lines) {
                   const trimmed = line.trim();
                   
-                  // 1. 发现 proxies: 开始，但不搬运这一行
+                  // 1. 发现 proxies 标题，开始抓取，但绝对不搬运这个标题
                   if (trimmed.toLowerCase().startsWith('proxies:')) {
                     inProxies = true;
                     continue;
                   }
 
                   if (inProxies) {
-                    // 2. 遇到其他顶级键（非空格、非横杠开头），说明此源抓取结束
+                    // 2. 判定段落结束
                     if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
                       inProxies = false;
                       continue;
                     }
 
-                    // 3. 核心净化：剔除重复标题，强制标准化缩进
+                    // 3. 核心修复：强制重置缩进，不叠加空格
                     if (trimmed.length > 0 && !trimmed.toLowerCase().includes('proxies:')) {
-                      // 强制节点开头为 2 空格，属性为 4 空格
-                      let formatted = trimmed.startsWith('-') ? '  ' + trimmed : '    ' + trimmed;
-                      cleanNodes.push(formatted);
+                      if (trimmed.startsWith('-')) {
+                        // 节点起始行：固定 2 空格
+                        allNodeLines.push('  ' + trimmed);
+                      } else {
+                        // 节点属性行：固定 4 空格
+                        allNodeLines.push('    ' + trimmed);
+                      }
 
-                      // 提取名字用于 proxy-groups
                       const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
                       if (nameMatch) {
                         nodeNames.add(nameMatch[1].trim().replace(/^["']|["']$/g, ''));
@@ -85,19 +88,18 @@ jobs:
                     }
                   }
                 }
-              } catch (e) { console.log(`跳过错误源: ${url}`); }
+              } catch (e) { console.log(`Error on ${url}`); }
             }
 
-            const proxyList = Array.from(nodeNames).map(n => `      - "${n}"`).join('\n');
+            const proxyListStr = Array.from(nodeNames).map(n => `      - "${n}"`).join('\n');
             
-            // 构造唯一的、绝对合规的 YAML 结构
+            // 构造唯一的、绝对整齐的 YAML
             const finalYaml = [
               "allow-left-click: true",
               "mode: rule",
               "unified-delay: true",
-              "",
-              "proxies:", // 全文件唯一的 proxies 标题
-              ...cleanNodes,
+              "proxies:",
+              ...allNodeLines,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -105,14 +107,14 @@ jobs:
               "    url: http://www.gstatic.com/generate_204",
               "    interval: 300",
               "    proxies:",
-              proxyList,
+              proxyListStr,
               "",
               "  - name: 🔰 手动切换",
               "    type: select",
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              proxyList,
+              proxyListStr,
               "",
               "rules:",
               "  - MATCH,🔰 手动切换"
@@ -130,5 +132,5 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Auto: Atomic Structural Rebuild" || exit 0
+          git commit -m "Fix Indentation Stairs Error" || exit 0
           git push origin HEAD
