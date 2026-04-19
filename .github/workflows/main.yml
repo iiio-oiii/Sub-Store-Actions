@@ -15,16 +15,16 @@ jobs:
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          # 1. 将订阅链接写入临时文件
+          # 1. 写入链接
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 2. 使用 Docker 运行，指定镜像内的 sub-store 路径
-          # 注意：镜像内命令通常需要通过 node 调用或者使用其 alias
+          # 2. 使用 sub-store-cli 命令 (这是该镜像通常内置的别名)
+          # 如果这个还不行，我们会用 npx 强制在容器内跑
           docker run --rm \
             -v $(pwd):/opt/app \
             -w /opt/app \
             xream/sub-store \
-            node /opt/sub-store/sub-store.js convert --source links.txt --script ./process.js --output hk_pure.yaml
+            sub-store-cli convert --source links.txt --script ./process.js --output hk_pure.yaml
             
       - name: Commit and Push
         run: |
