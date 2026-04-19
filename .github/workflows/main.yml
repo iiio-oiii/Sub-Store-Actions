@@ -1,4 +1,4 @@
-name: Multi-Source Node Merger
+name: Ultimate Multi-Source Merger
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Advanced Multi-Format Merge
+      - name: Comprehensive Reconstruction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -36,7 +36,15 @@ jobs:
             'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
             'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
             'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml',
-            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml'
+            'https://raw.githubusercontent.com/telegeam/freenode/refs/heads/master/clash.yaml',
+            'https://raw.githubusercontent.com/Pawdroid/Free-servers/refs/heads/main/sub',
+            'https://raw.githubusercontent.com/gslege/CloudflareIP/refs/heads/main/Vless.txt',
+            'https://raw.githubusercontent.com/pachangcheng/mianfeijiedian/refs/heads/main/should.txt',
+            'https://raw.githubusercontent.com/Leon406/SubCrawler/refs/heads/main/sub/share/vless',
+            'https://raw.githubusercontent.com/bin1site1/V2rayFree/refs/heads/main/config.txt',
+            'https://raw.githubusercontent.com/niq0n0pin/v2rayfree-nice-tracker/main/backup/nodes.txt',
+            'https://raw.githubusercontent.com/Barabama/FreeNodes/main/nodes/simple.txt',
+            'https://raw.githubusercontent.com/ishalumi/proxy-node-collector/main/output/nodes.txt'
           ];
 
           async function fetchUrl(url) {
@@ -50,66 +58,65 @@ jobs:
           }
 
           async function main() {
-            let allProxyBlocks = [];
+            let allProxyLines = [];
             let proxyNames = [];
 
             for (const url of urls) {
-              console.log(`📡 正在抓取: ${url}`);
+              console.log(`📡 Fetching: ${url}`);
               let content = await fetchUrl(url);
               if (!content) continue;
 
-              // 自动识别 Base64 并解码
-              if (!content.includes('proxies:') && !content.includes('server:')) {
+              // 自动解码 Base64 (很多源是加密的)
+              if (!content.includes('server:') && !content.includes('name:')) {
                 try { content = Buffer.from(content, 'base64').toString(); } catch(e) {}
               }
 
               const lines = content.split('\n');
-              let isProxySection = false;
+              let isProxyArea = false;
               let currentBlock = [];
 
               for (let line of lines) {
                 const trimmed = line.trim();
-                
-                // 找到 proxies 区域
+
+                // 核心逻辑：如果看到 "proxies:" 或者是符合节点特征的行
                 if (trimmed === 'proxies:') {
-                  isProxySection = true;
+                  isProxyArea = true;
                   continue;
                 }
-                
-                // 遇到非缩进的顶级字段则停止
-                if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                  isProxySection = false;
+
+                // 如果没看到 "proxies:" 但看到了以 "- name:" 开头，也强制开启抓取
+                if (trimmed.startsWith('- name:') || trimmed.startsWith('- {name:')) {
+                  isProxyArea = true;
                 }
 
-                if (isProxySection) {
-                  if (trimmed.startsWith('-')) {
-                    if (currentBlock.length > 0) allProxyBlocks.push(currentBlock.join('\n'));
-                    currentBlock = [line];
-                  } else if (currentBlock.length > 0) {
-                    currentBlock.push(line);
+                if (isProxyArea) {
+                  // 遇到下一个顶级配置（无缩进且不是节点）则停止该文件的抓取
+                  if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                    isProxyArea = false;
+                    continue;
                   }
 
-                  // 提取名字用于组
-                  const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                  // 像素级收集行
+                  allProxyLines.push(line);
+
+                  // 提取名字用于 Group，确保加引号防止表情符号导致报错
+                  const nameMatch = line.match(/name:\s*(.*)/);
                   if (nameMatch) {
-                    proxyNames.push(nameMatch[1].trim());
+                    let n = nameMatch[1].trim().replace(/^["']|["']$/g, '').split(',')[0].replace(/[{} ]/g, '');
+                    if (n) proxyNames.push(`      - "${n}"`);
                   }
                 }
               }
-              if (currentBlock.length > 0) allProxyBlocks.push(currentBlock.join('\n'));
             }
 
-            // 去重并统一加引号
-            const uniqueNames = [...new Set(proxyNames)].map(n => `      - "${n}"`);
-
-            const finalYaml = [
+            const output = [
               "allow-left-click: true",
               "mode: rule",
               "log-level: info",
               "unified-delay: true",
               "",
               "proxies:",
-              ...allProxyBlocks,
+              ...allProxyLines,
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -117,21 +124,21 @@ jobs:
               "    url: http://www.gstatic.com/generate_204",
               "    interval: 300",
               "    proxies:",
-              ...uniqueNames,
+              ...new Set(proxyNames),
               "",
               "  - name: 🔰 手动切换",
               "    type: select",
               "    proxies:",
               "      - 🚀 自动选择",
               "      - DIRECT",
-              ...uniqueNames,
+              ...new Set(proxyNames),
               "",
               "rules:",
               "  - MATCH,🔰 手动切换"
             ].join('\n');
 
-            fs.writeFileSync('merged_nodes.yaml', finalYaml);
-            console.log(`✅ 合并完成！总节点数: ${allProxyBlocks.length}`);
+            fs.writeFileSync('merged_nodes.yaml', output);
+            console.log("✅ 全部 21 个订阅源已处理完毕！");
           }
           main();
           EOF
@@ -141,8 +148,8 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          # 关键修正：确保换行符统一为 LF，并清理多余空格
+          # 核心修复：移除 \r 换行符并强制使用 UTF-8
           sed -i 's/\r$//' merged_nodes.yaml
           git add merged_nodes.yaml
-          git commit -m "Merge multiple verified sources" || exit 0
+          git commit -m "Merged All 21 Sources $(date +'%Y-%m-%d')" || exit 0
           git push
