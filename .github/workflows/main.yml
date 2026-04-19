@@ -18,14 +18,14 @@ jobs:
           # 1. 将订阅链接写入临时文件
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 2. 使用 Docker 运行 Sub-Store
-          # 我们把当前目录映射到容器里的 /opt/app，直接跑转换
+          # 2. 使用 Docker 运行，指定镜像内的 sub-store 路径
+          # 注意：镜像内命令通常需要通过 node 调用或者使用其 alias
           docker run --rm \
             -v $(pwd):/opt/app \
             -w /opt/app \
             xream/sub-store \
-            sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml
-
+            node /opt/sub-store/sub-store.js convert --source links.txt --script ./process.js --output hk_pure.yaml
+            
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
