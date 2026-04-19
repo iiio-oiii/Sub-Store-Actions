@@ -1,4 +1,4 @@
-name: Precise Node Merger
+name: Pure Raw Node Merger
 
 on:
   workflow_dispatch:
@@ -23,9 +23,7 @@ jobs:
           const fs = require('fs');
           const https = require('https');
 
-          const urls = [
-            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml'
-          ];
+          const url = 'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml';
 
           async function fetchUrl(url) {
             return new Promise((resolve) => {
@@ -38,70 +36,53 @@ jobs:
           }
 
           async function main() {
-            let allProxies = [];
+            const content = await fetchUrl(url);
+            if (!content) return;
+
+            const lines = content.split('\n');
+            let proxiesList = [];
             let proxyNames = [];
+            let isProxySection = false;
 
-            for (const url of urls) {
-              const content = await fetchUrl(url);
-              if (!content) continue;
+            for (let line of lines) {
+              const trimmed = line.trim();
+              
+              // 找到 proxies 区域
+              if (trimmed === 'proxies:') {
+                isProxySection = true;
+                continue;
+              }
+              
+              // 遇到下一个顶级配置则停止
+              if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
+                isProxySection = false;
+              }
 
-              const lines = content.split('\n');
-              let isProxySection = false;
-              let currentProxy = [];
+              if (isProxySection) {
+                // 1. 收集原始行（不做任何缩进修改，保持 0 缩进开头）
+                proxiesList.push(line);
 
-              for (let i = 0; i < lines.length; i++) {
-                let line = lines[i];
-                let trimmed = line.trim();
-
-                // 识别 proxies 区域开始
-                if (trimmed === 'proxies:') {
-                  isProxySection = true;
-                  continue;
-                }
-                
-                // 识别 proxies 区域结束（遇到下一个顶级字段）
-                if (isProxySection && line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                  isProxySection = false;
-                }
-
-                if (isProxySection) {
-                  // 如果是以 - 开头，代表一个新节点的起始
-                  if (trimmed.startsWith('-')) {
-                    if (currentProxy.length > 0) {
-                      allProxies.push(currentProxy.join('\n'));
-                    }
-                    currentProxy = [line];
-                  } else if (currentProxy.length > 0 && (line.startsWith(' ') || line === '')) {
-                    // 保持原有的缩进结构
-                    currentProxy.push(line);
-                  }
+                // 2. 提取节点名用于生成组
+                const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
+                if (nameMatch) {
+                  proxyNames.push(`      - "${nameMatch[1].trim()}"`);
                 }
               }
-              // 推入最后一个节点
-              if (currentProxy.length > 0) allProxies.push(currentProxy.join('\n'));
             }
-
-            // 提取节点名并确保唯一性
-            allProxies.forEach(block => {
-              const nameMatch = block.match(/name:\s*(.*)/);
-              if (nameMatch) {
-                let name = nameMatch[1].trim().replace(/^["']|["']$/g, '');
-                if (name) proxyNames.push(`      - "${name}"`);
-              }
-            });
 
             const uniqueNames = [...new Set(proxyNames)];
 
-            // 构造最终的 Mihomo/Clash 配置文件
+            // 构造最精简、最稳健的配置文件
             const finalYaml = [
               "port: 7890",
               "socks-port: 7891",
               "allow-left-click: true",
               "mode: rule",
               "log-level: info",
+              "unified-delay: true",
               "",
               "proxies:",
-              ...allProxies,
+              ...proxiesList, // 这里直接填入原始行，不再额外加空格
               "",
               "proxy-groups:",
               "  - name: 🚀 自动选择",
@@ -123,7 +104,7 @@ jobs:
             ].join('\n');
 
             fs.writeFileSync('merged_nodes.yaml', finalYaml);
-            console.log(`✅ 成功复刻节点！总数: ${allProxies.length}`);
+            console.log("✅ 像素级复刻完成！");
           }
           main();
           EOF
@@ -134,5 +115,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add merged_nodes.yaml
-          git commit -m "Fix indentation and retain all nodes" || exit 0
+          git commit -m "Ultra-precise raw merge" || exit 0
           git push
