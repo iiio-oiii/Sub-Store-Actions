@@ -1,4 +1,4 @@
-name: Ultimate_Standard_Merger_v3
+name: Ultimate_Single_Proxies_Merger
 
 on:
   workflow_dispatch:
@@ -19,122 +19,11 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Standard Proxies Extraction
+      - name: Clean Proxies Extraction
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
           const https = require('https');
 
           const urls = [
-            'https://raw.githubusercontent.com/chengaopan/AutoMergePublicNodes/master/list.yml',
-            'https://raw.githubusercontent.com/snakem982/proxypool/main/source/clash-meta.yaml',
-            'https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml',
-            'https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash',
-            'https://raw.githubusercontent.com/Jsnzkpg/Jsnzkpg/Jsnzkpg/Jsnzkpg',
-            'https://raw.githubusercontent.com/ccpthisbigdog/freedomchina/refs/heads/main/clab.yaml',
-            'https://raw.githubusercontent.com/xyfqzy/free-nodes/main/nodes/clash.yaml',
-            'https://raw.githubusercontent.com/clashv2ray-hub/clashfree/refs/heads/main/clash.yaml',
-            'https://raw.githubusercontent.com/ovmvo/FreeSub/refs/heads/main/sub/permanent/mihomo.yaml'
-          ];
-
-          async function fetchUrl(url) {
-            return new Promise((resolve) => {
-              https.get(url, { timeout: 20000 }, (res) => {
-                let data = '';
-                res.on('data', (chunk) => data += chunk);
-                res.on('end', () => resolve(data));
-              }).on('error', () => resolve(''));
-            });
-          }
-
-          async function main() {
-            let allProxyLines = [];
-            let proxyNames = [];
-
-            for (const url of urls) {
-              const content = await fetchUrl(url);
-              if (!content || !content.includes('proxies:')) continue;
-
-              const lines = content.split('\n');
-              let isProxyArea = false;
-
-              for (let line of lines) {
-                const trimmed = line.trim();
-                
-                // 1. 寻找 proxies 标志
-                if (trimmed === 'proxies:') {
-                  isProxyArea = true;
-                  continue;
-                }
-
-                if (isProxyArea) {
-                  // 2. 如果遇到顶级键（非空、非缩进、非横杠开头），说明该文件 proxies 结束
-                  if (line.length > 0 && !line.startsWith(' ') && !line.startsWith('-')) {
-                    isProxyArea = false;
-                    continue;
-                  }
-
-                  // 3. 核心修复：只要是有内容且在区域内的，全部推入
-                  if (trimmed.length > 0) {
-                    // 统一强制使用 2 格缩进，确保 Mihomo 识别
-                    if (trimmed.startsWith('-')) {
-                        allProxyLines.push("  " + trimmed);
-                    } else {
-                        allProxyLines.push("    " + trimmed);
-                    }
-                  }
-
-                  // 提取名字用于组
-                  const nameMatch = line.match(/name:\s*["']?([^"'\n,{}]+)["']?/);
-                  if (nameMatch) {
-                    let n = nameMatch[1].trim().replace(/^["']|["']$/g, '');
-                    if (n) proxyNames.push(`      - "${n}"`);
-                  }
-                }
-              }
-            }
-
-            const uniqueNames = [...new Set(proxyNames)];
-            
-            const finalYaml = [
-              "allow-left-click: true",
-              "mode: rule",
-              "log-level: info",
-              "unified-delay: true",
-              "",
-              "proxies:",
-              ...allProxyLines,
-              "",
-              "proxy-groups:",
-              "  - name: 🚀 自动选择",
-              "    type: url-test",
-              "    url: http://www.gstatic.com/generate_204",
-              "    interval: 300",
-              "    proxies:",
-              ...uniqueNames,
-              "",
-              "  - name: 🔰 手动切换",
-              "    type: select",
-              "    proxies:",
-              "      - 🚀 自动选择",
-              "      - DIRECT",
-              ...uniqueNames,
-              "",
-              "rules:",
-              "  - MATCH,🔰 手动切换"
-            ].join('\n');
-
-            fs.writeFileSync('merged_nodes.yaml', finalYaml);
-          }
-          main();
-          EOF
-          node generator.js
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          sed -i 's/\r$//' merged_nodes.yaml
-          git add merged_nodes.yaml
-          git commit -m "Force full content injection" || exit 0
-          git push origin HEAD
+            '
