@@ -40,51 +40,40 @@ jobs:
           }
 
           async function main() {
-              console.log(`🚀 开启智能块模式，解析 23 个源...`);
+              console.log(`🚀 正在执行严格过滤模式...`);
               let allNodes = [];
               const hkInclude = /(香港|HK|HongKong|🇭🇰|HKG)/i;
-              const globalExclude = /(美国|日本|新加坡|韩国|台湾|US|JP|SG|KR|TW)/i;
+              // 排除非节点的杂质行
+              const junkExclude = /(DOMAIN|SUFFIX|KEYWORD|PROCESS|IP-CIDR|USER-AGENT)/i;
 
               for (const link of links) {
                   const content = await fetchLink(link.trim());
                   if (!content) continue;
 
-                  // 1. 处理 Base64 (链接形式)
-                  if (!content.includes('proxies:')) {
-                      try {
-                          const decoded = Buffer.from(content.trim(), 'base64').toString('utf-8');
-                          decoded.split('\n').forEach(line => {
-                              if (hkInclude.test(line) && !globalExclude.test(line) && line.includes('://')) {
-                                  allNodes.push(line.trim());
-                              }
-                          });
-                      } catch(e) {}
-                  }
-
-                  // 2. 核心：Clash 块提取逻辑 (抓取完整的 YAML 节点块)
-                  const proxyMatch = content.match(/-[\s\S]*?(?=\n-|\n\n|\n[a-z])/g);
+                  // 核心：精准提取 YAML 节点块 (寻找以 - 开头且包含 name 和 server 的块)
+                  const proxyMatch = content.match(/-[\s\S]*?(?=\n-|\n\n|\n[a-zA-Z])/g);
                   if (proxyMatch) {
                       proxyMatch.forEach(block => {
-                          if (hkInclude.test(block) && (block.includes('server:') || block.includes('type:'))) {
-                              if (!globalExclude.test(block) && !block.includes('DOMAIN')) {
-                                  allNodes.push(block.trim());
+                          const b = block.trim();
+                          // 必须包含香港关键字，且必须同时具备 name, server, port 才是有效节点
+                          if (hkInclude.test(b) && b.includes('name:') && b.includes('server:') && b.includes('port:')) {
+                              if (!junkExclude.test(b)) {
+                                  // 统一格式化为 Clash 认可的缩进
+                                  const clean = b.startsWith('-') ? b : `- ${b}`;
+                                  allNodes.push(`  ${clean}`);
                               }
                           }
                       });
                   }
               }
 
-              // 去重
               const uniqueNodes = Array.from(new Set(allNodes));
-              console.log(`✅ 智能识别完成！找到 ${uniqueNodes.length} 个香港节点。`);
-
-              // 输出为标准 Clash 格式
-              let yamlContent = "proxies:\n" + uniqueNodes.map(n => {
-                  const clean = n.replace(/^- /, '').trim();
-                  return `  - ${clean}`;
-              }).join('\n');
               
-              fs.writeFileSync('hk_pure.yaml', yamlContent);
+              // 构造标准 Clash 结构
+              const finalYaml = "proxies:\n" + uniqueNodes.join('\n');
+              
+              console.log(`✅ 过滤完成，获得 ${uniqueNodes.length} 个高纯净度香港节点`);
+              fs.writeFileSync('hk_pure.yaml', finalYaml);
           }
           main();
           EOF
