@@ -3,7 +3,7 @@ async function operator(proxies, context) {
     if (!proxies || !Array.isArray(proxies)) return [];
 
     // 只留香港节点 (支持不区分大小写)
-    let hkProxies = proxies.filter(p => p && p.name && /(香港|HK|HongKong|🇭🇰)/i.test(p.name));
+    let hkProxies = proxies.filter(p => p && p.name && /(香港|HK)/i.test(p.name));
     
     console.log(`Found ${hkProxies.length} HK proxies. Starting test...`);
 
