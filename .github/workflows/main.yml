@@ -44,7 +44,7 @@ jobs:
           }
 
           async function main() {
-              console.log("🚀 正在清理格式乱象，确保香港节点绝对纯净...");
+              console.log("🚀 正在执行终极格式优化...");
               let finalNodes = new Set();
 
               for (const link of links) {
@@ -55,11 +55,9 @@ jobs:
                   const items = normalized.split(/\n\s*-/);
                   
                   items.forEach(item => {
-                      // 1. 严格过滤非香港节点
                       if (hkRegex.test(item) && !excludeRegex.test(item)) {
                           if (item.includes('name:') && item.includes('server:')) {
                               
-                              // 2. 核心修正：精准提取大括号内容，剔除开头的 / 或其他乱码
                               let startIdx = item.indexOf('{');
                               let endIdx = item.lastIndexOf('}');
                               let contentInside = (startIdx !== -1 && endIdx !== -1) 
@@ -67,12 +65,14 @@ jobs:
                                   : item;
 
                               let clean = contentInside.trim()
-                                  .replace(/\n/g, ', ')             // 换行转逗号
-                                  .replace(/\s+/g, ' ')             // 压缩空格
-                                  .replace(/,\s*,/g, ',')           // 清理双逗号
-                                  .replace(/:\s*,/g, ': "", ')      // 修复冒号后直接跟逗号的空键值
-                                  .replace(/,\s*$/g, '')            // 清理末尾逗号
-                                  .replace(/^[\s,./\\]+/, '')       // 强力剔除开头乱码
+                                  .replace(/\n/g, ', ')
+                                  .replace(/\s+/g, ' ')
+                                  .replace(/:\s*,/g, ': "", ')      // 修复空键值：ws-opts:, -> ws-opts: "",
+                                  .replace(/:\s*}/g, ': ""}')       // 修复末尾空值
+                                  .replace(/,\s*,/g, ',')           // 清理多余逗号
+                                  .replace(/,\s*}/g, '}')           // 清理末尾逗号
+                                  .replace(/^[\s,./\\]+/, '')       // 强力剔除开头符号
+                                  .replace(/,\s*$/g, '')            // 再次清理行尾逗号
                                   .trim();
 
                               if (clean.length > 10) {
@@ -85,7 +85,7 @@ jobs:
 
               const output = "proxies:\n" + Array.from(finalNodes).join('\n');
               fs.writeFileSync('hk_pure.yaml', output);
-              console.log(`✅ 格式化完成！共保留 ${finalNodes.size} 个精简香港节点`);
+              console.log(`✅ 清理完成！已准备好 ${finalNodes.size} 个完美格式的香港节点`);
           }
           main();
           EOF
