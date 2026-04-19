@@ -1,12 +1,58 @@
-- name: Generate Pure Subscription
+name: HK_Pure_Update
+on:
+  schedule:
+    - cron: '0 */4 * * *' # 每 4 小时全自动运行一次
+  workflow_dispatch:      # 允许你在网页上手动点击运行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # 强制使用 Node.js 24 以消除弃用警告
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Sub-Store CLI
+        run: |
+          npm install -g @sub-store/cli
+          echo "Sub-Store CLI version: $(sub-store --version)"
+
+      - name: Generate Pure Subscription
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          # 使用 printf 避免 echo 处理特殊字符时的转义问题
+          # 1. 安全导出订阅链接到文件，处理 23 个订阅中的特殊字符
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 增加调试信息：看看读取到了多少行链接
-          echo "Total subscription links: $(wc -l < links.txt)"
+          # 2. 打印行数，方便你在 Log 里排查是否读取到了所有订阅
+          echo "Processing $(wc -l < links.txt) subscription links..."
           
-          # 运行转换，增加 --verbose 模式以便报错时看到细节
+          # 3. 运行转换
+          # --source 指定输入文件
+          # --script 指定你的 process.js 逻辑
+          # --output 指定输出文件名
           sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # 检查文件是否生成成功
+          if [ -f "hk_pure.yaml" ]; then
+            git add hk_pure.yaml
+            # 只有当内容确实有变动时才提交，防止 Action 报错
+            git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure List (Node 24)"
+            git push
+          else
+            echo "Error: hk_pure.yaml was not generated!"
+            exit 1
+          fi
