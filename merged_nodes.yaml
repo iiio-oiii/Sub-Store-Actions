@@ -139,38 +139,123 @@ proxies:
     headers:
       Host: jflsjlaf.pages.dev
     path: /
-- name: 13|AT_speednode_0001
-  network: ws
-  password: trojan
-  port: 8888
-  server: 152.53.45.251
-  skip-cert-verify: false
-  sni: jflsjlaf.pages.dev
-  type: trojan
-  udp: true
-  ws-opts:
-    headers:
-      Host: jflsjlaf.pages.dev
-    path: /
-  - {name: "11|tg频道:@ripaojiedian", server: 63.180.254.10, port: 443, type: ss, password: amazonskr05, cipher: aes-256-cfb}
-  - {name: "11|🇭🇰 香港|@ripaojiedian", server: v10.hdacd.com, port: 30807, type: vmess, uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484, cipher: auto, alterId: 2, tls: false, skip-cert-verify: false}
-  - {name: "11", server: 95.40.85.50, port: 52687, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_4bo4", server: 54.46.52.70, port: 6313, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, network: tcp, skip-cert-verify: true}
-  - {name: "11_oipu", server: 52.69.111.130, port: 6313, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, network: tcp, skip-cert-verify: true}
-  - {name: "11_yo6e", server: 13.112.73.166, port: 1951, type: trojan, password: BxceQaOe, sni: t.me%252Fripaojiedian, network: tcp, skip-cert-verify: true}
-  - {name: "11_cftr", server: 54.249.109.55, port: 34818, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_3409", server: 54.249.109.55, port: 4380, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_ddrd", server: 13.115.146.132, port: 4674, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_5rpa", server: 54.249.109.55, port: 4674, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_wjdf", server: 95.40.68.160, port: 12070, type: trojan, password: BxceQaOe, sni: t.me%252Fripaojiedian, network: tcp, skip-cert-verify: true}
-  - {name: "11_e67g", server: 54.249.109.55, port: 4019, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_vbbo", server: 13.115.246.132, port: 3057, type: trojan, password: 868ecdaf6aed618ec98cf78585672b2b, sni: www.nintendogames.net, network: tcp, skip-cert-verify: false}
-  - {name: "11_rure", server: 54.46.52.234, port: 23255, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, network: tcp, skip-cert-verify: true}
-  - {name: "12|香港|@ripaojiedian", server: v10.hdacd.com, port: 30807, type: vmess, uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484, cipher: auto, alterId: 2, tls: false, network: tcp}
-  - {name: "13|AT_speednode_0001", server: 152.53.45.251, port: 8888, type: trojan, password: trojan, sni: jflsjlaf.pages.dev, network: ws, ws-opts: {headers:}, headers: {Host: jflsjlaf.pages.dev}, skip-cert-verify: false, path: /}
-
-  - {name: "13|AT_speednode_0001", server: 152.53.45.251, port: 8888, type: trojan, password: trojan, sni: jflsjlaf.pages.dev, network: ws, ws-opts: {headers:}, headers: {Host: jflsjlaf.pages.dev}, skip-cert-verify: false, path: /}
-
+  - ♻ 自动选择
+  - 🔰 延迟最低
+  - ✅ 手动选择
+  - 🗺️ 选择地区
+  type: select
+- interval: 300
+  name: ♻ 自动选择
+  proxies: &id001
+  - 11|tg频道:@ripaojiedian
+  - 11,12|日本|@ripaojiedian
+  - 11,12|香港4|@ripaojiedian
+  - 11,12|新加坡3|@ripaojiedian
+  - 11,12|日本3|@ripaojiedian
+  - 11,12|美国3|@ripaojiedian
+  - 11,12|日本2|@ripaojiedian
+  - 11,12|香港5|@ripaojiedian
+  - 11,12|新加坡|@ripaojiedian
+  - 11|🇭🇰 香港|@ripaojiedian
+  - 11,12|新加坡2|@ripaojiedian
+  - 11,12|香港3|@ripaojiedian
+  - 12|香港|@ripaojiedian
+  - 11,12|美国|@ripaojiedian
+  - 11,12|美国2|@ripaojiedian
+  - 13|AT_speednode_0001
+  type: fallback
+  url: https://www.google.com/
+- interval: 300
+  name: 🔰 延迟最低
+  proxies: *id001
+  tolerance: 20
+  type: url-test
+  url: https://www.google.com/
+- name: ✅ 手动选择
+  proxies: *id001
+  type: select
+- name: 🌐 突破锁区
+  - DIRECT
+  - 🚀 选择代理
+  type: select
+- name: ❓ 疑似国内
+  - DIRECT
+  - 🚀 选择代理
+  - REJECT
+  type: select
+- name: 🐟 漏网之鱼
+  - DIRECT
+  - 🚀 选择代理
+  type: select
+- name: 🚨 病毒网站
+  - REJECT
+  - DIRECT
+  type: select
+- name: ⛔ 广告拦截
+  - REJECT
+  - DIRECT
+  - 🚀 选择代理
+  type: select
+- name: 🗺️ 选择地区
+  - 🇯🇵 日本
+  - 🇺🇸 美国
+  - 🇨🇳 中国
+  - 🇭🇰 香港
+  - ❔ 台湾
+  - 🇨🇦 加拿大
+  - 🇫🇷 法国
+  - 🇸🇬 新加坡
+  - 🇬🇧 英国
+  - 🇰🇷 韩国
+  - 🇷🇺 俄罗斯
+  - 🇩🇪 德国
+  type: select
+- name: 🇯🇵 日本
+  - 11,12|日本|@ripaojiedian
+  - 11,12|日本2|@ripaojiedian
+  - 11,12|日本3|@ripaojiedian
+  type: select
+- name: 🇺🇸 美国
+  - 11,12|美国|@ripaojiedian
+  - 11,12|美国2|@ripaojiedian
+  - 11,12|美国3|@ripaojiedian
+  type: select
+- name: 🇨🇳 中国
+  - REJECT
+  type: select
+- name: 🇭🇰 香港
+  - 11|🇭🇰 香港|@ripaojiedian
+  - 11,12|香港3|@ripaojiedian
+  - 11,12|香港4|@ripaojiedian
+  - 11,12|香港5|@ripaojiedian
+  - 12|香港|@ripaojiedian
+  type: select
+- name: ❔ 台湾
+  - REJECT
+  type: select
+- name: 🇨🇦 加拿大
+  - REJECT
+  type: select
+- name: 🇫🇷 法国
+  - REJECT
+  type: select
+- name: 🇸🇬 新加坡
+  - 11,12|新加坡|@ripaojiedian
+  - 11,12|新加坡2|@ripaojiedian
+  - 11,12|新加坡3|@ripaojiedian
+  type: select
+- name: 🇬🇧 英国
+  - REJECT
+  type: select
+- name: 🇰🇷 韩国
+  - REJECT
+  type: select
+- name: 🇷🇺 俄罗斯
+  - REJECT
+  type: select
+- name: 🇩🇪 德国
+  - REJECT
+  type: select
 
 proxy-groups:
   - name: 🚀 自动选择
@@ -180,20 +265,41 @@ proxy-groups:
     proxies:
       - "11|tg频道:@ripaojiedian"
       - "11|🇭🇰 香港|@ripaojiedian"
-      - "11"
+      - "11,12|香港3|@ripaojiedian"
+      - "11,12|香港4|@ripaojiedian"
+      - "11,12|香港5|@ripaojiedian"
+      - "11,12|日本|@ripaojiedian"
+      - "11,12|日本2|@ripaojiedian"
+      - "11,12|日本3|@ripaojiedian"
+      - "11,12|新加坡|@ripaojiedian"
+      - "11,12|新加坡2|@ripaojiedian"
+      - "11,12|新加坡3|@ripaojiedian"
+      - "11,12|美国|@ripaojiedian"
+      - "11,12|美国2|@ripaojiedian"
+      - "11,12|美国3|@ripaojiedian"
       - "12|香港|@ripaojiedian"
       - "13|AT_speednode_0001"
-      - "11_4bo4"
-      - "11_oipu"
-      - "11_yo6e"
-      - "11_cftr"
-      - "11_3409"
-      - "11_ddrd"
-      - "11_5rpa"
-      - "11_wjdf"
-      - "11_e67g"
-      - "11_vbbo"
-      - "11_rure"
+      - "♻ 自动选择"
+      - "🔰 延迟最低"
+      - "✅ 手动选择"
+      - "🌐 突破锁区"
+      - "❓ 疑似国内"
+      - "🐟 漏网之鱼"
+      - "🚨 病毒网站"
+      - "⛔ 广告拦截"
+      - "🗺️ 选择地区"
+      - "🇯🇵 日本"
+      - "🇺🇸 美国"
+      - "🇨🇳 中国"
+      - "🇭🇰 香港"
+      - "❔ 台湾"
+      - "🇨🇦 加拿大"
+      - "🇫🇷 法国"
+      - "🇸🇬 新加坡"
+      - "🇬🇧 英国"
+      - "🇰🇷 韩国"
+      - "🇷🇺 俄罗斯"
+      - "🇩🇪 德国"
 
   - name: 🔰 手动切换
     type: select
@@ -202,20 +308,41 @@ proxy-groups:
       - DIRECT
       - "11|tg频道:@ripaojiedian"
       - "11|🇭🇰 香港|@ripaojiedian"
-      - "11"
+      - "11,12|香港3|@ripaojiedian"
+      - "11,12|香港4|@ripaojiedian"
+      - "11,12|香港5|@ripaojiedian"
+      - "11,12|日本|@ripaojiedian"
+      - "11,12|日本2|@ripaojiedian"
+      - "11,12|日本3|@ripaojiedian"
+      - "11,12|新加坡|@ripaojiedian"
+      - "11,12|新加坡2|@ripaojiedian"
+      - "11,12|新加坡3|@ripaojiedian"
+      - "11,12|美国|@ripaojiedian"
+      - "11,12|美国2|@ripaojiedian"
+      - "11,12|美国3|@ripaojiedian"
       - "12|香港|@ripaojiedian"
       - "13|AT_speednode_0001"
-      - "11_4bo4"
-      - "11_oipu"
-      - "11_yo6e"
-      - "11_cftr"
-      - "11_3409"
-      - "11_ddrd"
-      - "11_5rpa"
-      - "11_wjdf"
-      - "11_e67g"
-      - "11_vbbo"
-      - "11_rure"
+      - "♻ 自动选择"
+      - "🔰 延迟最低"
+      - "✅ 手动选择"
+      - "🌐 突破锁区"
+      - "❓ 疑似国内"
+      - "🐟 漏网之鱼"
+      - "🚨 病毒网站"
+      - "⛔ 广告拦截"
+      - "🗺️ 选择地区"
+      - "🇯🇵 日本"
+      - "🇺🇸 美国"
+      - "🇨🇳 中国"
+      - "🇭🇰 香港"
+      - "❔ 台湾"
+      - "🇨🇦 加拿大"
+      - "🇫🇷 法国"
+      - "🇸🇬 新加坡"
+      - "🇬🇧 英国"
+      - "🇰🇷 韩国"
+      - "🇷🇺 俄罗斯"
+      - "🇩🇪 德国"
 
 rules:
   - MATCH,🔰 手动切换
