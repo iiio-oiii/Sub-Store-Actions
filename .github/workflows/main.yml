@@ -1,4 +1,4 @@
-name: Generate Pure HK Subscription
+name: Generate All Nodes Subscription
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Generate Pure Subscription
+      - name: Generate Full Subscription
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
@@ -25,12 +25,7 @@ jobs:
           const fs = require('fs');
           const https = require('https');
 
-          // 获取订阅链接列表
           const links = process.env.SUB_LINKS.split('\n').filter(l => l.trim().startsWith('http'));
-          
-          // 核心过滤逻辑：只保留香港，排除其他
-          const hkRegex = /(香港|HK|HongKong|🇭🇰|HKG)/i;
-          const excludeRegex = /(美国|US|Japan|日本|Taiwan|台湾|Singapore|新加坡|Korea|韩国|🏁|未知|立陶宛|俄罗斯|🇮🇱)/i;
 
           async function fetchLink(url) {
               return new Promise((resolve) => {
@@ -45,7 +40,7 @@ jobs:
           }
 
           async function main() {
-              console.log("🚀 开始深度提取纯净香港节点...");
+              console.log("🚀 正在从 23 个源提取所有节点...");
               let finalNodes = [];
               let nodeNames = [];
 
@@ -53,17 +48,15 @@ jobs:
                   let content = await fetchLink(link.trim());
                   if (!content) continue;
                   
-                  // 处理可能存在的 Base64 编码
                   if (!content.includes('server:')) {
                       try { content = Buffer.from(content, 'base64').toString(); } catch(e) {}
                   }
 
-                  // 统一换行符并分割节点块
+                  // 提取所有节点块
                   const blocks = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
                   
                   blocks.forEach(block => {
-                      // 严格过滤条件：包含香港关键词 且 不包含排除关键词
-                      if (hkRegex.test(block) && !excludeRegex.test(block) && block.includes('server:')) {
+                      if (block.includes('server:')) {
                           const fields = ['name', 'server', 'port', 'type', 'uuid', 'password', 'cipher', 'alterId', 'tls', 'sni', 'network', 'ws-opts', 'headers', 'skip-cert-verify', 'path'];
                           let nodeObj = {};
 
@@ -76,58 +69,64 @@ jobs:
                           });
 
                           if (nodeObj.name && nodeObj.server) {
-                              // 重新格式化单行节点
+                              // 处理重名，防止配置文件冲突
+                              let cleanName = nodeObj.name.replace(/[\[\]"]/g, '').trim();
+                              if (nodeNames.includes(`      - "${cleanName}"`)) {
+                                  cleanName = `${cleanName}_${Math.random().toString(36).substr(2, 4)}`;
+                              }
+
                               let kv = Object.entries(nodeObj).map(([k, v]) => {
+                                  if (k === 'name') return `${k}: "${cleanName}"`;
                                   if (k === 'ws-opts' || k === 'headers') return `${k}: {${v.replace(/[\{\}]/g, '')}}`;
                                   return `${k}: ${v}`;
                               }).join(', ');
                               
                               finalNodes.push(`  - {${kv}}`);
-                              nodeNames.push(`      - "${nodeObj.name}"`);
+                              nodeNames.push(`      - "${cleanName}"`);
                           }
                       }
                   });
               }
 
-              const uniqueNodes = Array.from(new Set(finalNodes));
-              const uniqueNames = Array.from(new Set(nodeNames));
+              // 移除重复节点
+              const uniqueNodes = [...new Set(finalNodes)];
+              const uniqueNames = [...new Set(nodeNames)];
 
-              // 构造符合 Mihomo 规范的完整 YAML
-              const outputLines = [
-                  "port: 7890",
-                  "socks-port: 7891",
-                  "allow-left-click: true",
-                  "mode: rule",
-                  "log-level: info",
-                  "external-controller: 127.0.0.1:9090",
-                  "",
-                  "proxies:",
-                  ...uniqueNodes,
-                  "",
-                  "proxy-groups:",
-                  "  - name: 🚀 自动优选香港",
-                  "    type: url-test",
-                  "    url: http://www.gstatic.com/generate_204",
-                  "    interval: 300",
-                  "    proxies:",
-                  ...uniqueNames,
-                  "",
-                  "  - name: 🔰 手动选择节点",
-                  "    type: select",
-                  "    proxies:",
-                  "      - 🚀 自动优选香港",
-                  ...uniqueNames,
-                  "      - DIRECT",
-                  "",
-                  "rules:",
-                  "  - DOMAIN-SUFFIX,interactivebrokers.com,🚀 自动优选香港",
-                  "  - DOMAIN-SUFFIX,tradingview.com,🚀 自动优选香港",
-                  "  - DOMAIN-SUFFIX,google.com,🔰 手动选择节点",
-                  "  - MATCH,🔰 手动选择节点"
-              ];
+              // 构造标准 YAML
+              let config = [
+                "port: 7890",
+                "socks-port: 7891",
+                "allow-left-click: true",
+                "mode: rule",
+                "log-level: info",
+                "external-controller: 127.0.0.1:9090",
+                "",
+                "proxies:",
+                ...uniqueNodes,
+                "",
+                "proxy-groups:",
+                "  - name: 🚀 自动选择(延迟最低)",
+                "    type: url-test",
+                "    url: http://www.gstatic.com/generate_204",
+                "    interval: 300",
+                "    proxies:",
+                ...uniqueNames,
+                "",
+                "  - name: 🔰 手动切换节点",
+                "    type: select",
+                "    proxies:",
+                "      - 🚀 自动选择(延迟最低)",
+                "      - DIRECT",
+                ...uniqueNames,
+                "",
+                "rules:",
+                "  - DOMAIN-SUFFIX,interactivebrokers.com,🚀 自动选择(延迟最低)",
+                "  - DOMAIN-SUFFIX,google.com,🔰 手动切换节点",
+                "  - MATCH,🔰 手动切换节点"
+              ].join('\n');
 
-              fs.writeFileSync('hk_pure.yaml', outputLines.join('\n'));
-              console.log(`✅ 生成成功！共保留 ${uniqueNodes.length} 个纯净香港节点。`);
+              fs.writeFileSync('all_nodes.yaml', config);
+              console.log(`✅ 处理完成！已提取 ${uniqueNodes.length} 个节点。`);
           }
           main();
           EOF
@@ -137,6 +136,6 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add hk_pure.yaml
-          git commit -m "Update HK Pure Config" || exit 0
+          git add all_nodes.yaml
+          git commit -m "Update All Nodes Config" || exit 0
           git push
