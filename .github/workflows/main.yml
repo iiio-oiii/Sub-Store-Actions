@@ -1,27 +1,25 @@
-name: HK_Pure_Update
+name: Generate Pure HK Subscription
+
 on:
+  workflow_dispatch: # 支持手动触发
   schedule:
-    - cron: '0 */4 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *' # 每天凌晨自动运行一次
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '22'
+          node-version: '16'
 
       - name: Generate Pure Subscription
         env:
-          SUB_LINKS: ${{ secrets.SUB_LINKS }}
+          SUB_LINKS: ${{ secrets.SUB_LINKS }} # 请确保您在 Settings-Secrets 里填好了订阅源链接
         run: |
           cat << 'EOF' > generator.js
           const fs = require('fs');
@@ -44,48 +42,77 @@ jobs:
           }
 
           async function main() {
-              console.log("🚀 正在执行终极格式优化...");
-              let finalNodes = new Set();
+              console.log("🚀 开始为陈先生生成 Mihomo 专用订阅...");
+              let finalNodes = [];
+              let nodeNames = [];
 
               for (const link of links) {
                   const content = await fetchLink(link.trim());
                   if (!content) continue;
-
-                  const normalized = content.replace(/\r\n/g, '\n');
-                  const items = normalized.split(/\n\s*-/);
+                  // 统一换行符并分割节点
+                  const items = content.replace(/\r\n/g, '\n').split(/\n\s*-/);
                   
                   items.forEach(item => {
+                      // 严格过滤香港节点
                       if (hkRegex.test(item) && !excludeRegex.test(item)) {
                           if (item.includes('name:') && item.includes('server:')) {
-                              
-                              let startIdx = item.indexOf('{');
-                              let endIdx = item.lastIndexOf('}');
-                              let contentInside = (startIdx !== -1 && endIdx !== -1) 
-                                  ? item.substring(startIdx + 1, endIdx) 
-                                  : item;
-
-                              let clean = contentInside.trim()
+                              // 精准提取大括号内容，并清理格式瑕疵
+                              let clean = item.replace(/^[^{]*/, '').replace(/[^}]*$/, '')
+                                  .replace(/[\{\}]/g, '')
+                                  .trim()
                                   .replace(/\n/g, ', ')
                                   .replace(/\s+/g, ' ')
-                                  .replace(/:\s*,/g, ': "", ')      // 修复空键值：ws-opts:, -> ws-opts: "",
-                                  .replace(/:\s*}/g, ': ""}')       // 修复末尾空值
-                                  .replace(/,\s*,/g, ',')           // 清理多余逗号
-                                  .replace(/,\s*}/g, '}')           // 清理末尾逗号
-                                  .replace(/^[\s,./\\]+/, '')       // 强力剔除开头符号
-                                  .replace(/,\s*$/g, '')            // 再次清理行尾逗号
-                                  .trim();
+                                  .replace(/:\s*,/g, ': "", ')      // 补全空键值，如 ws-opts:,
+                                  .replace(/:\s*}/g, ': ""}')       // 补全末尾空值
+                                  .replace(/,\s*,/g, ',')           // 清理双逗号
+                                  .replace(/,\s*$/g, '');           // 移除最末尾的逗号
 
-                              if (clean.length > 10) {
-                                  finalNodes.add(`  - {${clean}}`);
+                              // 提取节点名称，用于构建代理组
+                              const nameMatch = clean.match(/name:\s*"?([^",{}]+)"?/);
+                              if (nameMatch) {
+                                  const name = nameMatch[1].trim();
+                                  finalNodes.push(`  - {${clean}}`);
+                                  nodeNames.push(`      - "${name}"`);
                               }
                           }
                       }
                   });
               }
 
-              const output = "proxies:\n" + Array.from(finalNodes).join('\n');
-              fs.writeFileSync('hk_pure.yaml', output);
-              console.log(`✅ 清理完成！已准备好 ${finalNodes.size} 个完美格式的香港节点`);
+              // 核心部分：构建 Mihomo/Clash 必须的完整配置文件结构
+              const configHeader = `
+port: 7890
+socks-port: 7891
+allow-left-click: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+proxies:
+${Array.from(new Set(finalNodes)).join('\n')}
+
+proxy-groups:
+  - name: 🚀 延迟自动选择
+    type: url-test
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    proxies:
+${Array.from(new Set(nodeNames)).join('\n')}
+
+  - name: 🔰 手动切换节点
+    type: select
+    proxies:
+      - 🚀 延迟自动选择
+${Array.from(new Set(nodeNames)).join('\n')}
+
+rules:
+  - DOMAIN-SUFFIX,google.com,🔰 手动切换节点
+  - DOMAIN-SUFFIX,github.com,🔰 手动切换节点
+  - DOMAIN-SUFFIX,interactivebrokers.com,🔰 手动切换节点
+  - MATCH,🔰 手动切换节点
+`;
+              fs.writeFileSync('hk_pure.yaml', configHeader.trim());
+              console.log("✅ 订阅文件生成成功，共包含 " + finalNodes.length + " 个节点");
           }
           main();
           EOF
@@ -94,10 +121,8 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          if [ -f "hk_pure.yaml" ]; then
-            git add hk_pure.yaml
-            git diff --quiet && git diff --staged --quiet || git commit -m "Update HK Pure"
-            git push
-          fi
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add hk_pure.yaml
+          git commit -m "Update HK Pure Subscription" || exit 0
+          git push
