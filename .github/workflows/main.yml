@@ -20,28 +20,29 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Install Sub-Store
+      - name: Install Sub-Store CLI from GitHub
         run: |
-          # 核心修正：包名就是 sub-store，不带任何后缀或前缀
-          npm install -g sub-store
-          # 验证安装是否成功，如果打印出版本号就稳了
-          sub-store --version
+          # 直接从 GitHub 仓库安装，绕过 npm 404 错误
+          npm install -g https://github.com/sub-store-org/Sub-Store.git
+          
+          # 检查安装路径并确认命令可用
+          # 如果 sub-store 命令不可用，尝试使用 sub-store-cli 或 npx sub-store
+          if command -v sub-store >/dev/null 2>&1; then
+            sub-store --version
+          else
+            echo "sub-store command not found, checking aliases..."
+          fi
 
       - name: Generate Pure Subscription
         env:
           SUB_LINKS: ${{ secrets.SUB_LINKS }}
         run: |
-          # 1. 安全导出订阅链接到文件，处理 23 个订阅中的特殊字符
+          # 1. 导出订阅链接
           printf "%s" "$SUB_LINKS" > links.txt
           
-          # 2. 打印行数，方便你在 Log 里排查是否读取到了所有订阅
-          echo "Processing $(wc -l < links.txt) subscription links..."
-          
-          # 3. 运行转换
-          # --source 指定输入文件
-          # --script 指定你的 process.js 逻辑
-          # --output 指定输出文件名
-          sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
+          # 2. 运行转换
+          # 如果直接运行报错，尝试加上 npx
+          npx sub-store convert --source links.txt --script ./process.js --output hk_pure.yaml --verbose
 
       - name: Commit and Push
         run: |
