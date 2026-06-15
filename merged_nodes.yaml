@@ -18,17 +18,17 @@ proxies:
     uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
   - name: 11,12|香港3|@ripaojiedian
     network: tcp
-    password: d02e3bb7e6b3333e818d36866d40de6e
+    password: e0195c73018d597b1c2f0ea89d8676ae
     port: 2008
-    server: 16.162.192.48
+    server: 18.183.118.126
     skip-cert-verify: true
     sni: www.nintendogames.net
     type: trojan
   - name: 11,12|香港4|@ripaojiedian
     network: tcp
     password: BxceQaOe
-    port: 1035
-    server: 16.162.220.24
+    port: 11035
+    server: 16.162.33.127
     skip-cert-verify: true
     sni: t.me%2Fripaojiedian
     type: trojan
@@ -36,71 +36,79 @@ proxies:
     network: tcp
     password: BxceQaOe
     port: 11035
-    server: 18.166.75.58
+    server: 16.162.190.109
     skip-cert-verify: true
     sni: t.me%2Fripaojiedian
     type: trojan
   - name: 11,12|日本|@ripaojiedian
     network: tcp
     password: BxceQaOe
-    port: 5408
-    server: 18.181.230.17
+    port: 19706
+    server: 18.183.247.142
     skip-cert-verify: true
     sni: t.me%252Fripaojiedian
     type: trojan
   - name: 11,12|日本2|@ripaojiedian
     network: tcp
-    password: d02e3bb7e6b3333e818d36866d40de6e
+    password: e0195c73018d597b1c2f0ea89d8676ae
     port: 55973
-    server: 95.40.55.96
+    server: 18.183.118.126
     skip-cert-verify: true
     sni: www.nintendogames.net
     type: trojan
   - name: 11,12|日本3|@ripaojiedian
     network: tcp
-    password: d02e3bb7e6b3333e818d36866d40de6e
-    port: 5701
-    server: 16.163.97.86
+    password: e0195c73018d597b1c2f0ea89d8676ae
+    port: 37973
+    server: 16.162.19.220
+    skip-cert-verify: true
+    sni: www.nintendogames.net
+    type: trojan
+  - name: 11,12|新加坡|@ripaojiedian
+    network: tcp
+    password: e0195c73018d597b1c2f0ea89d8676ae
+    port: 6357
+    server: 18.162.187.25
     skip-cert-verify: true
     sni: www.nintendogames.net
     type: trojan
   - name: 11,12|新加坡2|@ripaojiedian
     network: tcp
-    password: d02e3bb7e6b3333e818d36866d40de6e
-    port: 48738
-    server: 16.162.192.48
+    password: e0195c73018d597b1c2f0ea89d8676ae
+    port: 29642
+    server: 18.183.118.126
     skip-cert-verify: true
     sni: www.nintendogames.net
     type: trojan
   - name: 11,12|新加坡3|@ripaojiedian
     network: tcp
     password: BxceQaOe
-    port: 45744
-    server: 16.163.154.228
+    port: 22459
+    server: 18.166.62.207
     skip-cert-verify: true
     sni: t.me%252Fripaojiedian
     type: trojan
   - name: 11,12|美国|@ripaojiedian
     network: tcp
-    password: d02e3bb7e6b3333e818d36866d40de6e
+    password: e0195c73018d597b1c2f0ea89d8676ae
     port: 17005
-    server: 95.40.55.96
+    server: 18.162.187.25
     skip-cert-verify: true
     sni: www.nintendogames.net
     type: trojan
   - name: 11,12|美国2|@ripaojiedian
     network: tcp
-    password: d02e3bb7e6b3333e818d36866d40de6e
-    port: 17005
-    server: 16.163.144.103
+    password: e0195c73018d597b1c2f0ea89d8676ae
+    port: 49277
+    server: 18.183.118.126
     skip-cert-verify: true
     sni: www.nintendogames.net
     type: trojan
   - name: 11,12|美国3|@ripaojiedian
     network: tcp
     password: BxceQaOe
-    port: 17801
-    server: 43.198.12.196
+    port: 22057
+    server: 18.166.228.198
     skip-cert-verify: true
     sni: t.me%2Fripaojiedian
     type: trojan
@@ -148,23 +156,24 @@ proxies:
     type: select
   - interval: 300
     name: ♻ 自动选择
-  - 11|tg频道:@ripaojiedian
-  - 11,12|日本2|@ripaojiedian
-  - 11,12|美国2|@ripaojiedian
-  - 11,12|香港4|@ripaojiedian
-  - 11|🇭🇰 香港|@ripaojiedian
-  - 11,12|日本3|@ripaojiedian
-  - 11,12|美国3|@ripaojiedian
-  - 11,12|日本|@ripaojiedian
-  - 11|🇺🇸 美国4|@ripaojiedian
-  - 11,12|美国|@ripaojiedian
-  - 11,12|香��3|@ripaojiedian
-  - 12|香港|@ripaojiedian
-  - 13|DE_speednode_0001
   - 11,12|新加坡2|@ripaojiedian
+  - 11,12|日本|@ripaojiedian
+  - 11,12|日本3|@ripaojiedian
+  - 11|🇺🇸 美国4|@ripaojiedian
+  - 11,12|美国2|@ripaojiedian
+  - 12|香港|@ripaojiedian
+  - 11|🇭🇰 香港|@ripaojiedian
+  - 13|DE_speednode_0001
+  - 11,12|美国|@ripaojiedian
+  - 11,12|新加坡|@ripaojiedian
+  - 11,12|美国3|@ripaojiedian
+  - 11,12|香港4|@ripaojiedian
   - 11,12|新加坡3|@ripaojiedian
   - 11,12|香港5|@ripaojiedian
+  - 11|tg频道:@ripaojiedian
+  - 11,12|香港3|@ripaojiedian
   - 12|美国4|@ripaojiedian
+  - 11,12|日本2|@ripaojiedian
     type: fallback
     url: https://www.google.com/
   - interval: 300
@@ -207,7 +216,7 @@ proxies:
   - 🇸🇬 新加坡
   - 🇬🇧 英国
   - 🇰🇷 韩国
-  - 🇷🇺 俄罗斯
+  - 🇷🇺 俄罗���
   - 🇩🇪 德国
     type: select
   - name: 🇯🇵 日本
@@ -242,6 +251,7 @@ proxies:
   - REJECT
     type: select
   - name: 🇸🇬 新加坡
+  - 11,12|新加坡|@ripaojiedian
   - 11,12|新加坡2|@ripaojiedian
   - 11,12|新加坡3|@ripaojiedian
     type: select
@@ -257,165 +267,165 @@ proxies:
   - name: 🇩🇪 德国
   - 13|DE_speednode_0001
     type: select
-  - {name: DE_2d67a_0001, server: de-1.hysteria.ltd, port: 9443, type: trojan, password: LYaEYwjN8LjWTRJdCCTzW7V6gK7atJVu, sni: de-1.hysteria.ltd, skip-cert-verify: false, udp: true}
-  - {name: GB_2d67a_0002, server: 82.40.60.172, port: 443, type: vless, uuid: bbaaff1e-c914-4817-9d33-58be35a3bee6, flow: xtls-rprx-vision, packet-encoding: xudp, tls: true, skip-cert-verify: false, client-fingerprint: firefox, servername: nl-1.liambo.ai, reality-opts: {public-key: 9C7hhe8QFKasqMS7YrM_CE2YvTqREJGtFfZTcyPsfSs, short-id: 97470ad3d1b08e88}, udp: true}
-  - {name: KR_2d67a_0003, server: 121.169.46.116, port: 1090, type: socks5, username: T2clM0QlM0Q6, udp: true}
-  - {name: LB_2d67a_0004, server: 213.165.56.102, port: 443, type: vless, uuid: 0a12381a-e241-4b63-a03c-1a5a45a95977, flow: xtls-rprx-vision, tls: true, skip-cert-verify: false, client-fingerprint: chrome, servername: freede.aiage.work, reality-opts: {public-key: A_bQLZE6D32TJUdAf9doQTPaTUXyJjPXLSklplG4V1g, short-id: c8813f516bbb12c4}, udp: true}
-  - {name: NL_2d67a_0005, server: 147.45.145.127, port: 443, type: vless, uuid: 534cbbe2-cc36-4f2d-8fb0-90410e7148c9, tls: true, skip-cert-verify: false, client-fingerprint: chrome, servername: yahoo.com, reality-opts: {public-key: tWRR3W8jBAQKBUujLzL7Xri3WXy3F08OxHYrkSOnlAc, short-id: 52a6}, udp: true}
-  - {name: RO_2d67a_0006, server: 84.239.49.231, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0007, server: 84.239.49.224, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0008, server: 84.239.49.175, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0009, server: 84.239.49.234, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0010, server: 84.239.49.214, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0011, server: 84.239.49.176, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0012, server: 84.239.14.154, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0013, server: 84.239.49.219, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0014, server: 84.239.49.157, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0015, server: 84.239.49.42, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0016, server: 84.239.14.146, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0017, server: 84.239.49.40, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0018, server: 84.239.14.152, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0019, server: 84.239.49.164, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0020, server: 84.239.49.154, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0021, server: 84.239.49.201, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0022, server: 84.239.49.215, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0023, server: 84.239.49.39, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0024, server: 84.239.49.171, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0025, server: 84.239.49.225, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0026, server: 84.239.49.254, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0027, server: 84.239.49.242, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0028, server: 84.239.49.166, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0029, server: 84.239.49.55, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0030, server: 84.239.49.183, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0031, server: 84.239.49.155, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0032, server: 84.239.49.207, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0033, server: 84.239.49.191, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0034, server: 84.239.49.160, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0035, server: 84.239.14.149, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0036, server: 84.239.49.178, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0037, server: 84.239.49.227, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0038, server: 84.239.49.37, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0039, server: 84.239.49.249, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0040, server: 84.239.49.239, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0041, server: 84.239.14.158, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0042, server: 84.239.14.157, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0043, server: 84.239.49.156, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0044, server: 84.239.14.159, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0045, server: 84.239.49.245, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0046, server: 84.239.49.223, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: RO_2d67a_0047, server: 84.239.49.253, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
-  - {name: TW_2d67a_0048, server: 103.127.243.54, port: 53229, type: vmess, uuid: 2f50f5ef-1a3a-4585-a3c9-3a860d37b134, alterId: 0, cipher: auto, tls: false, skip-cert-verify: false, network: http, http-opts: {method: GET, path: [/ABCDE]}, udp: true}
-  - {name: US_2d67a_0049, server: 199.232.197.131, port: 80, type: vless, uuid: 0058c215-ab1e-400c-a403-b5b2fda7e846, tls: false, skip-cert-verify: false, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
-  - {name: US_2d67a_0050, server: 199.232.197.131, port: 80, type: vless, uuid: cabbfe13-038b-4dbb-9c45-5079c829abfa, tls: false, skip-cert-verify: false, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
-  - {name: US_2d67a_0051, server: 151.101.2.219, port: 80, type: vless, uuid: cabbfe13-038b-4dbb-9c45-5079c829abfa, tls: false, skip-cert-verify: false, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
-  - {name: US_2d67a_0052, server: 151.101.0.1, port: 80, type: vless, uuid: cabbfe13-038b-4dbb-9c45-5079c829abfa, tls: false, skip-cert-verify: true, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
+  - {name: DE_60981_0001, server: de-1.hysteria.ltd, port: 9443, type: trojan, password: LYaEYwjN8LjWTRJdCCTzW7V6gK7atJVu, sni: de-1.hysteria.ltd, skip-cert-verify: false, udp: true}
+  - {name: GB_60981_0002, server: 82.40.60.172, port: 443, type: vless, uuid: bbaaff1e-c914-4817-9d33-58be35a3bee6, flow: xtls-rprx-vision, packet-encoding: xudp, tls: true, skip-cert-verify: false, client-fingerprint: firefox, servername: nl-1.liambo.ai, reality-opts: {public-key: 9C7hhe8QFKasqMS7YrM_CE2YvTqREJGtFfZTcyPsfSs, short-id: 97470ad3d1b08e88}, udp: true}
+  - {name: KR_60981_0003, server: 121.169.46.116, port: 1090, type: socks5, username: T2clM0QlM0Q6, udp: true}
+  - {name: LB_60981_0004, server: 213.165.56.102, port: 443, type: vless, uuid: 0a12381a-e241-4b63-a03c-1a5a45a95977, flow: xtls-rprx-vision, tls: true, skip-cert-verify: false, client-fingerprint: chrome, servername: freede.aiage.work, reality-opts: {public-key: A_bQLZE6D32TJUdAf9doQTPaTUXyJjPXLSklplG4V1g, short-id: c8813f516bbb12c4}, udp: true}
+  - {name: NL_60981_0005, server: 147.45.145.127, port: 443, type: vless, uuid: 534cbbe2-cc36-4f2d-8fb0-90410e7148c9, tls: true, skip-cert-verify: false, client-fingerprint: chrome, servername: yahoo.com, reality-opts: {public-key: tWRR3W8jBAQKBUujLzL7Xri3WXy3F08OxHYrkSOnlAc, short-id: 52a6}, udp: true}
+  - {name: RO_60981_0006, server: 84.239.49.231, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0007, server: 84.239.49.224, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0008, server: 84.239.49.175, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0009, server: 84.239.49.234, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0010, server: 84.239.49.214, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0011, server: 84.239.49.176, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0012, server: 84.239.14.154, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0013, server: 84.239.49.219, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0014, server: 84.239.49.157, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0015, server: 84.239.49.42, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0016, server: 84.239.14.146, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0017, server: 84.239.49.40, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0018, server: 84.239.14.152, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0019, server: 84.239.49.164, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0020, server: 84.239.49.154, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0021, server: 84.239.49.201, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0022, server: 84.239.49.215, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0023, server: 84.239.49.39, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0024, server: 84.239.49.171, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0025, server: 84.239.49.225, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0026, server: 84.239.49.254, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0027, server: 84.239.49.242, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0028, server: 84.239.49.166, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0029, server: 84.239.49.55, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0030, server: 84.239.49.183, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0031, server: 84.239.49.155, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0032, server: 84.239.49.207, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0033, server: 84.239.49.191, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0034, server: 84.239.49.160, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0035, server: 84.239.14.149, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0036, server: 84.239.49.178, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0037, server: 84.239.49.227, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0038, server: 84.239.49.37, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0039, server: 84.239.49.249, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0040, server: 84.239.49.239, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0041, server: 84.239.14.158, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0042, server: 84.239.14.157, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0043, server: 84.239.49.156, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0044, server: 84.239.14.159, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0045, server: 84.239.49.245, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0046, server: 84.239.49.223, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: RO_60981_0047, server: 84.239.49.253, port: 9002, type: http, tls: true, skip-cert-verify: true, udp: true}
+  - {name: TW_60981_0048, server: 103.127.243.54, port: 53229, type: vmess, uuid: 2f50f5ef-1a3a-4585-a3c9-3a860d37b134, alterId: 0, cipher: auto, tls: false, skip-cert-verify: false, network: http, http-opts: {method: GET, path: [/ABCDE]}, udp: true}
+  - {name: US_60981_0049, server: 199.232.197.131, port: 80, type: vless, uuid: 0058c215-ab1e-400c-a403-b5b2fda7e846, tls: false, skip-cert-verify: false, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
+  - {name: US_60981_0050, server: 199.232.197.131, port: 80, type: vless, uuid: cabbfe13-038b-4dbb-9c45-5079c829abfa, tls: false, skip-cert-verify: false, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
+  - {name: US_60981_0051, server: 151.101.2.219, port: 80, type: vless, uuid: cabbfe13-038b-4dbb-9c45-5079c829abfa, tls: false, skip-cert-verify: false, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
+  - {name: US_60981_0052, server: 151.101.0.1, port: 80, type: vless, uuid: cabbfe13-038b-4dbb-9c45-5079c829abfa, tls: false, skip-cert-verify: true, servername: max-gb1.global.ssl.fastly.net, network: ws, ws-opts: {path: /, headers: {Host: max-gb1.global.ssl.fastly.net}}, udp: true}
   - ♻️ automatic
-  - DE_2d67a_0001
-  - GB_2d67a_0002
-  - KR_2d67a_0003
-  - LB_2d67a_0004
-  - NL_2d67a_0005
-  - RO_2d67a_0006
-  - RO_2d67a_0007
-  - RO_2d67a_0008
-  - RO_2d67a_0009
-  - RO_2d67a_0010
-  - RO_2d67a_0011
-  - RO_2d67a_0012
-  - RO_2d67a_0013
-  - RO_2d67a_0014
-  - RO_2d67a_0015
-  - RO_2d67a_0016
-  - RO_2d67a_0017
-  - RO_2d67a_0018
-  - RO_2d67a_0019
-  - RO_2d67a_0020
-  - RO_2d67a_0021
-  - RO_2d67a_0022
-  - RO_2d67a_0023
-  - RO_2d67a_0024
-  - RO_2d67a_0025
-  - RO_2d67a_0026
-  - RO_2d67a_0027
-  - RO_2d67a_0028
-  - RO_2d67a_0029
-  - RO_2d67a_0030
-  - RO_2d67a_0031
-  - RO_2d67a_0032
-  - RO_2d67a_0033
-  - RO_2d67a_0034
-  - RO_2d67a_0035
-  - RO_2d67a_0036
-  - RO_2d67a_0037
-  - RO_2d67a_0038
-  - RO_2d67a_0039
-  - RO_2d67a_0040
-  - RO_2d67a_0041
-  - RO_2d67a_0042
-  - RO_2d67a_0043
-  - RO_2d67a_0044
-  - RO_2d67a_0045
-  - RO_2d67a_0046
-  - RO_2d67a_0047
-  - TW_2d67a_0048
-  - US_2d67a_0049
-  - US_2d67a_0050
-  - US_2d67a_0051
-  - US_2d67a_0052
+  - DE_60981_0001
+  - GB_60981_0002
+  - KR_60981_0003
+  - LB_60981_0004
+  - NL_60981_0005
+  - RO_60981_0006
+  - RO_60981_0007
+  - RO_60981_0008
+  - RO_60981_0009
+  - RO_60981_0010
+  - RO_60981_0011
+  - RO_60981_0012
+  - RO_60981_0013
+  - RO_60981_0014
+  - RO_60981_0015
+  - RO_60981_0016
+  - RO_60981_0017
+  - RO_60981_0018
+  - RO_60981_0019
+  - RO_60981_0020
+  - RO_60981_0021
+  - RO_60981_0022
+  - RO_60981_0023
+  - RO_60981_0024
+  - RO_60981_0025
+  - RO_60981_0026
+  - RO_60981_0027
+  - RO_60981_0028
+  - RO_60981_0029
+  - RO_60981_0030
+  - RO_60981_0031
+  - RO_60981_0032
+  - RO_60981_0033
+  - RO_60981_0034
+  - RO_60981_0035
+  - RO_60981_0036
+  - RO_60981_0037
+  - RO_60981_0038
+  - RO_60981_0039
+  - RO_60981_0040
+  - RO_60981_0041
+  - RO_60981_0042
+  - RO_60981_0043
+  - RO_60981_0044
+  - RO_60981_0045
+  - RO_60981_0046
+  - RO_60981_0047
+  - TW_60981_0048
+  - US_60981_0049
+  - US_60981_0050
+  - US_60981_0051
+  - US_60981_0052
   - name: ♻️ automatic
     type: url-test
-  - DE_2d67a_0001
-  - GB_2d67a_0002
-  - KR_2d67a_0003
-  - LB_2d67a_0004
-  - NL_2d67a_0005
-  - RO_2d67a_0006
-  - RO_2d67a_0007
-  - RO_2d67a_0008
-  - RO_2d67a_0009
-  - RO_2d67a_0010
-  - RO_2d67a_0011
-  - RO_2d67a_0012
-  - RO_2d67a_0013
-  - RO_2d67a_0014
-  - RO_2d67a_0015
-  - RO_2d67a_0016
-  - RO_2d67a_0017
-  - RO_2d67a_0018
-  - RO_2d67a_0019
-  - RO_2d67a_0020
-  - RO_2d67a_0021
-  - RO_2d67a_0022
-  - RO_2d67a_0023
-  - RO_2d67a_0024
-  - RO_2d67a_0025
-  - RO_2d67a_0026
-  - RO_2d67a_0027
-  - RO_2d67a_0028
-  - RO_2d67a_0029
-  - RO_2d67a_0030
-  - RO_2d67a_0031
-  - RO_2d67a_0032
-  - RO_2d67a_0033
-  - RO_2d67a_0034
-  - RO_2d67a_0035
-  - RO_2d67a_0036
-  - RO_2d67a_0037
-  - RO_2d67a_0038
-  - RO_2d67a_0039
-  - RO_2d67a_0040
-  - RO_2d67a_0041
-  - RO_2d67a_0042
-  - RO_2d67a_0043
-  - RO_2d67a_0044
-  - RO_2d67a_0045
-  - RO_2d67a_0046
-  - RO_2d67a_0047
-  - TW_2d67a_0048
-  - US_2d67a_0049
-  - US_2d67a_0050
-  - US_2d67a_0051
-  - US_2d67a_0052
+  - DE_60981_0001
+  - GB_60981_0002
+  - KR_60981_0003
+  - LB_60981_0004
+  - NL_60981_0005
+  - RO_60981_0006
+  - RO_60981_0007
+  - RO_60981_0008
+  - RO_60981_0009
+  - RO_60981_0010
+  - RO_60981_0011
+  - RO_60981_0012
+  - RO_60981_0013
+  - RO_60981_0014
+  - RO_60981_0015
+  - RO_60981_0016
+  - RO_60981_0017
+  - RO_60981_0018
+  - RO_60981_0019
+  - RO_60981_0020
+  - RO_60981_0021
+  - RO_60981_0022
+  - RO_60981_0023
+  - RO_60981_0024
+  - RO_60981_0025
+  - RO_60981_0026
+  - RO_60981_0027
+  - RO_60981_0028
+  - RO_60981_0029
+  - RO_60981_0030
+  - RO_60981_0031
+  - RO_60981_0032
+  - RO_60981_0033
+  - RO_60981_0034
+  - RO_60981_0035
+  - RO_60981_0036
+  - RO_60981_0037
+  - RO_60981_0038
+  - RO_60981_0039
+  - RO_60981_0040
+  - RO_60981_0041
+  - RO_60981_0042
+  - RO_60981_0043
+  - RO_60981_0044
+  - RO_60981_0045
+  - RO_60981_0046
+  - RO_60981_0047
+  - TW_60981_0048
+  - US_60981_0049
+  - US_60981_0050
+  - US_60981_0051
+  - US_60981_0052
     url: https://www.google.com/favicon.ico
     interval: 300
   - name: 每天更新，请加电报群防止失联
@@ -6135,18 +6145,18 @@ proxies:
   - 🇦🇪阿联酋
   - {name: tg频道:@ripaojiedian, server: 63.180.254.10, port: 443, type: ss, cipher: aes-256-cfb, password: amazonskr05}
   - {name: 🇭🇰 香港|@ripaojiedian, server: v10.hdacd.com, port: 30807, type: vmess, uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484, alterId: 2, cipher: auto, tls: false, skip-cert-verify: false}
-  - {name: 🇭🇰 香港3|@ripaojiedian, server: 16.162.192.48, port: 2008, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇭🇰 香港4|@ripaojiedian, server: 16.162.220.24, port: 1035, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
-  - {name: 🇭🇰 香港5|@ripaojiedian, server: 18.166.75.58, port: 11035, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
-  - {name: 🇯🇵 日本|@ripaojiedian, server: 18.181.230.17, port: 5408, type: trojan, password: BxceQaOe, sni: t.me%252Fripaojiedian, skip-cert-verify: true}
-  - {name: 🇯🇵 日本2|@ripaojiedian, server: 95.40.55.96, port: 55973, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇯🇵 日本3|@ripaojiedian, server: 16.163.97.86, port: 5701, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇸🇬 新加坡|@ripaojiedian, server: 16.162.192.48, port: 48738, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇸🇬 新加坡2|@ripaojiedian, server: 16.162.192.48, port: 48738, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇸🇬 新加坡3|@ripaojiedian, server: 16.163.154.228, port: 45744, type: trojan, password: BxceQaOe, sni: t.me%252Fripaojiedian, skip-cert-verify: true}
-  - {name: 🇺🇸 美国|@ripaojiedian, server: 95.40.55.96, port: 17005, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇺🇸 美国2|@ripaojiedian, server: 16.163.144.103, port: 17005, type: trojan, password: d02e3bb7e6b3333e818d36866d40de6e, sni: www.nintendogames.net, skip-cert-verify: true}
-  - {name: 🇺🇸 美国3|@ripaojiedian, server: 43.198.12.196, port: 17801, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
+  - {name: 🇭🇰 香港3|@ripaojiedian, server: 18.183.118.126, port: 2008, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇭🇰 香港4|@ripaojiedian, server: 16.162.33.127, port: 11035, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
+  - {name: 🇭🇰 香港5|@ripaojiedian, server: 16.162.190.109, port: 11035, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
+  - {name: 🇯🇵 日本|@ripaojiedian, server: 18.183.247.142, port: 19706, type: trojan, password: BxceQaOe, sni: t.me%252Fripaojiedian, skip-cert-verify: true}
+  - {name: 🇯🇵 日本2|@ripaojiedian, server: 18.183.118.126, port: 55973, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇯🇵 日本3|@ripaojiedian, server: 16.162.19.220, port: 37973, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇸🇬 新加坡|@ripaojiedian, server: 18.162.187.25, port: 6357, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇸🇬 新加坡2|@ripaojiedian, server: 18.183.118.126, port: 29642, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇸🇬 新加坡3|@ripaojiedian, server: 18.166.62.207, port: 22459, type: trojan, password: BxceQaOe, sni: t.me%252Fripaojiedian, skip-cert-verify: true}
+  - {name: 🇺🇸 美国|@ripaojiedian, server: 18.162.187.25, port: 17005, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇺🇸 美国2|@ripaojiedian, server: 18.183.118.126, port: 49277, type: trojan, password: e0195c73018d597b1c2f0ea89d8676ae, sni: www.nintendogames.net, skip-cert-verify: true}
+  - {name: 🇺🇸 美国3|@ripaojiedian, server: 18.166.228.198, port: 22057, type: trojan, password: BxceQaOe, sni: t.me%2Fripaojiedian, skip-cert-verify: true}
   - {name: 🇺🇸 美国4|@ripaojiedian, server: 82.198.246.250, port: 180, type: vmess, uuid: d13fc2f5-3e05-4795-81eb-44143a09e552, alterId: 0, cipher: auto, tls: false, skip-cert-verify: false}
   - ♻️ 自动选择
   - DIRECT
@@ -6297,7 +6307,7 @@ proxies:
   - DIRECT
   - name: 🐟 漏网之鱼
     type: select
-  - 🚀 节���选择
+  - 🚀 节点选择
   - 🎯 全球直连
   - ♻️ 自动选择
   - tg频道:@ripaojiedian
@@ -6315,28 +6325,163 @@ proxies:
   - 🇺🇸 美国2|@ripaojiedian
   - 🇺🇸 美国3|@ripaojiedian
   - 🇺🇸 美国4|@ripaojiedian
-  - {name: '裤佬官网https://jsnzkpg.com', server: 104.19.58.118, port: 443, type: vless, uuid: 33b83411-cf14-48af-8105-ff8370f7a3d5, tls: true, tfo: false, skip-cert-verify: true, servername: us1-us1.aiopen.sbs, network: ws, ws-opts: {path: /kbjc/us1, headers: {Host: us1-us1.aiopen.sbs}}, udp: true, alterId: 0, cipher: "", flow: "", sni: us1-us1.aiopen.sbs}
-  - {name: '裤佬地址https://jsnzkpg.com', server: 104.19.58.118, port: 443, type: vless, uuid: 33b83411-cf14-48af-8105-ff8370f7a3d5, tls: true, tfo: false, skip-cert-verify: true, servername: us1-us1.aiopen.sbs, network: ws, ws-opts: {path: /kbjc/us1, headers: {Host: us1-us1.aiopen.sbs}}, udp: true, alterId: 0, cipher: "", flow: "", sni: us1-us1.aiopen.sbs}
-  - {name: '裤佬域名https://jsnzkpg.com', server: 69.84.182.13, port: 443, type: vless, uuid: 33b83411-cf14-48af-8105-ff8370f7a3d5, tls: true, tfo: false, skip-cert-verify: true, servername: jp1-jp1.aiopen.sbs, network: ws, ws-opts: {path: /kbjc/jp1, headers: {Host: jp1-jp1.aiopen.sbs}}, udp: true, alterId: 0, cipher: "", flow: "", sni: jp1-jp1.aiopen.sbs}
-  - {name: '裤佬发布页https://jsnzkpg.com', server: 69.84.182.13, port: 443, type: vless, uuid: 33b83411-cf14-48af-8105-ff8370f7a3d5, tls: true, tfo: false, skip-cert-verify: true, servername: jp1-jp1.aiopen.sbs, network: ws, ws-opts: {path: /kbjc/jp1, headers: {Host: jp1-jp1.aiopen.sbs}}, udp: true, alterId: 0, cipher: "", flow: "", sni: jp1-jp1.aiopen.sbs}
-  - {name: '裤佬软件站https://526900.xyz', server: 69.84.182.13, port: 443, type: vless, uuid: 33b83411-cf14-48af-8105-ff8370f7a3d5, tls: true, tfo: false, skip-cert-verify: true, network: ws, ws-opts: {path: /kbjc/fr1, headers: {Host: fr-1-fr-1.aiopen.sbs}}, udp: true, alterId: 0, cipher: "", flow: ""}
+  - {name: CF官方优选12, server: 108.162.198.41, port: 2083, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选11, server: 104.19.35.133, port: 8443, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选15, server: 198.41.209.49, port: 443, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选6, server: 104.17.148.105, port: 2087, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选16, server: 104.16.150.228, port: 2096, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选5, server: 104.17.165.183, port: 443, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选10, server: 104.17.213.252, port: 2087, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选3, server: 104.19.41.46, port: 2083, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选9, server: 104.26.7.45, port: 2096, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选1, server: 188.164.248.186, port: 443, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选13, server: 173.245.59.199, port: 2096, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选14, server: 104.18.36.245, port: 2053, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
+  - {name: CF官方优选4, server: 162.159.40.168, port: 2096, type: vless, uuid: 0137ab09-0728-4c44-8dc4-f2ac1847bffd, tls: true, tfo: false, skip-cert-verify: true, servername: cfoo-n0d.pages.dev, client-fingerprint: chrome, network: ws, ws-opts: {path: "/proxyip=159.60.146.82,159.60.146.81", headers: {Host: cfoo-n0d.pages.dev}}}
   - ♻️ 自动选择
+  - 🇭🇰 香港节点
+  - 🇺🇲 美国节点
+  - ☑️ 手动切换
   - DIRECT
-  - 裤佬官网https://jsnzkpg.com
-  - 裤佬地址https://jsnzkpg.com
-  - 裤佬域名https://jsnzkpg.com
-  - 裤佬发布页https://jsnzkpg.com
-  - 裤佬软件站https://526900.xyz
+  - name: ☑️ 手动切换
+    type: select
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
-  - 裤佬官网https://jsnzkpg.com
-  - 裤佬地址https://jsnzkpg.com
-  - 裤佬域名https://jsnzkpg.com
-  - 裤佬发布页https://jsnzkpg.com
-  - 裤佬软件站https://526900.xyz
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
+  - name: 📹 油管视频
+    type: select
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - ☑️ 手动切换
+  - DIRECT
+  - name: 🎥 奈飞视频
+    type: select
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - ☑️ 手动切换
+  - DIRECT
+  - name: 🌍 国外媒体
+    type: select
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - 🎯 全球直连
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
+  - name: 📲 电报信息
+    type: select
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
+  - name: 🤖 OpenAi
+    type: select
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - 🇺🇲 美国节点
+  - ☑️ 手动切换
+  - DIRECT
+  - name: Ⓜ️ 微软服务
+    type: select
+  - 🎯 全球直连
+  - 🚀 节点选择
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
+  - name: 🍎 苹果服务
+    type: select
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
+  - name: 📢 谷歌FCM
+    type: select
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - ♻️ 自动选择
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
   - name: 🎯 全球直连
     type: select
   - DIRECT
@@ -6346,16 +6491,40 @@ proxies:
     type: select
   - REJECT
   - DIRECT
+  - name: 🍃 应用净化
+    type: select
+  - REJECT
+  - DIRECT
   - name: 🐟 漏网之鱼
     type: select
   - 🚀 节点选择
   - 🎯 全球直连
   - ♻️ 自动选择
-  - 裤佬官网https://jsnzkpg.com
-  - 裤佬地址https://jsnzkpg.com
-  - 裤佬域名https://jsnzkpg.com
-  - 裤佬发布页https://jsnzkpg.com
-  - 裤佬软件站https://526900.xyz
+  - CF官方优选12
+  - CF官方优选11
+  - CF官方优选15
+  - CF官方优选6
+  - CF官方优选16
+  - CF官方优选5
+  - CF官方优选10
+  - CF官方优选3
+  - CF官方优选9
+  - CF官方优选1
+  - CF官方优选13
+  - CF官方优选14
+  - CF官方优选4
+  - name: 🇭🇰 香港节点
+    type: load-balance
+    strategy: consistent-hashing
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 50
+  - name: 🇺🇲 美国节点
+    type: load-balance
+    strategy: consistent-hashing
+    url: http://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 150
   - name: A
     server: hk2.mutoujs.top
     port: 20000
@@ -11007,7 +11176,7 @@ proxies:
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇭🇰 HK 025 | ⬇️ 18KB/s","network":"ws","port":44867,"server":"47.244.120.197","skip-cert-verify":true,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 026 | ⬇️ 24KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 027 | ⬇️ 21KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
-  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇭🇰 HK 028 | ⬇️ 30KB/s","network":"ws","port":36703,"server":"47.244.120.197","skip-cert-verify":true,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","max-early-data":2048,"path":"/arki"}}
+  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | ��🇰 HK 028 | ⬇️ 30KB/s","network":"ws","port":36703,"server":"47.244.120.197","skip-cert-verify":true,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 029 | ⬇️ 19KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
   - {"cipher":"chacha20-ietf-poly1305","name":" t.me/PFSub | 🇯🇵 JP 030 | ⬇️ 32KB/s","password":"t0srmdxrm3xyjnvqz9ewlxb2myq7rjuv","plugin":"obfs","plugin-opts":{"host":"403880e.default.microsoft.io:164892","mode":"tls"},"port":2377,"server":"403880e.j6.gladns.com","type":"ss","udp":true}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 031 | ⬇️ 15KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
@@ -11018,7 +11187,7 @@ proxies:
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","country":"🇭🇰HK","h2-opts":{},"http-opts":{},"name":" t.me/PFSub | 🇭🇰 HK 036 | ⬇️ 24KB/s","network":"ws","port":36703,"server":"47.244.120.197","skip-cert-verify":true,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","max-early-data":2048,"path":"/arki"}}
   - {"cipher":"aes-128-gcm","name":" t.me/PFSub | 🇮🇹 IT 037 | ⬇️ 17MB/s","password":"931d70c1-8644-433a-9e8a-e09e10f5e7f5","plugin":"v2ray-plugin","plugin-opts":{"host":"aoe.o.eoa.ccwu.cc","mode":"websocket","mux":false,"path":"/?enc\\=aes-128-gcm","tls":true},"port":2083,"server":"54.199.22.197","type":"ss","udp":true}
   - {"cipher":"aes-128-gcm","name":" t.me/PFSub | 🇮🇹 IT 038 | ⬇️ 15MB/s","password":"931d70c1-8644-433a-9e8a-e09e10f5e7f5","plugin":"v2ray-plugin","plugin-opts":{"host":"aoe.o.eoa.ccwu.cc","mode":"websocket","mux":false,"path":"/?enc\\=aes-128-gcm","tls":true},"port":2083,"server":"54.199.22.197","type":"ss","udp":true}
-  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 039 | ⬇�� 28KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
+  - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 039 | ⬇️ 28KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 040 | ⬇️ 16KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 041 | ⬇️ 22KB/s","network":"ws","port":36703,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"45b83519-9c4f-4052-a11b-02e017b636d4","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
   - {"alterId":0,"cipher":"auto","client-fingerprint":"chrome","name":" t.me/PFSub | 🇭🇰 HK 042 | ⬇️ 18KB/s","network":"ws","port":44867,"server":"47.244.120.197","tls":false,"type":"vmess","uuid":"845e6b08-2919-4290-ade0-5dc7dcea59ca","ws-opts":{"early-data-header-name":"Sec-WebSocket-Protocol","headers":{},"max-early-data":2048,"path":"/arki"}}
@@ -12127,58 +12296,58 @@ proxy-groups:
       - "🇰🇷 韩国"
       - "🇷🇺 俄罗斯"
       - "🇩🇪 德国"
-      - "DE_2d67a_0001"
-      - "GB_2d67a_0002"
-      - "KR_2d67a_0003"
-      - "LB_2d67a_0004"
-      - "NL_2d67a_0005"
-      - "RO_2d67a_0006"
-      - "RO_2d67a_0007"
-      - "RO_2d67a_0008"
-      - "RO_2d67a_0009"
-      - "RO_2d67a_0010"
-      - "RO_2d67a_0011"
-      - "RO_2d67a_0012"
-      - "RO_2d67a_0013"
-      - "RO_2d67a_0014"
-      - "RO_2d67a_0015"
-      - "RO_2d67a_0016"
-      - "RO_2d67a_0017"
-      - "RO_2d67a_0018"
-      - "RO_2d67a_0019"
-      - "RO_2d67a_0020"
-      - "RO_2d67a_0021"
-      - "RO_2d67a_0022"
-      - "RO_2d67a_0023"
-      - "RO_2d67a_0024"
-      - "RO_2d67a_0025"
-      - "RO_2d67a_0026"
-      - "RO_2d67a_0027"
-      - "RO_2d67a_0028"
-      - "RO_2d67a_0029"
-      - "RO_2d67a_0030"
-      - "RO_2d67a_0031"
-      - "RO_2d67a_0032"
-      - "RO_2d67a_0033"
-      - "RO_2d67a_0034"
-      - "RO_2d67a_0035"
-      - "RO_2d67a_0036"
-      - "RO_2d67a_0037"
-      - "RO_2d67a_0038"
-      - "RO_2d67a_0039"
-      - "RO_2d67a_0040"
-      - "RO_2d67a_0041"
-      - "RO_2d67a_0042"
-      - "RO_2d67a_0043"
-      - "RO_2d67a_0044"
-      - "RO_2d67a_0045"
-      - "RO_2d67a_0046"
-      - "RO_2d67a_0047"
-      - "TW_2d67a_0048"
-      - "US_2d67a_0049"
-      - "US_2d67a_0050"
-      - "US_2d67a_0051"
-      - "US_2d67a_0052"
+      - "DE_60981_0001"
+      - "GB_60981_0002"
+      - "KR_60981_0003"
+      - "LB_60981_0004"
+      - "NL_60981_0005"
+      - "RO_60981_0006"
+      - "RO_60981_0007"
+      - "RO_60981_0008"
+      - "RO_60981_0009"
+      - "RO_60981_0010"
+      - "RO_60981_0011"
+      - "RO_60981_0012"
+      - "RO_60981_0013"
+      - "RO_60981_0014"
+      - "RO_60981_0015"
+      - "RO_60981_0016"
+      - "RO_60981_0017"
+      - "RO_60981_0018"
+      - "RO_60981_0019"
+      - "RO_60981_0020"
+      - "RO_60981_0021"
+      - "RO_60981_0022"
+      - "RO_60981_0023"
+      - "RO_60981_0024"
+      - "RO_60981_0025"
+      - "RO_60981_0026"
+      - "RO_60981_0027"
+      - "RO_60981_0028"
+      - "RO_60981_0029"
+      - "RO_60981_0030"
+      - "RO_60981_0031"
+      - "RO_60981_0032"
+      - "RO_60981_0033"
+      - "RO_60981_0034"
+      - "RO_60981_0035"
+      - "RO_60981_0036"
+      - "RO_60981_0037"
+      - "RO_60981_0038"
+      - "RO_60981_0039"
+      - "RO_60981_0040"
+      - "RO_60981_0041"
+      - "RO_60981_0042"
+      - "RO_60981_0043"
+      - "RO_60981_0044"
+      - "RO_60981_0045"
+      - "RO_60981_0046"
+      - "RO_60981_0047"
+      - "TW_60981_0048"
+      - "US_60981_0049"
+      - "US_60981_0050"
+      - "US_60981_0051"
+      - "US_60981_0052"
       - "♻️ automatic"
       - "每天更新，请加电报群防止失联"
       - "电报群：https://t.me/vvkj11"
@@ -12483,11 +12652,25 @@ proxy-groups:
       - "🇺🇸 美国3|@ripaojiedian"
       - "🇺🇸 美国4|@ripaojiedian"
       - "📢 谷歌FCM"
-      - "裤佬官网https://jsnzkpg.com"
-      - "裤佬地址https://jsnzkpg.com"
-      - "裤佬域名https://jsnzkpg.com"
-      - "裤佬发布页https://jsnzkpg.com"
-      - "裤佬软件站https://526900.xyz"
+      - "CF官方优选12"
+      - "CF官方优选11"
+      - "CF官方优选15"
+      - "CF官方优选6"
+      - "CF官方优选16"
+      - "CF官方优选5"
+      - "CF官方优选10"
+      - "CF官方优选3"
+      - "CF官方优选9"
+      - "CF官方优选1"
+      - "CF官方优选13"
+      - "CF官方优选14"
+      - "CF官方优选4"
+      - "☑️ 手动切换"
+      - "📹 油管视频"
+      - "🎥 奈飞视频"
+      - "🤖 OpenAi"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
       - "A"
       - "B"
       - "C"
@@ -12746,58 +12929,58 @@ proxy-groups:
       - "🇰🇷 韩国"
       - "🇷🇺 俄罗斯"
       - "🇩🇪 德国"
-      - "DE_2d67a_0001"
-      - "GB_2d67a_0002"
-      - "KR_2d67a_0003"
-      - "LB_2d67a_0004"
-      - "NL_2d67a_0005"
-      - "RO_2d67a_0006"
-      - "RO_2d67a_0007"
-      - "RO_2d67a_0008"
-      - "RO_2d67a_0009"
-      - "RO_2d67a_0010"
-      - "RO_2d67a_0011"
-      - "RO_2d67a_0012"
-      - "RO_2d67a_0013"
-      - "RO_2d67a_0014"
-      - "RO_2d67a_0015"
-      - "RO_2d67a_0016"
-      - "RO_2d67a_0017"
-      - "RO_2d67a_0018"
-      - "RO_2d67a_0019"
-      - "RO_2d67a_0020"
-      - "RO_2d67a_0021"
-      - "RO_2d67a_0022"
-      - "RO_2d67a_0023"
-      - "RO_2d67a_0024"
-      - "RO_2d67a_0025"
-      - "RO_2d67a_0026"
-      - "RO_2d67a_0027"
-      - "RO_2d67a_0028"
-      - "RO_2d67a_0029"
-      - "RO_2d67a_0030"
-      - "RO_2d67a_0031"
-      - "RO_2d67a_0032"
-      - "RO_2d67a_0033"
-      - "RO_2d67a_0034"
-      - "RO_2d67a_0035"
-      - "RO_2d67a_0036"
-      - "RO_2d67a_0037"
-      - "RO_2d67a_0038"
-      - "RO_2d67a_0039"
-      - "RO_2d67a_0040"
-      - "RO_2d67a_0041"
-      - "RO_2d67a_0042"
-      - "RO_2d67a_0043"
-      - "RO_2d67a_0044"
-      - "RO_2d67a_0045"
-      - "RO_2d67a_0046"
-      - "RO_2d67a_0047"
-      - "TW_2d67a_0048"
-      - "US_2d67a_0049"
-      - "US_2d67a_0050"
-      - "US_2d67a_0051"
-      - "US_2d67a_0052"
+      - "DE_60981_0001"
+      - "GB_60981_0002"
+      - "KR_60981_0003"
+      - "LB_60981_0004"
+      - "NL_60981_0005"
+      - "RO_60981_0006"
+      - "RO_60981_0007"
+      - "RO_60981_0008"
+      - "RO_60981_0009"
+      - "RO_60981_0010"
+      - "RO_60981_0011"
+      - "RO_60981_0012"
+      - "RO_60981_0013"
+      - "RO_60981_0014"
+      - "RO_60981_0015"
+      - "RO_60981_0016"
+      - "RO_60981_0017"
+      - "RO_60981_0018"
+      - "RO_60981_0019"
+      - "RO_60981_0020"
+      - "RO_60981_0021"
+      - "RO_60981_0022"
+      - "RO_60981_0023"
+      - "RO_60981_0024"
+      - "RO_60981_0025"
+      - "RO_60981_0026"
+      - "RO_60981_0027"
+      - "RO_60981_0028"
+      - "RO_60981_0029"
+      - "RO_60981_0030"
+      - "RO_60981_0031"
+      - "RO_60981_0032"
+      - "RO_60981_0033"
+      - "RO_60981_0034"
+      - "RO_60981_0035"
+      - "RO_60981_0036"
+      - "RO_60981_0037"
+      - "RO_60981_0038"
+      - "RO_60981_0039"
+      - "RO_60981_0040"
+      - "RO_60981_0041"
+      - "RO_60981_0042"
+      - "RO_60981_0043"
+      - "RO_60981_0044"
+      - "RO_60981_0045"
+      - "RO_60981_0046"
+      - "RO_60981_0047"
+      - "TW_60981_0048"
+      - "US_60981_0049"
+      - "US_60981_0050"
+      - "US_60981_0051"
+      - "US_60981_0052"
       - "♻️ automatic"
       - "每天更新，请加电报群防止失联"
       - "电报群：https://t.me/vvkj11"
@@ -13102,11 +13285,25 @@ proxy-groups:
       - "🇺🇸 美国3|@ripaojiedian"
       - "🇺🇸 美国4|@ripaojiedian"
       - "📢 谷歌FCM"
-      - "裤佬官网https://jsnzkpg.com"
-      - "裤佬地址https://jsnzkpg.com"
-      - "裤佬域名https://jsnzkpg.com"
-      - "裤佬发布页https://jsnzkpg.com"
-      - "裤佬软件站https://526900.xyz"
+      - "CF官方优选12"
+      - "CF官方优选11"
+      - "CF官方优选15"
+      - "CF官方优选6"
+      - "CF官方优选16"
+      - "CF官方优选5"
+      - "CF官方优选10"
+      - "CF官方优选3"
+      - "CF官方优选9"
+      - "CF官方优选1"
+      - "CF官方优选13"
+      - "CF官方优选14"
+      - "CF官方优选4"
+      - "☑️ 手动切换"
+      - "📹 油管视频"
+      - "🎥 奈飞视频"
+      - "🤖 OpenAi"
+      - "🇭🇰 香港节点"
+      - "🇺🇲 美国节点"
       - "A"
       - "B"
       - "C"
