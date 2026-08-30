@@ -213,33 +213,45 @@ proxies:
     sni: t.me%252Fripaojiedian
     type: trojan
   - cipher: aes-256-cfb
-    name: 🇰🇷KR_1|1.7MB/s
+    name: 🇺🇸US_2|3.2MB/s
     password: 7eadc6dbe2ae
-    port: 65443
-    server: 121.46.230.138
+    port: '65443'
+    server: 121.46.230.233
     type: ss
     udp: true
   - client-fingerprint: chrome
-    name: 🇫🇷FR_1|2.1MB/s
+    name: 🇫🇷FR_1|2.9MB/s
     network: ws
     password: humanity
     port: '443'
-    server: render.com
+    server: 45.130.125.160
     skip-cert-verify: false
     sni: www.ignitelimit.com
     type: trojan
     udp: true
     ws-opts:
     headers:
-    User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML,
-    like Gecko) Chrome/55.0.2883.87 Safari/537.36
+    User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko)
+    Chrome/70.0.3538.102 Safari/537.36
     path: /assignment
+  - alterId: 2
+    cipher: auto
+    name: 🇺🇸US_4|1.0MB/s
+    network: tcp
+    port: 30829
+    server: v29.hdacd.com
+    skip-cert-verify: false
+    tls: false
+    type: vmess
+    udp: true
+    uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
+    xudp: true
   - client-fingerprint: chrome
-    name: 🇫🇷FR_2|1.1MB/s
+    name: 🇫🇷FR_2|3.2MB/s
     network: ws
     password: humanity
     port: '443'
-    server: 104.26.14.137
+    server: 104.18.152.207
     skip-cert-verify: false
     sni: www.ignitelimit.com
     type: trojan
@@ -247,16 +259,72 @@ proxies:
     ws-opts:
     headers:
     User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like
-    Gecko) Chrome/47.0.2526.111 Safari/537.36
+    Gecko) Chrome/45.0.2454.85 Safari/537.36
     path: /assignment
-  - alterId: '0'
-    cipher: auto
-    name: 🇺🇸US_18|4.6MB/s
-    network: http
-    port: 40733
-    server: 38.147.160.203
-    type: vmess
-    uuid: 655300ee-f085-4b62-bc56-207e1c095a4a
+  - alpn:
+  - h3
+  - h2
+  - http/1.1
+    client-fingerprint: chrome
+    name: 🇫🇷FR_3|2.7MB/s
+    network: ws
+    password: humanity
+    port: '443'
+    server: join-telegram-channel-tirexnet.trex.kdns.fr
+    skip-cert-verify: false
+    sni: www.ignitelimit.com
+    type: trojan
+    udp: true
+    ws-opts:
+    headers:
+    User-Agent: Mozilla/5.0 (Linux; Android 6.0; vivo 1606 Build/MMB29M) AppleWebKit/537.36
+    (KHTML, like Gecko) Chrome/53.0.2785.124 Mobile Safari/537.36
+    path: /assignment
+  - client-fingerprint: chrome
+    name: 🇫🇷FR_4|1.9MB/s
+    network: ws
+    password: humanity
+    port: '443'
+    server: 104.18.152.208
+    skip-cert-verify: false
+    sni: www.ignitelimit.com
+    type: trojan
+    udp: true
+    ws-opts:
+    headers:
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+    like Gecko) Chrome/61.0.3163.100 Safari/537.36
+    path: /assignment
+  - client-fingerprint: chrome
+    name: 🇫🇷FR_5|2.0MB/s
+    network: ws
+    password: humanity
+    port: '443'
+    server: 104.16.174.6
+    skip-cert-verify: false
+    sni: www.ignitelimit.com
+    type: trojan
+    udp: true
+    ws-opts:
+    headers:
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
+    like Gecko) Chrome/66.0.3359.181 Safari/537.36
+    path: /assignment
+  - client-fingerprint: chrome
+    name: 🇫🇷FR_6|2.1MB/s
+    network: ws
+    password: humanity
+    port: '443'
+    server: 104.16.174.143
+    skip-cert-verify: false
+    sni: www.ignitelimit.com
+    type: trojan
+    udp: true
+    ws-opts:
+    headers:
+    User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.4
+    (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4
+    path: /assignment
   - ♻ 自动选择
   - 🔰 延迟最低
   - ✅ 手动选择
@@ -264,37 +332,41 @@ proxies:
     type: select
   - interval: 300
     name: ♻ 自动选择
-  - 美国2|@ripaojiedian
-  - '防范境外势力渗透 #6'
-  - 香港4|@ripaojiedian
-  - 'tg频道:@ripaojiedian #1'
-  - 香港2|@ripaojiedian
-  - '防范境外势力渗透 #8'
   - '防范境外势力渗透 #1'
-  - 🇫🇷FR_2|1.1MB/s
-  - 🇰🇷KR_1|1.7MB/s
-  - 日本3|@ripaojiedian
-  - 🇭🇰 香港|@ripaojiedian
-  - 美国|@ripaojiedian
+  - 🇺🇸US_2|3.2MB/s
   - 台湾|@ripaojiedian
-  - 🇫🇷FR_1|2.1MB/s
-  - 🇭🇰 香港5|@ripaojiedian
-  - 🇺🇸US_18|4.6MB/s
-  - '防范境外势力渗透 #5'
   - 日本|@ripaojiedian
-  - 🇯🇵 日本|@ripaojiedian
-  - 防范境外势力渗透
-  - 香港|@ripaojiedian
+  - 美国2|@ripaojiedian
+  - 🇫🇷FR_2|3.2MB/s
+  - '防范境外势力渗透 #4'
+  - '防范境外势力渗透 #9'
   - 新加坡3|@ripaojiedian
+  - 日本2|@ripaojiedian
+  - 香港4|@ripaojiedian
+  - '防范境外势力渗透 #8'
+  - 🇫🇷FR_1|2.9MB/s
+  - 🇫🇷FR_5|2.0MB/s
+  - 日本3|@ripaojiedian
+  - 'tg频道:@ripaojiedian #1'
+  - 香港|@ripaojiedian
+  - 🇯🇵 日本|@ripaojiedian
+  - 美国|@ripaojiedian
+  - 香港5|@ripaojiedian
+  - 🇺🇸US_4|1.0MB/s
+  - 🇫🇷FR_6|2.1MB/s
+  - '防范境外势力渗透 #2'
+  - '防范境外势力渗透 #6'
+  - 🇫🇷FR_4|1.9MB/s
+  - 🇭🇰 香港|@ripaojiedian
+  - 🇫🇷FR_3|2.7MB/s
+  - '防范境外势力渗透 #5'
+  - '防范境外势力渗透 #7'
+  - 🇭🇰 香港5|@ripaojiedian
+  - '防范境外势力渗透 #3'
+  - 香港2|@ripaojiedian
   - 香港3|@ripaojiedian
   - 美国3|@ripaojiedian
-  - 香港5|@ripaojiedian
-  - '防范境外势力渗透 #4'
-  - '防范境外势力渗透 #2'
-  - 日本2|@ripaojiedian
-  - '防范境外势力渗透 #3'
-  - '防范境外势力渗透 #7'
-  - '防范境外势力渗透 #9'
+  - 防范境外势力渗透
     type: fallback
     url: https://www.google.com/
   - interval: 300
@@ -350,7 +422,8 @@ proxies:
   - 美国2|@ripaojiedian
   - 美国|@ripaojiedian
   - 美国3|@ripaojiedian
-  - 🇺🇸US_18|4.6MB/s
+  - 🇺🇸US_2|3.2MB/s
+  - 🇺🇸US_4|1.0MB/s
     type: select
   - name: 🇨🇳 台湾
   - 台湾|@ripaojiedian
@@ -371,8 +444,12 @@ proxies:
   - REJECT
     type: select
   - name: 🇫🇷 法国
-  - 🇫🇷FR_1|2.1MB/s
-  - 🇫🇷FR_2|1.1MB/s
+  - 🇫🇷FR_1|2.9MB/s
+  - 🇫🇷FR_2|3.2MB/s
+  - 🇫🇷FR_3|2.7MB/s
+  - 🇫🇷FR_4|1.9MB/s
+  - 🇫🇷FR_5|2.0MB/s
+  - 🇫🇷FR_6|2.1MB/s
     type: select
   - name: 🇸🇬 新加坡
   - 新加坡3|@ripaojiedian
@@ -381,7 +458,7 @@ proxies:
   - REJECT
     type: select
   - name: 🇰🇷 韩国
-  - 🇰🇷KR_1|1.7MB/s
+  - REJECT
     type: select
   - name: 🇷🇺 俄罗斯
   - REJECT
@@ -1963,7 +2040,7 @@ proxies:
     ws-opts:
     path: //assignment
     udp: true
-  - name: 🏳��_未知_143
+  - name: 🏳️_未知_143
     type: trojan
     server: 104.16.174.44
     port: 443
@@ -5862,7 +5939,7 @@ proxies:
     type: select
   - DIRECT
   - Proxy
-  - "\U0001F1ED\U0001F1F0 香港节点"
+  - "\U0001F1ED\U0001F1F0 ���港节点"
   - "\U0001F1EF\U0001F1F5 日本节点"
   - "\U0001F1F0\U0001F1F7 韩国节点"
   - "\U0001F1F8\U0001F1EC 新加坡节点"
@@ -6135,7 +6212,7 @@ proxies:
     include-all: true
   - {"client-fingerprint":"chrome","flow":"xtls-rprx-vision","name":"🇭🇰 001  | ⬇️ 66KB/s","network":"tcp","port":59750,"reality-opts":{"public-key":"W9BjX6YmCIVsjhKMlz233Yoe0xcf0SVHfvPKqbf3vCg","short-id":""},"server":"47.83.153.19","tls":true,"type":"vless","udp":true,"uuid":"9e76cfb8-b7a6-40f6-c2aa-9905aa19f31b","servername":"www.amd.com"}
   - {"name":"🇭🇰 002  | ⬇️ 6KB/s","type":"vmess","server":"n1747624274.4u9ma.icu","port":443,"cipher":"auto","uuid":"d8daf507-a4ac-4eea-8399-8f0cd071eb52","alterId":0,"tls":true,"network":"ws","ws-opts":{"path":"/","headers":{"Host":"n1747624274.4u9ma.icu"}},"servername":"n1747624274.4u9ma.icu"}
-  - {"name":"🇭🇰 003  | ⬇️ 23KB/s","type":"vmess","server":"ex1ogt73nzpqkac2.v.3dns.vip","port":443,"cipher":"auto","uuid":"f23bb427c1f94373876c2f43e9f790f3","alterId":0,"tls":true,"network":"ws","ws-opts":{"path":"/ws-vmess","headers":{"Host":"EX1oGt73NzPQKAc2.v.3dns.vip"}},"servername":"EX1oGt73NzPQKAc2.v.3dns.vip"}
+  - {"name":"��🇰 003  | ⬇️ 23KB/s","type":"vmess","server":"ex1ogt73nzpqkac2.v.3dns.vip","port":443,"cipher":"auto","uuid":"f23bb427c1f94373876c2f43e9f790f3","alterId":0,"tls":true,"network":"ws","ws-opts":{"path":"/ws-vmess","headers":{"Host":"EX1oGt73NzPQKAc2.v.3dns.vip"}},"servername":"EX1oGt73NzPQKAc2.v.3dns.vip"}
   - {"type":"hysteria2","name":"🇩🇪 004  | ⬇️ 5MB/s","server":"srvhy1.ezcon24.online","port":8443,"password":"130e6aab-9eba-441e-9021-22cbccc72832","sni":"srvhy1.ezcon24.online","skip-cert-verify":false,"tfo":false}
   - {"name":"🇭🇰 005  | ⬇️ 2KB/s","type":"vmess","server":"ce0gedpxwou6cqon.v.3dns.vip","port":443,"cipher":"auto","uuid":"f23bb427c1f94373876c2f43e9f790f3","alterId":0,"tls":true,"network":"ws","ws-opts":{"path":"/ws-vmess","headers":{"Host":"cE0gedPXwOU6cqoN.v.3dns.vip"}},"servername":"cE0gedPXwOU6cqoN.v.3dns.vip"}
   - {"type":"hysteria2","name":"🇸🇪 006  | ⬇️ 4MB/s","server":"2.27.23.44","port":43327,"password":"Zg0z_Mdkhj_NNZBvZZ4TmwAyQgJlTUev","sni":"gate-v1.not-a-projects.xyz","skip-cert-verify":false,"tfo":false}
@@ -6353,7 +6430,7 @@ proxy-groups:
       - "🏳️_未知_140"
       - "🏳️_未知_141"
       - "🏳️_未知_142"
-      - "🏳��_未知_143"
+      - "🏳️_未知_143"
       - "🏳️_未知_144"
       - "🏳️_未知_145"
       - "🇮🇷_伊朗_146"
@@ -6719,7 +6796,7 @@ proxy-groups:
       - "🏳️_未知_140"
       - "🏳️_未知_141"
       - "🏳️_未知_142"
-      - "🏳��_未知_143"
+      - "🏳️_未知_143"
       - "🏳️_未知_144"
       - "🏳️_未知_145"
       - "🇮🇷_伊朗_146"
